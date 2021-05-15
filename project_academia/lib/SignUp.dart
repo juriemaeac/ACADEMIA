@@ -16,7 +16,7 @@ class _SignUpState extends State<SignUp> {
   checkAuthentication() async {
     _auth.authStateChanges().listen((user) {
       if (user != null) {
-        Navigator.pushReplacementNamed(context, "/");
+        Navigator.pushReplacementNamed(context, "HomePage");
       }
     });
   }
@@ -65,6 +65,9 @@ class _SignUpState extends State<SignUp> {
   navigateToLogin() async {
     Navigator.pushReplacementNamed(context, "Login");
   }
+  // navigateToHomePage() async {
+  //   Navigator.pushReplacementNamed(context, "HomePage");
+  // }
 
   @override
   Widget build(BuildContext context) {

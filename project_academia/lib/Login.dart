@@ -79,7 +79,7 @@ class _LoginState extends State<Login> {
         child: Container(
           child: Column(
             children: <Widget>[
-              //SizedBox(height: 50.0),
+              SizedBox(height: 50.0),
               Container(
                 height: 250,
                 child: Image(

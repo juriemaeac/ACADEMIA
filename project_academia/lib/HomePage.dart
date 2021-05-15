@@ -4,6 +4,8 @@ import 'package:sample1/Start.dart';
 //import 'package:sample1/logic/get_books.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 //import 'package:sample1/models/book.dart';
+import 'package:sample1/Navbar.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -50,10 +52,15 @@ class _HomePageState extends State<HomePage> {
     this.checkAuthentification();
     this.getUser();
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
+      drawer: Navbar(),
+      appBar: AppBar(title: Text('Home'),
+      ),
+      
         backgroundColor: Colors.white,
         body: Center(
           child: Container(
@@ -67,30 +74,63 @@ class _HomePageState extends State<HomePage> {
                 :  
                 Column(
                     children: <Widget>[
-                      SizedBox(height: 60.0),
+                      SizedBox(height: 20.0),
                        Row( 
                       mainAxisAlignment: MainAxisAlignment.start,
-                       children: <Widget>[
-                        
-                         
-                          
-                         ]
-                       ),
-                       Container(                    
-                            alignment: Alignment.center,
-                            child: Text(
-                              "ACADEMIA",
-                              style: TextStyle(
-                                  
-                                  fontSize: 30,
+                      children: <Widget>[
+                      ]
+                      ),
+                      SizedBox(height: 0),
+                      Container(
+                        alignment: FractionalOffset.center,
+                        child: new Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Text(
+                              DateFormat("yMd").format(DateTime.now()),
+                                style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.orange),
-                              textAlign: TextAlign.center,
+                                  color: Colors.grey[850], fontSize: 20),
                             ),
-                          ),
-
-                      
+                            
+                            Text(
+                              DateFormat.jm().format(DateTime.now()),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[850], fontSize: 20)
+                            ),
+                            
+                          ],
+                        ),
+                      ),
                       SizedBox(height: 10),
+                      Container(  
+                        alignment: Alignment.center,
+                        child: Text(
+                          DateFormat.EEEE().format(DateTime.now()),
+                          style: TextStyle(
+                              
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFFE28C7E),),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      SizedBox(height: 30),
+                      Container(  
+                        alignment: Alignment.center,
+                        child: Text(
+                          "ACADEMIA",
+                          style: TextStyle(
+                              
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFFE28C7E),),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      
+                      SizedBox(height: 40),
                       Container(
                         alignment: Alignment.center,
                         child: Text(
@@ -116,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 20),
+                                horizontal: 40, vertical: 40),
                             primary: Color(0xFF98BD91),
                             onPrimary: Colors.white,
                             shape: RoundedRectangleBorder(
@@ -142,31 +182,7 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: BorderRadius.circular(25.0),
                             )),
                       ),
-                      SizedBox(width: 100),
-                          Container(
-                            alignment: Alignment.center,
-                            child: ElevatedButton.icon(
-                              onPressed: signOut,
-                              icon: Icon(Icons.exit_to_app,
-                                color: Colors.white,
-                                size: 20.0,),
-                              label: Text(
-                                'SIGN OUT',
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                  padding: EdgeInsets.fromLTRB(19, 0, 19, 0),
-                                  primary: Colors.redAccent,
-                                  onPrimary: Colors.white,                                 
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  )),
-                            ),
-                          ),   
-                      SizedBox(height: 100.0),
+                      SizedBox(height: 70.0),
                       Container(
                         width: 380,
                         child: Center(
