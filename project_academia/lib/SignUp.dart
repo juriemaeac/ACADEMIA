@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:sample1/Login.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -9,7 +10,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
+  bool _showPassword = false;
   String _email, _password, _name;
 
   checkAuthentication() async {
@@ -61,6 +62,10 @@ class _SignUpState extends State<SignUp> {
         });
   }
 
+  navigateToLogin() async {
+    Navigator.pushReplacementNamed(context, "Login");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +76,7 @@ class _SignUpState extends State<SignUp> {
         children: <Widget>[
           SizedBox(height: 50.0),
           Container(
-            height: 250,
+            height: 200,
             child: Image(
               image: AssetImage("assets/iconHome.png"),
               fit: BoxFit.contain,
@@ -133,6 +138,7 @@ class _SignUpState extends State<SignUp> {
                         }
                         return null;
                       },
+                      obscureText: !this._showPassword,
                       decoration: InputDecoration(
                           labelText: 'Password',
                           filled: true,
@@ -140,12 +146,24 @@ class _SignUpState extends State<SignUp> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25),
                           ),
-                          prefixIcon: Icon(Icons.lock)),
-                      obscureText: true,
+                          prefixIcon: Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                              icon: Icon(
+                                Icons.remove_red_eye,
+                                color: this._showPassword ? Colors.blue : Colors.grey,
+                              ),
+                              onPressed: () {
+                              setState(() => this._showPassword = !this._showPassword);
+                              },
+                          ),
+                          ),
+                      //obscureText: true,
                       onSaved: (input) => _password = input,
                     ),
+                      
                   ),
-                  SizedBox(height: 90.0),
+                  
+                  SizedBox(height: 60.0),
                   ElevatedButton(
                     onPressed: signUp,
                     child: Text(
@@ -164,6 +182,26 @@ class _SignUpState extends State<SignUp> {
                         )),
                   ),
                   SizedBox(height: 10.0),
+                Container(
+                  alignment: FractionalOffset.center,
+                  child: new Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Text(
+                        "Already have an account? ",
+                        style: TextStyle(color: Colors.grey, fontSize: 15),
+                      ),
+                      GestureDetector(
+                        child: Text("Sign in here.",
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              color: Colors.indigoAccent, fontSize: 15)),
+                        onTap: navigateToLogin,
+                      )
+                    ],
+                  )
+                ),
+                  SizedBox(height: 5.0),
                   Text(
                     'By signing up, You agree to Academia Terms and Conditions.',
                     style: TextStyle(color: Colors.grey, fontSize: 13),

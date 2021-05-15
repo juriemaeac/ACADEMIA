@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sample1/HomePage.dart';
+import 'package:sample1/SignUp.dart';
 
 
 class Login extends StatefulWidget {
@@ -9,16 +10,15 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
+  bool _showPassword = false;
   String _email, _password;
 
   checkAuthentification() async {
     _auth.authStateChanges().listen((user) {
       if (user != null) {
-        //print(user);
+        print(user);
 
         //Navigator.pushReplacementNamed(context, "/");
         Navigator.push(context, MaterialPageRoute(
@@ -26,6 +26,7 @@ class _LoginState extends State<Login> {
       }
     });
   }
+
   @override
   void initState() {
     super.initState();
@@ -67,7 +68,7 @@ class _LoginState extends State<Login> {
   }
 
   navigateToSignUp() async {
-    //Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
   }
 
 
@@ -78,7 +79,7 @@ class _LoginState extends State<Login> {
         child: Container(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 50.0),
+              //SizedBox(height: 50.0),
               Container(
                 height: 250,
                 child: Image(
@@ -99,6 +100,11 @@ class _LoginState extends State<Login> {
                             if (input.isEmpty) {
                               return 'Enter your Email.';
                             }
+                            if (!RegExp(
+                r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+            .hasMatch(input)) {
+          return 'Please enter a valid email adress';
+        }
                             return null;
                           },
                             decoration: InputDecoration(
@@ -107,8 +113,7 @@ class _LoginState extends State<Login> {
                               hoverColor: Color(0xFFE28C7E),
                               border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25)),
-                              prefixIcon: Icon(Icons.email)
-                            ),
+                              prefixIcon: Icon(Icons.email)),
                             onSaved: (input) => _email = input,
                           ),
                         ),
@@ -122,19 +127,31 @@ class _LoginState extends State<Login> {
                               }
                               return null;
                             },
+                            obscureText: !this._showPassword,
                             decoration: InputDecoration(
                               labelText: 'Password',
                               filled: true,
                               hoverColor: Color(0xFFE28C7E),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(25)),
-                              prefixIcon: Icon(Icons.lock)
+                              prefixIcon: Icon(Icons.lock),
+                              suffixIcon: IconButton(
+                              icon: Icon(
+                                Icons.remove_red_eye,
+                                color: this._showPassword ? Colors.blue : Colors.grey,
+                              ),
+                              onPressed: () {
+                              setState(() => this._showPassword = !this._showPassword);
+                              },
+                            
                             ),
-                            obscureText: true, 
-                            onSaved: (input) => _password = input,
+                            
                           ),
+                          //obscureText: true, 
+                          onSaved: (input) => _password = input,
                         ),
-                        SizedBox(height: 70.0),
+                        ),
+                        SizedBox(height: 50.0),
                         ElevatedButton(
                         onPressed: login,
                         child: Text(
@@ -145,14 +162,14 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
-                            primary: Color(0xFFE28C7E),
-                            onPrimary: Colors.white,
-                            //shadowColor: Colors.grey,
-                            elevation: 10,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            )),
+                          padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
+                          primary: Color(0xFFE28C7E),
+                          onPrimary: Colors.white,
+                          //shadowColor: Colors.grey,
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          )),
                         ),
                       ],
                     ),
@@ -171,7 +188,8 @@ class _LoginState extends State<Login> {
                       GestureDetector(
                         child: Text("Create an account here.",
                             style: TextStyle(
-                                color: Colors.indigoAccent, fontSize: 15)),
+                              decoration: TextDecoration.underline,
+                              color: Colors.indigoAccent, fontSize: 15)),
                         onTap: navigateToSignUp,
                       )
                     ],
