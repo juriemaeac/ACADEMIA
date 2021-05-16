@@ -59,6 +59,7 @@ class _HomePageState extends State<HomePage> {
       
       drawer: Navbar(),
       appBar: AppBar(title: Text('Home'),
+      backgroundColor: Color(0xFFE7C8A9),
       ),
       
         backgroundColor: Colors.white,

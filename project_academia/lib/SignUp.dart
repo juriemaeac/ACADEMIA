@@ -77,9 +77,9 @@ class _SignUpState extends State<SignUp> {
       child: Container(
           child: Column(
         children: <Widget>[
-          SizedBox(height: 50.0),
+          SizedBox(height: 60.0),
           Container(
-            height: 200,
+            height: 150,
             child: Image(
               image: AssetImage("assets/iconHome.png"),
               fit: BoxFit.contain,
@@ -90,8 +90,9 @@ class _SignUpState extends State<SignUp> {
               key: _formKey,
               child: Column(
                 children: <Widget>[
+                  SizedBox(height: 40.0),
                   Container(
-                    padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                    padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
                     child: TextFormField(
                       validator: (input) {
                         if (input.isEmpty) {
@@ -102,7 +103,7 @@ class _SignUpState extends State<SignUp> {
                       decoration: InputDecoration(
                           labelText: 'Name',
                           filled: true,
-                          hoverColor: Colors.orange[50],
+                          hoverColor: Color(0xFFEEBAB2),
                           isDense: true,
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25)),
@@ -112,7 +113,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   SizedBox(height: 10.0),
                   Container(
-                    padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                    padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
                     child: TextFormField(
                       validator: (input) {
                         if (input.isEmpty) {
@@ -123,7 +124,7 @@ class _SignUpState extends State<SignUp> {
                       decoration: InputDecoration(
                           labelText: 'Email',
                           filled: true,
-                          hoverColor: Colors.orange[50],
+                          hoverColor: Color(0xFFEEBAB2),
                           isDense: true,
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25)),
@@ -133,7 +134,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   SizedBox(height: 10.0),
                   Container(
-                    padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                    padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
                     child: TextFormField(
                       validator: (input) {
                         if (input.length < 6) {
@@ -145,7 +146,8 @@ class _SignUpState extends State<SignUp> {
                       decoration: InputDecoration(
                           labelText: 'Password',
                           filled: true,
-                          hoverColor: Colors.orange[50],
+                          hoverColor: Color(0xFFEEBAB2),
+                          isDense: true,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25),
                           ),

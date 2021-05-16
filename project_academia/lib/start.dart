@@ -49,8 +49,8 @@ class _StartState extends State<Start> {
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
               colors: [
                 Color(0xFFE28C7E),
                 Color(0xFFF2E2D2),

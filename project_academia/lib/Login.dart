@@ -75,43 +75,59 @@ class _LoginState extends State<Login> {
   @override 
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
+      backgroundColor: Color(0xFFE7C9A9),
+      body: Container(
+      decoration: BoxDecoration(
+        
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color(0xFFFFB8AC),
+            Color(0xFFE7C9A9),
+          ],
+        )
+      ),
+
+      child: SingleChildScrollView(
         child: Container(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 50.0),
+              SizedBox(height: 80.0),
               Container(
-                height: 250,
+                
+                height: 130,
                 child: Image(
-                image: AssetImage("assets/iconLog.png"),
+                image: AssetImage("assets/signin1.png"),
                 fit: BoxFit.contain,
                 ),
               ),
-              SizedBox(height: 20.0),
+              SizedBox(height: 40.0),
               Container(
                 child: Form(
                   key: _formKey,
                     child: Column(
                       children: <Widget>[
                         Container(
-                          padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                          padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
                           child: TextFormField(
                           validator: (input) {
                             if (input.isEmpty) {
                               return 'Enter your Email.';
                             }
                             if (!RegExp(
-                r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-            .hasMatch(input)) {
-          return 'Please enter a valid email adress';
-        }
+                                    r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                                .hasMatch(input)) {
+                              return 'Please enter a valid email adress';
+                            }
                             return null;
                           },
                             decoration: InputDecoration(
                               labelText: 'Email',
-                              filled: true,
-                              hoverColor: Color(0xFFE28C7E),
-                              border: OutlineInputBorder(
+                              filled: false,
+                              hoverColor: Colors.white,
+                              isDense: true,
+                              focusedBorder: UnderlineInputBorder(
                               borderRadius: BorderRadius.circular(25)),
                               prefixIcon: Icon(Icons.email)),
                             onSaved: (input) => _email = input,
@@ -119,7 +135,7 @@ class _LoginState extends State<Login> {
                         ),
                         SizedBox(height: 10.0),
                         Container(
-                          padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                          padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
                           child: TextFormField(
                             validator: (input) {
                               if (input.length < 6) {
@@ -130,15 +146,16 @@ class _LoginState extends State<Login> {
                             obscureText: !this._showPassword,
                             decoration: InputDecoration(
                               labelText: 'Password',
-                              filled: true,
-                              hoverColor: Color(0xFFE28C7E),
-                              border: OutlineInputBorder(
+                              filled: false,
+                              hoverColor: Colors.white,
+                              isDense: true,
+                              focusedBorder: UnderlineInputBorder(
                                   borderRadius: BorderRadius.circular(25)),
                               prefixIcon: Icon(Icons.lock),
                               suffixIcon: IconButton(
                               icon: Icon(
                                 Icons.remove_red_eye,
-                                color: this._showPassword ? Colors.blue : Colors.grey,
+                                color: this._showPassword ? Colors.white : Colors.grey,
                               ),
                               onPressed: () {
                               setState(() => this._showPassword = !this._showPassword);
@@ -151,7 +168,7 @@ class _LoginState extends State<Login> {
                           onSaved: (input) => _password = input,
                         ),
                         ),
-                        SizedBox(height: 50.0),
+                        SizedBox(height: 80.0),
                         ElevatedButton(
                         onPressed: login,
                         child: Text(
@@ -163,8 +180,8 @@ class _LoginState extends State<Login> {
                         ),
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
-                          primary: Color(0xFFE28C7E),
-                          onPrimary: Colors.white,
+                          primary: Colors.white,
+                          onPrimary: Colors.grey,
                           //shadowColor: Colors.grey,
                           elevation: 10,
                           shape: RoundedRectangleBorder(
@@ -183,7 +200,7 @@ class _LoginState extends State<Login> {
                     children: <Widget>[
                       Text(
                         "Doesn't have an account yet? ",
-                        style: TextStyle(color: Colors.grey, fontSize: 15),
+                        style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
                       GestureDetector(
                         child: Text("Create an account here.",
@@ -193,21 +210,23 @@ class _LoginState extends State<Login> {
                         onTap: navigateToSignUp,
                       )
                     ],
-                  )
+                  ),
                 ),
+                    
                 SizedBox(height: 10.0),  
                 Text(
                   'Secured login powered by: Firebase Authentication',
-                  style: TextStyle(color: Colors.grey, fontSize: 13),
+                  style: TextStyle(color: Colors.white, fontSize: 13),
                 ), 
                 Text(
                   'Academia. All Rights Reserved (2021)',
-                  style: TextStyle(color: Colors.grey, fontSize: 13),
-                ),     
+                  style: TextStyle(color: Colors.white, fontSize: 13),
+                ),
             ],
           )
         ),
-      )
+      ),
+    ),
     );
   }
 }
