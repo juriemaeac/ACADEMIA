@@ -72,16 +72,16 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF5F3E7),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
       child: Container(
           child: Column(
         children: <Widget>[
-          SizedBox(height: 60.0),
+          SizedBox(height: MediaQuery.of(context).size.height - (MediaQuery.of(context).size.height * 8/9)),
           Container(
-            height: 150,
+            height: MediaQuery.of(context).size.height - ((MediaQuery.of(context).size.height * 5/7)+10),
             child: Image(
-              image: AssetImage("assets/iconHome.png"),
+              image: AssetImage("assets/iconLog.png"),
               fit: BoxFit.contain,
             ),
           ),
@@ -90,7 +90,7 @@ class _SignUpState extends State<SignUp> {
               key: _formKey,
               child: Column(
                 children: <Widget>[
-                  SizedBox(height: 40.0),
+                  SizedBox(height: 10.0),
                   Container(
                     padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
                     child: TextFormField(
@@ -106,8 +106,10 @@ class _SignUpState extends State<SignUp> {
                           hoverColor: Color(0xFFEEBAB2),
                           isDense: true,
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(25)),
-                          prefixIcon: Icon(Icons.person)),
+                              borderRadius: BorderRadius.circular(25),
+                          ),
+                          prefixIcon: Icon(Icons.person)
+                      ),
                       onSaved: (input) => _name = input,
                     ),
                   ),
@@ -127,8 +129,10 @@ class _SignUpState extends State<SignUp> {
                           hoverColor: Color(0xFFEEBAB2),
                           isDense: true,
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(25)),
-                          prefixIcon: Icon(Icons.email)),
+                              borderRadius: BorderRadius.circular(25)
+                          ),
+                          prefixIcon: Icon(Icons.email)
+                      ),
                       onSaved: (input) => _email = input,
                     ),
                   ),
@@ -161,14 +165,14 @@ class _SignUpState extends State<SignUp> {
                               setState(() => this._showPassword = !this._showPassword);
                               },
                           ),
-                          ),
+                      ),
                       //obscureText: true,
                       onSaved: (input) => _password = input,
                     ),
                       
                   ),
                   
-                  SizedBox(height: 60.0),
+                  SizedBox(height: 40.0),
                   ElevatedButton(
                     onPressed: signUp,
                     child: Text(

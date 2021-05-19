@@ -57,16 +57,20 @@ class _StartState extends State<Start> {
               ],
             )
           ),
-        child: Column(
+         
+          child: Column(
           children: <Widget>[
-            SizedBox(height: 15.0),
+            
+            SizedBox(
+              height: MediaQuery.of(context).size.height - (MediaQuery.of(context).size.height * 3/4)
+            ),
             Container(
-              height: 350,
+              height: 100,
               child: Image(
                 image: AssetImage("assets/logo.png"),
               ),
             ),
-            SizedBox(height: 0),
+            SizedBox(height: 20),
             RichText(
                 text: TextSpan(
                     text: 'Welcome to ',
@@ -80,7 +84,8 @@ class _StartState extends State<Start> {
                       style: TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white))
+                          color: Colors.white),
+                      )
                 ])),
             Text(
               'All-in-one-organizer',
@@ -125,14 +130,14 @@ class _StartState extends State<Start> {
                 ),
               ],
             ),
-            SizedBox(height: 15.0),
-            SignInButton(
+            SizedBox(height: 10.0),SignInButton(
               Buttons.Google,
               text: "Sign in with Google", 
               onPressed: (){},
-            )
+            ),
           ],
         ),
+        
       ),
     );
   }

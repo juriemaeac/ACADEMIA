@@ -20,7 +20,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:sample1/todo/todoProvider.dart';
 
 
-void main() async {
+void main() async { //change void to future
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   

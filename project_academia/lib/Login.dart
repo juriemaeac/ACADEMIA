@@ -93,7 +93,7 @@ class _LoginState extends State<Login> {
         child: Container(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 80.0),
+              SizedBox(height: MediaQuery.of(context).size.height - (MediaQuery.of(context).size.height * 5/6)),
               Container(
                 
                 height: 130,
@@ -102,7 +102,7 @@ class _LoginState extends State<Login> {
                 fit: BoxFit.contain,
                 ),
               ),
-              SizedBox(height: 40.0),
+              SizedBox(height: 50.0),
               Container(
                 child: Form(
                   key: _formKey,
@@ -168,7 +168,7 @@ class _LoginState extends State<Login> {
                           onSaved: (input) => _password = input,
                         ),
                         ),
-                        SizedBox(height: 80.0),
+                        SizedBox(height: 40.0),
                         ElevatedButton(
                         onPressed: login,
                         child: Text(
@@ -213,7 +213,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                     
-                SizedBox(height: 10.0),  
+                SizedBox(height: 10.0),
                 Text(
                   'Secured login powered by: Firebase Authentication',
                   style: TextStyle(color: Colors.white, fontSize: 13),

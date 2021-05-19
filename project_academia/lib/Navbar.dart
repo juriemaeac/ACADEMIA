@@ -17,7 +17,7 @@ class Navbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
-        color: Colors.transparent,//Color(0xFFEEBAB2),
+        //color: Colors.transparent,//Color(0xFFEEBAB2),
       child: Container(
       // decoration: BoxDecoration(
       //       gradient: LinearGradient(
@@ -33,7 +33,17 @@ class Navbar extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           Container(
-          height: 80,
+            decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFFEEBAB2),
+                Color(0xFFF2E2D2),
+              ],
+            )
+          ),
+          height: 85,
             child: DrawerHeader(
               decoration: BoxDecoration(
                 color: Color(0xFFEEBAB2),
@@ -59,13 +69,13 @@ class Navbar extends StatelessWidget {
               color: Colors.transparent,
             ),
           ),
-          Divider(
-            color: Colors.black,
-            height: 0,
-            thickness: 1,
-            indent: 10,
-            endIndent: 10,
-          ),
+          // Divider(
+          //   color: Colors.black,
+          //   height: 0,
+          //   thickness: 1,
+          //   indent: 10,
+          //   endIndent: 10,
+          // ),
           ListTile(
             leading: Icon(Icons.home),
             title: Text('Home'),
