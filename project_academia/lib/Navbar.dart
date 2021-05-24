@@ -43,7 +43,7 @@ class Navbar extends StatelessWidget {
               ],
             )
           ),
-          height: 85,
+          height: 105,
             child: DrawerHeader(
               decoration: BoxDecoration(
                 color: Color(0xFFEEBAB2),
