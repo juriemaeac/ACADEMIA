@@ -110,7 +110,7 @@ class Navbar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.rate_review_outlined),
             title: Text('Reviewer'),
-            onTap: () => Navigator.of(context).pushNamed("Flashcard"),
+            onTap: () => Navigator.of(context).pushNamed("Topic"),
           ),
           Divider(
             height: 30,

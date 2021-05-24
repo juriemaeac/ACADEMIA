@@ -25,15 +25,56 @@ class _ReviewerState extends State<Reviewer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Reviewer'),
-      ),
+      //drawer: Navbar(),
+      //appBar: AppBar(title: Text('My Flashcards'),),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          //mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              width: 250,
-              height: 250,
+            SizedBox(height: 70),
+            Row(
+              //mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SizedBox(height: 30, width: 20),
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Icon(Icons.arrow_back, 
+                  size: 25,
+                  color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 30, width: 65,),
+                Container(  
+                  alignment: Alignment.center,
+                  child: Text(
+                    "My Flashcards",
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFFE28C7E),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ]
+            ),
+            SizedBox(height: 10),
+            Container(  
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Topic Title",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+            SizedBox(height: 10),
+            Container(
+              margin: EdgeInsets.all(20),
+              width: 350,
+              height: 500,
               child: FlipCard(
                 front: FlashcardView(
                   text: _flashcards[_currentIndex].question,
@@ -47,14 +88,42 @@ class _ReviewerState extends State<Reviewer> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-              OutlinedButton.icon(
-                onPressed: showPreviousCard,
-              icon: Icon(Icons.chevron_left),
-              label: Text('Prev')),
-              OutlinedButton.icon(
-                onPressed: showNextCard,
-                icon: Icon(Icons.chevron_right),
-                label: Text('Next')), 
+                ElevatedButton.icon(
+                  onPressed: showPreviousCard,
+                  icon: Icon(
+                    Icons.chevron_left,
+                  ),
+                  label: Text('Prev',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      primary: Color(0xFF98BD91),
+                      onPrimary: Colors.white,
+                  ),
+                ),
+                ElevatedButton.icon(
+                  onPressed: showNextCard,
+                  icon: Icon(
+                    Icons.chevron_right,
+                    color: Colors.white,
+                  ),
+                  label: Text('Next',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  
+                  style: ElevatedButton.styleFrom(
+                      primary: Color(0xFF98BD91),
+                      onPrimary: Colors.white,
+                  ),
+                ), 
               ],
             )
           ],
