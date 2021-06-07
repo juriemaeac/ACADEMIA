@@ -11,7 +11,7 @@ class _SignUpState extends State<SignUp> {
   FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _showPassword = false;
-  String _email, _password, _name;
+  String _email, _password, _name; 
 
   checkAuthentication() async {
     _auth.authStateChanges().listen((user) {

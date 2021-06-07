@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sample1/Start.dart';
 //import 'package:sample1/logic/get_books.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 //import 'package:sample1/models/book.dart';
@@ -17,12 +16,12 @@ class _HomePageState extends State<HomePage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User user;
   bool isloggedin = false;
-
+  
   checkAuthentification() async {
     _auth.authStateChanges().listen((user) {
       if (user == null) {
-        //Navigator.of(context).pushReplacementNamed("start");
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> Start()));
+        Navigator.of(context).pushReplacementNamed("start");
+        //Navigator.push(context, MaterialPageRoute(builder: (context)=> Navbar()));
       }
     });
   }
@@ -135,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                       Container(
                         alignment: Alignment.center,
                         child: Text(
-                          "Hello ${user.displayName} you are logged in as ${user.email}",
+                          "Hello ${user.displayName} you are logged in as ${user.email}!",
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,

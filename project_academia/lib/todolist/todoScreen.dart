@@ -49,6 +49,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                   ? TextDecoration.none
                   : TextDecoration.lineThrough,
               ),
+              overflow: TextOverflow.ellipsis,
             ),
             isThreeLine: true,
             trailing: Checkbox(

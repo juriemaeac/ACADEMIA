@@ -1,21 +1,64 @@
+
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sample1/start.dart';
 
-class Navbar extends StatelessWidget {
+class Navbar extends StatefulWidget {
+  @override
+  _NavbarState createState() => _NavbarState();
+}
 
+class _NavbarState extends State<Navbar> {
+  //final _formKey = GlobalKey<FormState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  User user;
+  bool isloggedin = false;
+
+  checkAuthentification() async {
+    _auth.authStateChanges().listen((user) {
+      if (user == null) {
+        //Navigator.of(context).pushReplacementNamed("start");
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> Start()));
+        
+      }
+    });
+  }
+
   
+
+  getUser() async {
+    User firebaseUser = _auth.currentUser;
+
+    await firebaseUser?.reload();
+    firebaseUser = _auth.currentUser;
+
+    if (firebaseUser != null) {
+      setState(() {
+        this.user = firebaseUser;
+        this.isloggedin = true;
+      });
+    }
+  }
+
+
   signOut() async {
     _auth.signOut();
     final googleSignIn = GoogleSignIn();
     await googleSignIn.signOut();
   }
 
+  @override
+  void initState() {
+    super.initState();
+    this.checkAuthentification();
+    this.getUser();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      //key: _formKey,
       child: Material(
         //color: Colors.transparent,//Color(0xFFEEBAB2),
       child: Container(
@@ -53,8 +96,8 @@ class Navbar extends StatelessWidget {
             ),
           ),
           UserAccountsDrawerHeader(
-            accountName: Text('hatdogTestNamedipanagagawa'), 
-            accountEmail: Text('testMaildipanagagawa@gmail.com'),
+            accountName: Text('name'), 
+            accountEmail: Text('email'),
             
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
@@ -91,6 +134,11 @@ class Navbar extends StatelessWidget {
             leading: Icon(Icons.list),
             title: Text('To-do List'),
             onTap: () => Navigator.of(context).pushNamed("Todolist"),
+          ),
+          ListTile(
+            leading: Icon(Icons.notes),
+            title: Text('Notes'),
+            onTap: () => Navigator.of(context).pushNamed("Notes"),
           ),
           ListTile(
             leading: Icon(Icons.schedule),
@@ -135,7 +183,6 @@ class Navbar extends StatelessWidget {
       ),
     ),
     );
-    
   }
 }
 

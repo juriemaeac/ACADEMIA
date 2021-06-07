@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:sample1/HomePage.dart';
 import 'package:sample1/SignUp.dart';
 
 
@@ -13,6 +12,7 @@ class _LoginState extends State<Login> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _showPassword = false;
+  
   String _email, _password;
 
   checkAuthentification() async {
@@ -21,8 +21,7 @@ class _LoginState extends State<Login> {
         print(user);
 
         //Navigator.pushReplacementNamed(context, "/");
-        Navigator.push(context, MaterialPageRoute(
-          builder: (context)=>HomePage()));
+        Navigator.pushReplacementNamed(context, "HomePage");
       }
     });
   }

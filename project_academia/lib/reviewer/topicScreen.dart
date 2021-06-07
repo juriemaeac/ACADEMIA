@@ -97,18 +97,6 @@ class _TopicScreenState extends State<TopicScreen> {
                   ),
                 ),
               ),
-              subtitle: Transform.translate(
-                offset: Offset(20, 0),
-                child: Text('',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 15,
-                    // decoration: topic.statusTopic == 0 
-                    // ? TextDecoration.none
-                    // : TextDecoration.lineThrough,
-                  ),
-                ),
-              ),
               trailing: IconButton(
                 icon: Icon(
                   Icons.favorite_border_outlined,

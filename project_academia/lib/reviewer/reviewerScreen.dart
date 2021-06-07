@@ -30,7 +30,6 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
     });
   }
 
-  
   @override
   void dispose(){
     //_dateController.dispose();
@@ -124,7 +123,7 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
   }
 
   navigateToFlashcard() async {
-    Navigator.pushReplacementNamed(context, "Flashcard");
+    Navigator.pushReplacementNamed(context, "FR");//Flashcard
   }
 
   @override

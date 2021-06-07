@@ -12,10 +12,13 @@ import 'package:sample1/flashcards/Reviewer.dart';
 //import 'package:sample1/flashcards/flashcardHomeAdd.dart';
 //import 'package:sample1/flashcards/Reviewer.dart';
 import 'package:sample1/Settings.dart';
+import 'package:sample1/flashcards/flashcardReviewer.dart';
+import 'package:sample1/notes/screen/noteScreen.dart';
 import 'package:sample1/reviewer/topicScreen.dart';
 import 'package:sample1/schedule.dart';
 import 'package:sample1/Policies.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+//import 'package:sample1/screens/note_list.dart';
 import 'package:sample1/todolist/todoScreen.dart';
 import 'package:sample1/reviewer/reviewerScreen.dart';
 
@@ -29,7 +32,7 @@ void main() async { //change void to future
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
-  static final String title = 'Todo App';
+  //static final String title = 'Todo App';
   @override
   Widget build(BuildContext context) {
     return MaterialApp( //note dati itong return MaterialApp
@@ -40,7 +43,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         
       ),
-      //home: MyHome(),
+      //home: Flashcard(),
       debugShowCheckedModeBanner: false,
       home: AnimatedSplashScreen(
         splash: Image.asset(
@@ -59,10 +62,12 @@ class MyApp extends StatelessWidget {
         "Navbar": (BuildContext context) => Navbar(),
         "Profile": (BuildContext context) => Profile(),
         "Todolist": (BuildContext context) => TodoListScreen(),
+        "Notes": (BuildContext context) => NoteList(),
         "Schedule": (BuildContext context) => Schedule(),
         "Calendar": (BuildContext context) => Calendar(),
         "Attendance": (BuildContext context) => Attendance(),
         "Flashcard": (BuildContext context) => Reviewer(),
+        "FR": (BuildContext context) => Flashcard(),
         "Policies": (BuildContext context) => Policies(),
         "Settings": (BuildContext context) => Settings(),
         "Reviewer": (BuildContext context) => ReviewerScreen(),
