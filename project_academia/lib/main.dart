@@ -15,7 +15,7 @@ import 'package:sample1/Settings.dart';
 import 'package:sample1/flashcards/flashcardReviewer.dart';
 import 'package:sample1/notes/screen/noteScreen.dart';
 import 'package:sample1/reviewer/topicScreen.dart';
-import 'package:sample1/schedule.dart';
+import 'package:sample1/schedule/schedule.dart';
 import 'package:sample1/Policies.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 //import 'package:sample1/screens/note_list.dart';
