@@ -249,19 +249,19 @@ class NoteDetailState extends State<NoteDetail> {
 
   void updateTitle() {
     isEdited = true;
-    note.title = titleController.text;
+    note.titleNote = titleController.text;
   }
 
   void updateDescription() {
     isEdited = true;
-    note.description = descriptionController.text;
+    note.descriptionNote = descriptionController.text;
   }
 
   // Save data to database
   void _save() async {
     moveToLastScreen();
 
-    note.date = DateFormat.yMMMd().format(DateTime.now());
+    note.dateNote = DateFormat.yMMMd().format(DateTime.now());
 
     if (note.idNote != null) {
       await helper.updateNote(note);

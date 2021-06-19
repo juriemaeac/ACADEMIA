@@ -263,7 +263,7 @@ class DatabaseHelper {
   Future<int> updateNote(Note note) async {
     var db = await this.db;
     var result = await db.update(noteTable, note.toMap(),
-        where: '$colId = ?', whereArgs: [note.idNote]);
+        where: '$colIdNote = ?', whereArgs: [note.idNote]);
     return result;
   }
 
@@ -271,7 +271,7 @@ class DatabaseHelper {
     Database db = await this.db;
     final int result =  await db.delete(
       noteTable, 
-      where: '$colId = ?', 
+      where: '$colIdNote = ?', 
       whereArgs: [idNote],
     );
     return result;
