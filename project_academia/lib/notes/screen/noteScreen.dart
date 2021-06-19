@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:sample1/notes/screen/detailScreen.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:sample1/notes/screen/searchScreen.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:sample1/notes/noteModel.dart';
+import 'package:sample1/notes/screen/detailScreen.dart';
+import 'package:sample1/notes/screen/searchScreen.dart';
 import 'package:sample1/notes/widgets.dart';
 import 'package:sample1/databaseHelpers.dart';
+import 'package:sqflite/sqflite.dart';
 
 class NoteList extends StatefulWidget {
   @override
@@ -14,13 +14,11 @@ class NoteList extends StatefulWidget {
     return NoteListState();
   }
 }
-
 class NoteListState extends State<NoteList> {
   DatabaseHelper databaseHelper = DatabaseHelper();
   List<Note> noteList;
   int count = 0;
   int axisCount = 2;
-
   @override
   Widget build(BuildContext context) {
     if (noteList == null) {
@@ -28,15 +26,25 @@ class NoteListState extends State<NoteList> {
       updateListView();
     }
 
-    Widget myAppBar() {
-      return AppBar(
-        title: Text('Notes', style: Theme.of(context).textTheme.headline5),
-        centerTitle: true,
+
+    return Scaffold(
+      appBar: 
+      PreferredSize(
+        preferredSize: Size(double.infinity, 50),
+        child: AppBar(
+          //centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: noteList.length == 0
-            ? Container()
-            : IconButton(
+
+          title: Row(
+            //mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(width: 100,),
+              Text('Notes', style: Theme.of(context).textTheme.headline5,
+              //textAlign: TextAlign.center,
+              ),
+              SizedBox(width: 60,),
+              IconButton(
                 icon: Icon(
                   Icons.search,
                   color: Colors.black,
@@ -49,26 +57,25 @@ class NoteListState extends State<NoteList> {
                   }
                 },
               ),
-        actions: <Widget>[
-          noteList.length == 0
-              ? Container()
-              : IconButton(
-                  icon: Icon(
-                    axisCount == 2 ? Icons.list : Icons.grid_on,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      axisCount = axisCount == 2 ? 4 : 2;
-                    });
-                  },
-                )
-        ],
-      );
-    }
+              //SizedBox(width: 20,),
+              IconButton(
+                icon: Icon(
+                  axisCount == 2 ? Icons.list : Icons.grid_on,
+                  color: Colors.black,
 
-    return Scaffold(
-      appBar: myAppBar(),
+                ),
+                onPressed: () {
+                  setState(() {
+                    axisCount = axisCount == 2 ? 4 : 2;
+                  });
+                },
+              )
+
+            ],
+          ),
+        ),
+      ),
+      
       body: noteList.length == 0
           ? Container(
               color: Colors.white,
