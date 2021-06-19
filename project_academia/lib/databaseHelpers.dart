@@ -68,13 +68,13 @@ class DatabaseHelper {
 
   Future<Database> initializeDatabase() async {
     Directory dir =  await getApplicationDocumentsDirectory();
-    String path = dir.path + 'todo_list.db';
-    final todoListDb = await openDatabase(
+    String path = dir.path + 'projectAcademia.db';
+    final academiaDb = await openDatabase(
       path, 
       version: 2,
       onCreate: _createDb,
     );
-    return todoListDb;
+    return academiaDb;
   }
   void _createDb(Database db, int version) async {
     await db.execute(

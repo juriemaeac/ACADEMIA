@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sample1/todolist/addTaskScreen.dart';
-import 'package:sample1/todolist/databaseHelpers.dart';
+import 'package:sample1/databaseHelpers.dart';
 import 'package:sample1/todolist/taskModel.dart';
 
 class TodoListScreen extends StatefulWidget {

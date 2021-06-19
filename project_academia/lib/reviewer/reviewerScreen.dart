@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sample1/reviewer/addReviewer.dart';
 import 'package:sample1/reviewer/reviewerModel.dart';
-import 'package:sample1/todolist/databaseHelpers.dart';
+import 'package:sample1/databaseHelpers.dart';
 
 class ReviewerScreen extends StatefulWidget {
   final Function updateReviewerList;

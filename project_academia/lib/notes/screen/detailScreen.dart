@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sample1/notes/noteModel.dart';
 import 'package:sample1/notes/widgets.dart';
-import 'package:sample1/todolist/databaseHelpers.dart';
+import 'package:sample1/databaseHelpers.dart';
 
 
 class NoteDetail extends StatefulWidget {

@@ -4,7 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sample1/Navbar.dart';
 import 'package:sample1/reviewer/addTopic.dart';
 import 'package:sample1/reviewer/topicModel.dart';
-import 'package:sample1/todolist/databaseHelpers.dart';
+import 'package:sample1/databaseHelpers.dart';
 import 'package:flutter/cupertino.dart';
 
 class TopicScreen extends StatefulWidget {

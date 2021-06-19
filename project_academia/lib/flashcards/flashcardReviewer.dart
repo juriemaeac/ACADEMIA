@@ -3,7 +3,7 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:sample1/flashcards/flashcard_view.dart';
 import 'package:sample1/reviewer/reviewerModel.dart';
-import 'package:sample1/todolist/databaseHelpers.dart';
+import 'package:sample1/databaseHelpers.dart';
 
 class Flashcard extends StatefulWidget {
   final Function updateReviewerList;
