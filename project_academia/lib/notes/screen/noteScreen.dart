@@ -14,6 +14,7 @@ class NoteList extends StatefulWidget {
     return NoteListState();
   }
 }
+
 class NoteListState extends State<NoteList> {
   DatabaseHelper databaseHelper = DatabaseHelper();
   List<Note> noteList;
@@ -26,24 +27,27 @@ class NoteListState extends State<NoteList> {
       updateListView();
     }
 
-
     return Scaffold(
-      appBar: 
-      PreferredSize(
+      appBar: PreferredSize(
         preferredSize: Size(double.infinity, 50),
         child: AppBar(
           //centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.white,
+          elevation: 0,
+          backgroundColor: Color(0xFFCDB193),
 
           title: Row(
             //mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              SizedBox(width: 100,),
-              Text('Notes', style: Theme.of(context).textTheme.headline5,
-              //textAlign: TextAlign.center,
+              SizedBox(
+                width: 100,
               ),
-              SizedBox(width: 60,),
+              Text(
+                'Notes', style: Theme.of(context).textTheme.headline5,
+                //textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                width: 60,
+              ),
               IconButton(
                 icon: Icon(
                   Icons.search,
@@ -62,7 +66,6 @@ class NoteListState extends State<NoteList> {
                 icon: Icon(
                   axisCount == 2 ? Icons.list : Icons.grid_on,
                   color: Colors.black,
-
                 ),
                 onPressed: () {
                   setState(() {
@@ -70,12 +73,10 @@ class NoteListState extends State<NoteList> {
                   });
                 },
               )
-
             ],
           ),
         ),
       ),
-      
       body: noteList.length == 0
           ? Container(
               color: Colors.white,
@@ -96,9 +97,13 @@ class NoteListState extends State<NoteList> {
           navigateToDetail(Note('', '', 3, 0), 'Add Note');
         },
         tooltip: 'Add Note',
-        shape: CircleBorder(side: BorderSide(color: Colors.black, width: 2.0)),
-        child: Icon(Icons.add, color: Colors.black),
-        backgroundColor: Colors.white,
+        shape: CircleBorder(
+            side: BorderSide(color: Colors.transparent, width: 2.0)),
+        child: Icon(
+          Icons.add,
+          color: Colors.black45,
+        ),
+        backgroundColor: Color(0xFFCDB193),
       ),
     );
   }
@@ -118,7 +123,7 @@ class NoteListState extends State<NoteList> {
             padding: EdgeInsets.all(8.0),
             decoration: BoxDecoration(
                 color: colors[this.noteList[index].colorNote],
-                border: Border.all(width: 2, color: Colors.black),
+                border: Border.all(width: .1, color: Colors.black),
                 borderRadius: BorderRadius.circular(8.0)),
             child: Column(
               children: <Widget>[
@@ -137,8 +142,8 @@ class NoteListState extends State<NoteList> {
                     Text(
                       getPriorityText(this.noteList[index].priorityNote),
                       style: TextStyle(
-                          color:
-                              getPriorityColor(this.noteList[index].priorityNote)),
+                          color: getPriorityColor(
+                              this.noteList[index].priorityNote)),
                     ),
                   ],
                 ),
