@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 //import 'package:sample1/models/book.dart';
 import 'package:sample1/Navbar.dart';
 import 'package:intl/intl.dart';
+//import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,6 +13,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _currentIndex = 0;
+  
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User user;
@@ -45,6 +48,12 @@ class _HomePageState extends State<HomePage> {
     await googleSignIn.signOut();
   }
 
+  void onTabTapped(int index) {
+   setState(() {
+     _currentIndex = index;
+   });
+ }
+
   @override
   void initState() {
     super.initState();
@@ -60,10 +69,30 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(title: Text('Home'),
       backgroundColor: Color(0xFFE7C8A9),
       ),
+      //body: _children[_currentIndex], // new
+        bottomNavigationBar: BottomNavigationBar(
+          
+          onTap: onTabTapped, // new
+          currentIndex: _currentIndex, // this will be set when a new tab is tapped
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home,size: 30),
+              label: 'Home',
+            ),
+            
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person, size: 30),
+              label: 'Profile'
+              
+            )
+          ],
+        ),
       
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
         body: Center(
+          
           child: Container(
+            
             child: SafeArea(
             child: !isloggedin? CircularProgressIndicator(
               backgroundColor: Color(0xFFE28C7E),

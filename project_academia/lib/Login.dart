@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sample1/SignUp.dart';
+import 'package:sample1/forgotPass.dart';
 
 
 class Login extends StatefulWidget {
@@ -167,6 +168,22 @@ class _LoginState extends State<Login> {
                           onSaved: (input) => _password = input,
                         ),
                         ),
+                        SizedBox(height: 10.0),
+                        Row(
+                          children: [
+                            SizedBox(width: 250),
+                        
+                        GestureDetector(
+                          child: Text("Forget Password",
+                              style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: Colors.grey[700], fontSize: 15)),
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword()));
+                          }
+                        ),
+                          ],
+                        ),
                         SizedBox(height: 40.0),
                         ElevatedButton(
                         onPressed: login,
@@ -191,6 +208,7 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                 ),
+                
                 SizedBox(height: 20.0),
                 Container(
                   alignment: FractionalOffset.center,
@@ -210,8 +228,9 @@ class _LoginState extends State<Login> {
                       )
                     ],
                   ),
+                  
                 ),
-                    
+                                  
                 SizedBox(height: 10.0),
                 Text(
                   'Secured login powered by: Firebase Authentication',

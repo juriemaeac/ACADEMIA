@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:sample1/Navbar.dart';
-import 'package:sample1/profile/Profile.dart';
+import 'package:sample1/profile/profileScreen.dart';
 import 'package:sample1/Start.dart';
 import 'package:sample1/Login.dart';
 import 'package:sample1/HomePage.dart';
@@ -9,8 +9,6 @@ import 'package:sample1/SignUp.dart';
 import 'package:sample1/Attendance.dart';
 import 'package:sample1/Calendar.dart';
 import 'package:sample1/flashcards/Reviewer.dart';
-//import 'package:sample1/flashcards/flashcardHomeAdd.dart';
-//import 'package:sample1/flashcards/Reviewer.dart';
 import 'package:sample1/Settings.dart';
 import 'package:sample1/flashcards/flashcardReviewer.dart';
 import 'package:sample1/notes/screen/noteScreen.dart';
@@ -18,7 +16,6 @@ import 'package:sample1/reviewer/topicScreen.dart';
 import 'package:sample1/schedule/schedule.dart';
 import 'package:sample1/Policies.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-//import 'package:sample1/screens/note_list.dart';
 import 'package:sample1/todolist/todoScreen.dart';
 import 'package:sample1/reviewer/reviewerScreen.dart';
 
