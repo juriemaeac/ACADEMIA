@@ -6,6 +6,7 @@ import 'package:sample1/forgotPass.dart';
 import 'package:sample1/profile/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:sample1/profile/editProfileScreen.dart';
+import 'package:sample1/start.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -16,6 +17,7 @@ class _ProfileState extends State<Profile> {
 final FirebaseAuth _auth = FirebaseAuth.instance;
   User user;
   bool isloggedin = false;
+  //final userid = user.uid;
   
   checkAuthentification() async {
     _auth.authStateChanges().listen((user) {
@@ -39,6 +41,12 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
     }
   }
 
+  delete() async {
+    User firebaseUser = _auth.currentUser;
+    await firebaseUser.delete();
+  }
+
+
   signOut() async {
     _auth.signOut();
     final googleSignIn = GoogleSignIn();
@@ -51,6 +59,8 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
     this.checkAuthentification();
     this.getUser();
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -189,13 +199,13 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
                           Text("January 02, 2001", style: TextStyle(color: Colors.grey),)
                         ),
                         
-                        SizedBox(height: 30,),
+                        SizedBox(height: 20,),
                         FadeAnimation(1.6,
                           Column(
                             children: [
                               Center(
                                 child: GestureDetector(
-                                  child: Text("Reset Password.",
+                                  child: Text("Change Password.",
                                   textAlign: TextAlign.center,
                                     style: TextStyle(
                                       decoration: TextDecoration.underline,
@@ -203,6 +213,49 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
                                   ),
                                   onTap: (){
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword()));
+                                  }
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 10,),
+                        FadeAnimation(1.6,
+                          Column(
+                            children: [
+                              Center(
+                                child: GestureDetector(
+                                  child: Text("Delete Account",
+                                  textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold, ),
+                                  ),
+                                  onTap: (){
+                                    return showDialog(
+                                      context: context,
+                                      builder: (ctx) => AlertDialog(
+                                        title: Text("Delete Account",textAlign: TextAlign.center,
+                                          style: TextStyle(color: Colors.red[700], fontSize: 18, fontWeight: FontWeight.bold),
+                                        ),
+                                        content: Text("Are you sure you want to delete your account?"),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () {
+                                              delete();
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => Start()));
+                                            },
+                                            child: Text('Yes',style: TextStyle(color: Colors.red[700]),
+                                            ),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text('No'))
+                                        ],
+                                      ),
+                                    );
                                   }
                                 ),
                               ),
