@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sample1/Settings.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sample1/profile/profileScreen.dart';
 import 'package:sample1/profile/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -222,22 +223,11 @@ class _EditProfileState extends State<EditProfile> {
   Widget _buildUsername() {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.9),
-            blurRadius: 8,
-            spreadRadius: 1,
-            offset: Offset(4, 4),
-          ),
-        ],
-        //borderRadius: BorderRadius.all(Radius.circular(0)),
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+      
       child: TextFormField(
           controller: textName,
-          style: TextStyle(color: Colors.black, fontSize: 24),
+          style: TextStyle(color: Colors.black, fontSize: 20),
           cursorColor: Colors.black,
           validator: (String value) {
             if (value.isEmpty) {
@@ -246,23 +236,22 @@ class _EditProfileState extends State<EditProfile> {
             return null;
           },
           decoration: InputDecoration(
-              border: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              errorBorder: InputBorder.none,
-              disabledBorder: InputBorder.none,
-              labelText: 'Name',
-              labelStyle: TextStyle(
-                color: Colors.black,
-                fontSize: 9,
-              ),
-              focusColor: Colors.black,
-              isDense: true,
-              prefixIcon: Icon(
-                Icons.face_unlock_rounded,
-                color: Colors.black,
-                size: 24,
-              )),
+            focusedBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            labelText: 'Name',
+            labelStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+            ),
+            focusColor: Colors.black,
+            isDense: true,
+            prefixIcon: Icon(
+              Icons.face_unlock_rounded,
+              color: Colors.black,
+              size: 24,
+            ),
+          ),
           /////using shared preferences
           onChanged: (value) {
             setState(() {
@@ -275,23 +264,15 @@ class _EditProfileState extends State<EditProfile> {
   Widget _buildUserEmail() {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(
-        color: CustomColors.menuBackgroundColor,
-        boxShadow: [
-          BoxShadow(
-            color: CustomColors.menuBackgroundColor.withOpacity(0.9),
-            blurRadius: 8,
-            spreadRadius: 1,
-            offset: Offset(4, 4),
-          ),
-        ],
-        borderRadius: BorderRadius.all(Radius.circular(30)),
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+      // decoration: BoxDecoration(
+      //   color: CustomColors.menuBackgroundColor,
+      //   borderRadius: BorderRadius.all(Radius.circular(30)),
+      // ),
       child: TextFormField(
           controller: textEmail,
-          style: TextStyle(color: Colors.white, fontSize: 24),
-          cursorColor: Colors.white,
+          style: TextStyle(color: Colors.black, fontSize: 20),
+          cursorColor: Colors.black,
           validator: (String value) {
             if (value.isEmpty) {
               return 'Enter Email';
@@ -299,23 +280,22 @@ class _EditProfileState extends State<EditProfile> {
             return null;
           },
           decoration: InputDecoration(
-              border: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              errorBorder: InputBorder.none,
-              disabledBorder: InputBorder.none,
-              labelText: 'Email',
-              labelStyle: TextStyle(
-                color: Colors.white,
-                fontSize: 9,
-              ),
-              focusColor: Colors.white,
-              isDense: true,
-              prefixIcon: Icon(
-                Icons.face_unlock_rounded,
-                color: Colors.white,
-                size: 24,
-              )),
+            focusedBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            labelText: 'Email',
+            labelStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+            ),
+            focusColor: Colors.black,
+            isDense: true,
+            prefixIcon: Icon(
+              Icons.email,
+              color: Colors.black,
+              size: 24,
+            ),
+          ),
           /////using shared preferences
           onChanged: (value) {
             setState(() {
@@ -416,13 +396,13 @@ class _EditProfileState extends State<EditProfile> {
                         sharedPref.save("user", userSave);
                         print("Profile Saved");
                         loadSharedPrefs();
-                        // Navigator.push(
-                        //   context, 
-                        //   MaterialPageRoute(
-                        //     builder: (_)=> Profile(
-                        //     ),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(
+                            builder: (_)=> Profile(
+                            ),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Color(0xFFEEBAB2),
@@ -445,6 +425,14 @@ class _EditProfileState extends State<EditProfile> {
                 SizedBox(height: 35),
                 Text(
                   userLoad.userName ?? "Test User",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.deepPurple[900],
+                      fontSize: 22),
+                ),
+                SizedBox(height: 35),
+                Text(
+                  userLoad.userEmail ?? "Test Email",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.deepPurple[900],
