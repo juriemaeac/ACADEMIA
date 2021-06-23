@@ -71,9 +71,7 @@ flutter:
    - assets/signin1.png
    - assets/design.png
    - assets/jurie.jpg
-   - assets/jurie1.jpg
-   - assets/jurie2.jpg
-   - assets/jurie3.jpg
+   - assets/profile.jpg
 
 
   # To add assets to your application, add an assets section, like this:

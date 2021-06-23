@@ -66,7 +66,7 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Navbar(),
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: Stack(
         children: <Widget>[
           
@@ -80,7 +80,7 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
                       icon: Icon(
                         Icons.mode_edit_outline, 
                         size: 20,
-                        color: Colors.pink[50],
+                        color: Colors.white,
                       ),
                       onPressed: () {
                         Navigator.push(
@@ -96,8 +96,27 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
                       child: Text(
                         'Edit',
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15),
+                          color: Colors.white,
+                          fontSize: 15,
+                          shadows: [
+                            // Shadow( // bottomLeft
+                            //   offset: Offset(-1.5, -1.5),
+                            //   color: Colors.white
+                            // ),
+                            Shadow( // bottomRight
+                              offset: Offset(1.5, -1.5),
+                              color: Colors.black
+                            ),
+                            // Shadow( // topRight
+                            //   offset: Offset(1.5, 1.5),
+                            //   color: Colors.white
+                            // ),
+                            // Shadow( // topLeft
+                            //   offset: Offset(-1.5, 1.5),
+                            //   color: Colors.white
+                            // ),
+                          ],
+                        ),
                       ),
                       onTap: () {
                         Navigator.push(
@@ -119,7 +138,7 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
                   background: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('assets/jurie.jpg'),
+                        image: AssetImage('assets/profile.jpg'),
                         fit: BoxFit.cover
                       )
                     ),
@@ -128,8 +147,8 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
                         gradient: LinearGradient(
                           begin: Alignment.bottomRight,
                           colors: [
-                            Colors.black,
-                            Colors.black.withOpacity(.3)
+                            Colors.white,
+                            Colors.white.withOpacity(.1)
                           ]
                         )
                       ),
@@ -140,17 +159,17 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             FadeAnimation(1, Text("${user.displayName}", style: 
-                              TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 40)
+                              TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 40)
                             ,)),
                             SizedBox(height: 20,),
                             Row(
                               children: <Widget>[
                                 FadeAnimation(1.2, 
-                                  Text("BS Computer Engineering", style: TextStyle(color: Colors.grey, fontSize: 16),)
+                                  Text("BS Computer Engineering", style: TextStyle(color: Colors.grey[850], fontSize: 16),)
                                 ),
                                 SizedBox(width: 50,),
                                 FadeAnimation(1.3, Text("2019-06524-MN-0", style: 
-                                  TextStyle(color: Colors.grey, fontSize: 16)
+                                  TextStyle(color: Colors.grey[850], fontSize: 16)
                                 ,))
                               ],
                             )
@@ -171,32 +190,71 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         FadeAnimation(1.6, Text("<< Description >>", 
-                        style: TextStyle(color: Colors.grey, height: 1.4),)),
+                        style: TextStyle(color: Colors.grey[850], height: 1.4,fontSize: 16,),)),
+                        
                         SizedBox(height: 40,),
-                        FadeAnimation(1.6, 
-                          Text("Email", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),)
+                        
+                        Row(
+                          children: [
+                            FadeAnimation(1.6, 
+                            Icon(Icons.email, color: Color(0xFFFFB8AC),),),
+                            SizedBox(width: 10,),
+                            FadeAnimation(1.6, 
+                              Text("${user.email}", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 10,),
-                        FadeAnimation(1.6, 
-                          Text("${user.email}", style: TextStyle(color: Colors.grey),)
+                        SizedBox(height: 5,),
+                        Row(
+                          children: [
+                            SizedBox(width: 33),
+                            FadeAnimation(1.6, 
+                              Text("Email", style: TextStyle(color: Colors.grey[850], ),)
+                            ),
+                          ],
+                        ),
+                            
+
+                        SizedBox(height: 20,),
+                        Row(
+                          children: [
+                            FadeAnimation(1.6, 
+                            Icon(Icons.phone, color: Color(0xFFFFB8AC),),),
+                            SizedBox(width: 10,),
+                            FadeAnimation(1.6, 
+                              Text("09757179206", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 5,),
+                        Row(
+                          children: [
+                            SizedBox(width: 33),
+                            FadeAnimation(1.6, 
+                              Text("Contact Number", style: TextStyle(color: Colors.grey[850], ),)
+                            ),
+                          ],
                         ),
 
                         SizedBox(height: 20,),
-                        FadeAnimation(1.6, 
-                          Text("Contact Number", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),)
+                        Row(
+                          children: [
+                            FadeAnimation(1.6, 
+                            Icon(Icons.cake, color: Color(0xFFFFB8AC),),),
+                            SizedBox(width: 10,),
+                            FadeAnimation(1.6, 
+                              Text("January 02, 2001", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 10,),
-                        FadeAnimation(1.6, 
-                          Text("09757179206", style: TextStyle(color: Colors.grey),)
-                        ),
-
-                        SizedBox(height: 20,),
-                        FadeAnimation(1.6, 
-                          Text("Birthdate", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),)
-                        ),
-                        SizedBox(height: 10,),
-                        FadeAnimation(1.6, 
-                          Text("January 02, 2001", style: TextStyle(color: Colors.grey),)
+                        SizedBox(height: 5,),
+                        Row(
+                          children: [
+                            SizedBox(width: 33),
+                            FadeAnimation(1.6, 
+                              Text("Birthdate", style: TextStyle(color: Colors.grey[850], ),)
+                            ),
+                          ],
                         ),
                         
                         SizedBox(height: 20,),
@@ -205,11 +263,11 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
                             children: [
                               Center(
                                 child: GestureDetector(
-                                  child: Text("Change Password.",
+                                  child: Text("Change Password",
                                   textAlign: TextAlign.center,
                                     style: TextStyle(
                                       decoration: TextDecoration.underline,
-                                      color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold, ),
+                                      color: Colors.grey[850], fontSize: 18, fontWeight: FontWeight.bold, ),
                                   ),
                                   onTap: (){
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword()));
@@ -229,7 +287,7 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
                                   textAlign: TextAlign.center,
                                     style: TextStyle(
                                       decoration: TextDecoration.underline,
-                                      color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold, ),
+                                      color: Colors.grey[850], fontSize: 18, fontWeight: FontWeight.bold, ),
                                   ),
                                   onTap: (){
                                     return showDialog(
