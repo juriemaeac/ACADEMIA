@@ -1,23 +1,21 @@
-
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:sample1/Settings.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sample1/profile/profileScreen.dart';
 import 'package:sample1/profile/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-
 class EditProfile extends StatefulWidget {
+
   @override
   _EditProfileState createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User user;
   bool isloggedin = false;
@@ -62,12 +60,11 @@ class _EditProfileState extends State<EditProfile> {
   PickedFile _imageFile;
   static ImagePicker _picker = ImagePicker();
   static final TextEditingController textName = TextEditingController();
-  // static final TextEditingController textCourse = TextEditingController();
-  // static final TextEditingController textLRN = TextEditingController();
-  // static final TextEditingController textDescription = TextEditingController();
+  static final TextEditingController textCourse = TextEditingController();
+  static final TextEditingController textLRN = TextEditingController();
+  static final TextEditingController textDescription = TextEditingController();
   static final TextEditingController textEmail = TextEditingController();
-  // static final TextEditingController textNumber = TextEditingController();
-  // static final TextEditingController textNationality = TextEditingController();
+  static final TextEditingController textNumber = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -97,38 +94,38 @@ class _EditProfileState extends State<EditProfile> {
     return Center(
       child: Stack(
         children: <Widget>[
-          Container(
+          Positioned(
+          child: Container(
             decoration: BoxDecoration(
               color: CustomColors.menuBackgroundColor,
               shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                    color: CustomColors.menuBackgroundColor,
-                    blurRadius: 4,
-                    spreadRadius: 4,
-                    offset: Offset(1, 1)),
-              ],
+              border: Border.all(
+                width: 8,
+                color: Colors.white,
+              ),
             ),
             child: CircleAvatar(
-              radius: 45.0,
+              radius: 90.0,
               backgroundImage: userLoad.imagePath == null
-                  ? AssetImage('assets/jurie.jpg')
+                  ? AssetImage('assets/profile.jpg')
                   : FileImage(File(userLoad.imagePath)),
             ),
+            
+          ),
           ),
           Positioned(
-            bottom: 0,
-            right: 0,
+            bottom: 20,
+            right: 20,
             child: Container(
               height: 40,
               width: 40,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(
-                  width: 4,
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                ),
-                color: Color(0xFFEEBAB2),
+                // border: Border.all(
+                //   width: 4,
+                //   color: Theme.of(context).scaffoldBackgroundColor,
+                // ),
+                color: Color(0xFFEEBAB2).withOpacity(.8),
               ),
               child: InkWell(
               onTap: () {
@@ -223,7 +220,7 @@ class _EditProfileState extends State<EditProfile> {
   Widget _buildUsername() {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
       
       child: TextFormField(
           controller: textName,
@@ -264,7 +261,7 @@ class _EditProfileState extends State<EditProfile> {
   Widget _buildUserEmail() {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
       // decoration: BoxDecoration(
       //   color: CustomColors.menuBackgroundColor,
       //   borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -305,208 +302,430 @@ class _EditProfileState extends State<EditProfile> {
     );
   }
 
+  Widget _buildUserLRN() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+      // decoration: BoxDecoration(
+      //   color: CustomColors.menuBackgroundColor,
+      //   borderRadius: BorderRadius.all(Radius.circular(30)),
+      // ),
+      child: TextFormField(
+          controller: textLRN,
+          style: TextStyle(color: Colors.black, fontSize: 20),
+          cursorColor: Colors.black,
+          validator: (String value) {
+            if (value.isEmpty) {
+              return 'Enter LRN';
+            }
+            return null;
+          },
+          decoration: InputDecoration(
+            focusedBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            labelText: 'LRN',
+            labelStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+            ),
+            focusColor: Colors.black,
+            isDense: true,
+            prefixIcon: Icon(
+              Icons.email,
+              color: Colors.black,
+              size: 24,
+            ),
+          ),
+          /////using shared preferences
+          onChanged: (value) {
+            setState(() {
+              userSave.userEmail = value;
+            });
+          }),
+    );
+  }
+
+  Widget _buildUserCourse() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+      // decoration: BoxDecoration(
+      //   color: CustomColors.menuBackgroundColor,
+      //   borderRadius: BorderRadius.all(Radius.circular(30)),
+      // ),
+      child: TextFormField(
+          controller: textCourse,
+          
+          style: TextStyle(color: Colors.black, fontSize: 20),
+          cursorColor: Colors.black,
+          validator: (String value) {
+            if (value.isEmpty) {
+              return 'Enter Course';
+            }
+            return null;
+          },
+          decoration: InputDecoration(
+            focusedBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            labelText: 'Course',
+            labelStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+            ),
+            focusColor: Colors.black,
+            isDense: true,
+            prefixIcon: Icon(
+              Icons.email,
+              color: Colors.black,
+              size: 24,
+            ),
+          ),
+          /////using shared preferences
+          onChanged: (value) {
+            setState(() {
+              userSave.userEmail = value;
+            });
+          }),
+    );
+  }
+
+  Widget _buildUserDescription() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+      // decoration: BoxDecoration(
+      //   color: CustomColors.menuBackgroundColor,
+      //   borderRadius: BorderRadius.all(Radius.circular(30)),
+      // ),
+      child: TextFormField(
+          controller: textDescription,
+          style: TextStyle(color: Colors.black, fontSize: 20),
+          cursorColor: Colors.black,
+          validator: (String value) {
+            if (value.isEmpty) {
+              return 'Enter Description';
+            }
+            return null;
+          },
+          decoration: InputDecoration(
+            focusedBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            labelText: 'Description',
+            labelStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+            ),
+            focusColor: Colors.black,
+            isDense: true,
+            prefixIcon: Icon(
+              Icons.email,
+              color: Colors.black,
+              size: 24,
+            ),
+          ),
+          /////using shared preferences
+          onChanged: (value) {
+            setState(() {
+              userSave.userEmail = value;
+            });
+          }),
+    );
+  }
+
+  Widget _buildUserNumber() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+      // decoration: BoxDecoration(
+      //   color: CustomColors.menuBackgroundColor,
+      //   borderRadius: BorderRadius.all(Radius.circular(30)),
+      // ),
+      child: TextFormField(
+          controller: textNumber,
+          keyboardType: TextInputType.number,
+          style: TextStyle(color: Colors.black, fontSize: 20),
+          cursorColor: Colors.black,
+          validator: (String value) {
+            if (value.isEmpty) {
+              return 'Enter Contact Number';
+            }
+            return null;
+          },
+          decoration: InputDecoration(
+            focusedBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            labelText: 'Contact Number',
+            labelStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+            ),
+            focusColor: Colors.black,
+            isDense: true,
+            prefixIcon: Icon(
+              Icons.email,
+              color: Colors.black,
+              size: 24,
+            ),
+          ),
+          /////using shared preferences
+          onChanged: (value) {
+            setState(() {
+              userSave.userEmail = value;
+            });
+          }),
+    );
+  }
+
+  Widget _buildButton(){
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(width: 10.0),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20)
+              ),
+              primary: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text("CANCEL",
+                style: TextStyle(
+                    fontSize: 14,
+                    letterSpacing: 2.2,
+                    color: Colors.black)),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              if (!_formKey.currentState.validate()) {
+                return;
+              }
+              _formKey.currentState.save();
+
+              sharedPref.save("user", userSave);
+              print("Profile Saved");
+              loadSharedPrefs();
+              Navigator.push(
+                context, 
+                MaterialPageRoute(
+                  builder: (_)=> Profile(
+                  ),
+                ),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              primary: Color(0xFFFFB8AC),
+            padding: EdgeInsets.symmetric(horizontal: 50),
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20)),
+            ),
+            child: Text(
+              " SAVE ",
+              style: TextStyle(
+                  fontSize: 14,
+                  letterSpacing: 2.2,
+                  color: Colors.white),
+            ),
+          ),
+          SizedBox(width: 10.0),
+        ],
+      ),
+
+    );
+  }
+  
   @override
   Widget build(BuildContext context) {
+    //double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 1,
+        elevation: 0.0,
+        backgroundColor: Color(0xFFFFB8AC),
+        title: Row(
+            //mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(width: 80),
+              Text(
+                'Edit Profile', style: TextStyle(color: Colors.white, fontSize: 24),
+                //textAlign: TextAlign.center,
+              ),
+              SizedBox(width: 70),
+              IconButton(
+                icon: Icon(
+                  Icons.settings,
+                  color: Colors.white,
+                ),
+                onPressed: () async {
+                },
+              ),
+            ],
+          ),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
+            color: Colors.white,
           ),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: Color(0xFFFFB8AC),
-            ),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => Settings()));
-            },
-          ),
-        ],
       ),
+    
       body: Container(
-        padding: EdgeInsets.only(left: 16, top: 0, right: 16),
+        padding: EdgeInsets.only(left: 0, top: 0, right: 0),
         child: Form(
           key: _formKey,
           child: GestureDetector(
             onTap: () {
               FocusScope.of(context).unfocus();
-            },
-            child: ListView(
+            }, 
+            child:  Stack(
+              fit: StackFit.expand,
               children: [
-                Text(
-                  "Edit Profile",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-                ),
-                SizedBox(height: 15),
-                Center(
-                  child: Stack(
-                    children: [
-                      _buildImage(),
-                    ],
+                Container(
+                  decoration: BoxDecoration(
+                    color: Color(0xFFFFB8AC),
                   ),
                 ),
-                SizedBox(height: 35),
-                _buildUsername(),
-                _buildUserEmail(),
-                buildTextField("Full Name", "${user.displayName}", false),
-                buildTextField("Description", "Description", false),
-                buildTextField("Course", "Course", false),
-                buildTextField("LRN", "Enter LRN", false),
-                buildTextField("E-mail", "${user.email}", false),
-                buildTextField("Contact Number", "09123456789", false),
-                buildTextField("Nationality", "Nationality", false),
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(horizontal: 50),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)
-                        ),
-                        primary: Colors.white,
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text("CANCEL",
-                          style: TextStyle(
-                              fontSize: 14,
-                              letterSpacing: 2.2,
-                              color: Colors.black)),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (!_formKey.currentState.validate()) {
-                          return;
-                        }
-                        _formKey.currentState.save();
-
-                        sharedPref.save("user", userSave);
-                        print("Profile Saved");
-                        loadSharedPrefs();
-                        Navigator.push(
-                          context, 
-                          MaterialPageRoute(
-                            builder: (_)=> Profile(
+                Scaffold(
+                  backgroundColor: Colors.transparent,
+                  body: SingleChildScrollView(
+                    //physics: BouncingScrollPhysics(),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(left: 0, top: 0, right: 0),
+                            //height: height * 0.43,
+                            height: height -80,
+                            child: LayoutBuilder(
+                              builder: (context, constraints) {
+                                //double innerHeight = constraints.maxHeight;
+                                double innerWidth = constraints.maxWidth;
+                                return Stack(
+                                  fit: StackFit.expand,
+                                  children: [
+                                    Positioned(
+                                      top: 120,
+                                      bottom: 0,
+                                      left: 0,
+                                      right: 0,
+                                      child: Container(
+                                        //height: (innerHeight + 400 ),
+                                        width: innerWidth,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(130.0),
+                                        bottomRight: Radius.circular(0.0),
+                                        topLeft: Radius.circular(130.0),
+                                        bottomLeft: Radius.circular(0.0)),
+                                          color: Colors.white,
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            SizedBox(height: 80),
+                                            _buildUsername(),
+                                            SizedBox(height: 10),
+                                            _buildUserDescription(),
+                                            SizedBox(height: 10),
+                                            _buildUserEmail(),
+                                            SizedBox(height: 10),
+                                            _buildUserLRN(),
+                                            SizedBox(height: 10),
+                                            _buildUserCourse(),
+                                            SizedBox(height: 10),
+                                            _buildUserNumber(),
+                                            SizedBox(height: 20),
+                                            _buildButton(),
+                                          ],
+                                        ), 
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 0,
+                                      left: 0,
+                                      right: 0,
+                                      child: Center(
+                                        child: Container(
+                                          child: _buildImage(),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
                             ),
                           ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(0xFFEEBAB2),
-                      padding: EdgeInsets.symmetric(horizontal: 50),
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      ),
-                      
-                      child: Text(
-                        " SAVE ",
-                        style: TextStyle(
-                            fontSize: 14,
-                            letterSpacing: 2.2,
-                            color: Colors.white),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(height: 35),
-                Text(
-                  userLoad.userName ?? "Test User",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.deepPurple[900],
-                      fontSize: 22),
-                ),
-                SizedBox(height: 35),
-                Text(
-                  userLoad.userEmail ?? "Test Email",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.deepPurple[900],
-                      fontSize: 22),
-                ),
+                  ),
+                )
               ],
             ),
+          ),
         ),
-            ),
-      ),
-    );
-  }
-
-  Widget buildTextField(
-      String labelText, String placeholder, bool isPasswordTextField) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 35.0),
-      child: TextField(
-        //obscureText: isPasswordTextField ? showPassword : false,
-        decoration: InputDecoration(
-            suffixIcon: isPasswordTextField
-                ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        //showPassword = !showPassword;
-                      });
-                    },
-                    icon: Icon(
-                      Icons.remove_red_eye,
-                      color: Colors.grey,
-                    ),
-                  )
-                : null,
-            contentPadding: EdgeInsets.only(bottom: 3),
-            labelText: labelText,
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            hintText: placeholder,
-            hintStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            )),
       ),
     );
   }
 }
 
 class ProfileInfo {
-  
-
   var imagePath;
   String userName;
   String userEmail;
+  String userLRN;
+  String userDescription;
+  String userCourse;
+  String userNumber;
 
   ProfileInfo.createProfile(
-      var imagePath,
-      String userName,
-      String userEmail) {
+    var imagePath,
+    String userName,
+    String userEmail,
+    String userLRN,
+    String userDescription,
+    String userCourse,
+    String userNumber) {
     imagePath = imagePath;
     userName = userName;
     userEmail = userEmail;
+    userLRN = userLRN;
+    userDescription = userDescription;
+    userCourse = userCourse;
+    userNumber = userNumber;
   }
 
   ProfileInfo();
 
   ProfileInfo.fromJson(Map<String, dynamic> json)
-      : imagePath = json['imagePath'],
-      userName = json['userName'],
-      userEmail = json['userEmail'];
+    : imagePath = json['imagePath'],
+    userName = json['userName'],
+    userEmail = json['userEmail'],
+    userLRN = json['userLRN'],
+    userDescription = json['userDescription'],
+    userCourse = json['userCourse'],
+    userNumber = json['userNumber'];
   Map<String, dynamic> toJson() => {
-        'imagePath': imagePath,
-        'userName': userName,
-        'userEmail': userEmail,
-      };
+    'imagePath': imagePath,
+    'userName': userName,
+    'userEmail': userEmail,
+    'userLRN': userLRN,
+    'userDescription': userDescription,
+    'userCourse': userCourse,
+    'userNumber': userNumber,
+  };
 }
 
 class SharedPref {

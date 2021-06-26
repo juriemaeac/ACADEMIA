@@ -94,8 +94,10 @@ class _NavbarState extends State<Navbar> {
                 ),
               ),
               UserAccountsDrawerHeader(
-                accountName: Text("${user.displayName}"),
-                accountEmail: Text("${user.email}"),
+                //accountName: Text("${user.displayName}"),
+                accountName: Text("name"),
+                //accountEmail: Text("${user.email}"),
+                accountEmail: Text("email"),
                 currentAccountPicture: CircleAvatar(
                   child: ClipOval(
                     child: Image.network(

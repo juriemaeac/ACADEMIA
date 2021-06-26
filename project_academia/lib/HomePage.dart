@@ -67,26 +67,27 @@ class _HomePageState extends State<HomePage> {
       
       drawer: Navbar(),
       appBar: AppBar(title: Text('Home'),
-      backgroundColor: Color(0xFFE7C8A9),
+      elevation: 0,
+      backgroundColor: Colors.white,
       ),
       //body: _children[_currentIndex], // new
-        bottomNavigationBar: BottomNavigationBar(
+        // bottomNavigationBar: BottomNavigationBar(
           
-          onTap: onTabTapped, // new
-          currentIndex: _currentIndex, // this will be set when a new tab is tapped
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home,size: 30),
-              label: 'Home',
-            ),
+        //   onTap: onTabTapped, // new
+        //   currentIndex: _currentIndex, // this will be set when a new tab is tapped
+        //   items: [
+        //     BottomNavigationBarItem(
+        //       icon: Icon(Icons.home,size: 30),
+        //       label: 'Home',
+        //     ),
             
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person, size: 30),
-              label: 'Profile'
+        //     BottomNavigationBarItem(
+        //       icon: Icon(Icons.person, size: 30),
+        //       label: 'Profile'
               
-            )
-          ],
-        ),
+        //     )
+        //   ],
+        // ),
       
         //backgroundColor: Colors.white,
         body: Center(
@@ -103,12 +104,6 @@ class _HomePageState extends State<HomePage> {
                 :  
                 Column(
                     children: <Widget>[
-                      SizedBox(height: 20.0),
-                       Row( 
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                      ]
-                      ),
                       SizedBox(height: 0),
                       Container(
                         alignment: FractionalOffset.center,

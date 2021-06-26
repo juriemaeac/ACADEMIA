@@ -33,21 +33,17 @@ class NoteListState extends State<NoteList> {
         child: AppBar(
           //centerTitle: true,
           elevation: 0,
-          backgroundColor: Color(0xFFCDB193),
+          backgroundColor: Colors.white,
 
           title: Row(
             //mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              SizedBox(
-                width: 100,
-              ),
+              SizedBox(width: 100),
               Text(
                 'Notes', style: Theme.of(context).textTheme.headline5,
                 //textAlign: TextAlign.center,
               ),
-              SizedBox(
-                width: 60,
-              ),
+              SizedBox(width: 60),
               IconButton(
                 icon: Icon(
                   Icons.search,
@@ -105,6 +101,7 @@ class NoteListState extends State<NoteList> {
         ),
         backgroundColor: Color(0xFFCDB193),
       ),
+      
     );
   }
 

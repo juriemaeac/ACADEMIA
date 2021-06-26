@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sample1/Navbar.dart';
@@ -8,13 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:sample1/profile/editProfileScreen.dart';
 import 'package:sample1/start.dart';
 
+
 class Profile extends StatefulWidget {
   @override
   _ProfileState createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
-final FirebaseAuth _auth = FirebaseAuth.instance;
+  SharedPref sharedPref = SharedPref();
+  ProfileInfo userLoad = ProfileInfo();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   User user;
   bool isloggedin = false;
   //final userid = user.uid;
@@ -58,12 +60,35 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
     super.initState();
     this.checkAuthentification();
     this.getUser();
+    loadSharedPrefs();
   }
 
-  
+  loadSharedPrefs() async {
+    try {
+      ProfileInfo user = ProfileInfo.fromJson(await sharedPref.read("user"));
+      // ignore: deprecated_member_use
+      Scaffold.of(context).showSnackBar(SnackBar(
+          content: new Text("Loaded!"),
+          duration: const Duration(milliseconds: 500)));
+      setState(() {
+        userLoad = user;
+      });
+    } catch (Exception) {
+      // ignore: deprecated_member_use
+      Scaffold.of(context).showSnackBar(SnackBar(
+          content: new Text("Nothing found!"),
+          duration: const Duration(milliseconds: 500)));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    String _userName = userLoad.userName ?? "Username";
+    String _userDesription = userLoad.userDescription ?? "<<Description>>";
+    String _userEmail = userLoad.userEmail ?? "Email";
+    String _userCourse = userLoad.userCourse ?? "Course";
+    String _userLRN = userLoad.userLRN ?? "LRN";
+    String _userNumber = userLoad.userNumber ?? "Number";
     return Scaffold(
       drawer: Navbar(),
       backgroundColor: Colors.white,
@@ -158,17 +183,17 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
-                            FadeAnimation(1, Text("${user.displayName}", style: 
+                            FadeAnimation(1, Text("$_userName", style: 
                               TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 40)
                             ,)),
                             SizedBox(height: 20,),
                             Row(
                               children: <Widget>[
                                 FadeAnimation(1.2, 
-                                  Text("BS Computer Engineering", style: TextStyle(color: Colors.grey[850], fontSize: 16),)
+                                  Text("$_userCourse", style: TextStyle(color: Colors.grey[850], fontSize: 16),)
                                 ),
                                 SizedBox(width: 50,),
-                                FadeAnimation(1.3, Text("2019-06524-MN-0", style: 
+                                FadeAnimation(1.3, Text("$_userLRN", style: 
                                   TextStyle(color: Colors.grey[850], fontSize: 16)
                                 ,))
                               ],
@@ -189,7 +214,7 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        FadeAnimation(1.6, Text("<< Description >>", 
+                        FadeAnimation(1.6, Text("$_userDesription", 
                         style: TextStyle(color: Colors.grey[850], height: 1.4,fontSize: 16,),)),
                         
                         SizedBox(height: 40,),
@@ -200,7 +225,7 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
                             Icon(Icons.email, color: Color(0xFFFFB8AC),),),
                             SizedBox(width: 10,),
                             FadeAnimation(1.6, 
-                              Text("${user.email}", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
+                              Text("$_userEmail", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
                             ),
                           ],
                         ),
@@ -222,7 +247,7 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
                             Icon(Icons.phone, color: Color(0xFFFFB8AC),),),
                             SizedBox(width: 10,),
                             FadeAnimation(1.6, 
-                              Text("09757179206", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
+                              Text("$_userNumber", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
                             ),
                           ],
                         ),
@@ -320,25 +345,6 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
                             ],
                           ),
                         ),
-                        
-                        
-                        //SizedBox(height: 20,),
-                        // FadeAnimation(1.6, 
-                        //   Text("Pictures", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),)
-                        // ),
-                        // SizedBox(height: 20,),
-                        // FadeAnimation(1.8, Container(
-                        //   height: 200,
-                        //   child: ListView(
-                        //     scrollDirection: Axis.horizontal,
-                        //     children: <Widget>[
-                        //       makeVideo(image: 'assets/jurie1.jpg'),
-                        //       makeVideo(image: 'assets/jurie2.jpg'),
-                        //       makeVideo(image: 'assets/jurie3.jpg'),
-                        //     ],
-                        //   ),
-                        // )),
-                        //SizedBox(height: 120,)
                       ],
                     ),
                   )
