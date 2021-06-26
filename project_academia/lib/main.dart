@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:sample1/Navbar.dart';
+import 'package:sample1/calendar/calendarScreen.dart';
+import 'package:sample1/profile/editProfileScreen.dart';
 import 'package:sample1/profile/profileScreen.dart';
 import 'package:sample1/Start.dart';
 import 'package:sample1/Login.dart';
 import 'package:sample1/HomePage.dart';
 import 'package:sample1/SignUp.dart';
 import 'package:sample1/Attendance.dart';
-import 'package:sample1/Calendar.dart';
 import 'package:sample1/flashcards/Reviewer.dart';
 import 'package:sample1/Settings.dart';
 import 'package:sample1/flashcards/flashcardReviewer.dart';
@@ -69,6 +70,7 @@ class MyApp extends StatelessWidget {
         "Settings": (BuildContext context) => Settings(),
         "Reviewer": (BuildContext context) => ReviewerScreen(),
         "Topic": (BuildContext context) => TopicScreen(),
+        "EditProfile": (BuildContext context) => EditProfile(),
       }
     );
     
