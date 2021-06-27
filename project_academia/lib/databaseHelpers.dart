@@ -8,7 +8,6 @@ import 'package:sample1/todolist/taskModel.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sample1/notes/noteModel.dart';
 
-
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._instance();
   static Database _db;
@@ -58,7 +57,7 @@ class DatabaseHelper {
     }
     return _databaseHelper;
   }
-  
+
   Future<Database> get db async {
     if (_db == null) {
       _db = await initializeDatabase();
@@ -67,15 +66,16 @@ class DatabaseHelper {
   }
 
   Future<Database> initializeDatabase() async {
-    Directory dir =  await getApplicationDocumentsDirectory();
+    Directory dir = await getApplicationDocumentsDirectory();
     String path = dir.path + 'projectAcademia.db';
     final academiaDb = await openDatabase(
-      path, 
+      path,
       version: 2,
       onCreate: _createDb,
     );
     return academiaDb;
   }
+
   void _createDb(Database db, int version) async {
     await db.execute(
       'CREATE TABLE $taskstables($colId INTEGER PRIMARY KEY AUTOINCREMENT, $colTitle TEXT, $colDate TEXT, $colDescription TEXT, $colPriority TEXT, $colStatus INTEGER)',
@@ -87,7 +87,7 @@ class DatabaseHelper {
       'CREATE TABLE $topicTable($colIdTopic INTEGER PRIMARY KEY AUTOINCREMENT, $colTitleTopic TEXT, $colStatusTopic INTEGER)',
     );
     await db.execute(
-      'CREATE TABLE $noteTable($colIdNote INTEGER PRIMARY KEY AUTOINCREMENT, $colTitleNote TEXT, $colDescriptionNote TEXT, $colPriorityNote INTEGER, $colColorNote INTEGER,$colDateNote TEXT)');
+        'CREATE TABLE $noteTable($colIdNote INTEGER PRIMARY KEY AUTOINCREMENT, $colTitleNote TEXT, $colDescriptionNote TEXT, $colPriorityNote INTEGER, $colColorNote INTEGER,$colDateNote TEXT)');
   }
 
   Future<List<Map<String, dynamic>>> getTaskMapList() async {
@@ -96,7 +96,7 @@ class DatabaseHelper {
     return result;
   }
 
-  Future <List<Task>> getTaskList() async {
+  Future<List<Task>> getTaskList() async {
     final List<Map<String, dynamic>> taskMapList = await getTaskMapList();
     final List<Task> taskList = [];
     taskMapList.forEach((taskMap) {
@@ -107,6 +107,7 @@ class DatabaseHelper {
     taskList.sort((taskA, taskB) => taskA.date.compareTo(taskB.date));
     return taskList;
   }
+
   //when u add ask to the db
   Future<int> insertTask(Task task) async {
     Database db = await this.db;
@@ -117,9 +118,9 @@ class DatabaseHelper {
   Future<int> updateTask(Task task) async {
     Database db = await this.db;
     final int result = await db.update(
-      taskstables, 
-      task.toMap(), 
-      where: '$colId = ?', 
+      taskstables,
+      task.toMap(),
+      where: '$colId = ?',
       whereArgs: [task.id],
     );
     return result;
@@ -127,13 +128,14 @@ class DatabaseHelper {
 
   Future<int> deleteTask(int id) async {
     Database db = await this.db;
-    final int result =  await db.delete(
-      taskstables, 
-      where: '$colId = ?', 
+    final int result = await db.delete(
+      taskstables,
+      where: '$colId = ?',
       whereArgs: [id],
     );
     return result;
   }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
   Future<List<Map<String, dynamic>>> getReviewerMapList() async {
     Database db = await this.db;
@@ -141,15 +143,16 @@ class DatabaseHelper {
     return result;
   }
 
-  Future <List<Reviewer>> getReviewerList() async {
-    final List<Map<String, dynamic>> reviewerMapList = await getReviewerMapList();
+  Future<List<Reviewer>> getReviewerList() async {
+    final List<Map<String, dynamic>> reviewerMapList =
+        await getReviewerMapList();
     final List<Reviewer> reviewerList = [];
     reviewerMapList.forEach((reviewerMap) {
       reviewerList.add(Reviewer.fromMap(reviewerMap));
     });
     return reviewerList;
-
   }
+
   //when u add reviewer to the db
   Future<int> insertReviewer(Reviewer reviewer) async {
     Database db = await this.db;
@@ -160,9 +163,9 @@ class DatabaseHelper {
   Future<int> updateReviewer(Reviewer reviewer) async {
     Database db = await this.db;
     final int result = await db.update(
-      reviewerTable, 
-      reviewer.toMap(), 
-      where: '$colIdReviewer = ?', 
+      reviewerTable,
+      reviewer.toMap(),
+      where: '$colIdReviewer = ?',
       whereArgs: [reviewer.idReviewer],
     );
     return result;
@@ -170,13 +173,14 @@ class DatabaseHelper {
 
   Future<int> deleteReviewer(int idReviewer) async {
     Database db = await this.db;
-    final int result =  await db.delete(
-      reviewerTable, 
-      where: '$colIdReviewer = ?', 
+    final int result = await db.delete(
+      reviewerTable,
+      where: '$colIdReviewer = ?',
       whereArgs: [idReviewer],
     );
     return result;
   }
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
   Future<List<Map<String, dynamic>>> getTopicMapList() async {
     Database db = await this.db;
@@ -184,15 +188,15 @@ class DatabaseHelper {
     return result;
   }
 
-  Future <List<Topic>> getTopicList() async {
+  Future<List<Topic>> getTopicList() async {
     final List<Map<String, dynamic>> topicMapList = await getTopicMapList();
     final List<Topic> topicList = [];
     topicMapList.forEach((topicMap) {
       topicList.add(Topic.fromMap(topicMap));
     });
     return topicList;
-
   }
+
   //when u add topic to the db
   Future<int> insertTopic(Topic topic) async {
     Database db = await this.db;
@@ -203,9 +207,9 @@ class DatabaseHelper {
   Future<int> updateTopic(Topic topic) async {
     Database db = await this.db;
     final int result = await db.update(
-      topicTable, 
-      topic.toMap(), 
-      where: '$colIdTopic = ?', 
+      topicTable,
+      topic.toMap(),
+      where: '$colIdTopic = ?',
       whereArgs: [topic.idTopic],
     );
     return result;
@@ -213,9 +217,9 @@ class DatabaseHelper {
 
   Future<int> deleteTopic(int idTopic) async {
     Database db = await this.db;
-    final int result =  await db.delete(
-      topicTable, 
-      where: '$colIdTopic = ?', 
+    final int result = await db.delete(
+      topicTable,
+      where: '$colIdTopic = ?',
       whereArgs: [idTopic],
     );
     return result;
@@ -228,7 +232,7 @@ class DatabaseHelper {
     return result;
   }
 
-  Future <List<Note>> getNoteList() async {
+  Future<List<Note>> getNoteList() async {
     final List<Map<String, dynamic>> noteMapList = await getNoteMapList();
     final List<Note> noteList = [];
     noteMapList.forEach((noteMap) {
@@ -269,20 +273,19 @@ class DatabaseHelper {
 
   Future<int> deleteNote(int idNote) async {
     Database db = await this.db;
-    final int result =  await db.delete(
-      noteTable, 
-      where: '$colIdNote = ?', 
+    final int result = await db.delete(
+      noteTable,
+      where: '$colIdNote = ?',
       whereArgs: [idNote],
     );
     return result;
   }
-Future<int> getCount() async {
+
+  Future<int> getCount() async {
     Database db = await this.db;
     List<Map<String, dynamic>> x =
         await db.rawQuery('SELECT COUNT (*) from $noteTable');
     int result = Sqflite.firstIntValue(x);
     return result;
   }
-
-  
 }
