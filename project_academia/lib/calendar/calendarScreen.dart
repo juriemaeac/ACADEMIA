@@ -8,6 +8,8 @@ import 'package:sample1/calendar/db.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 
+import 'event_editing_page.dart';
+
 class Calendar extends StatefulWidget {
   @override
   _CalendarState createState() => _CalendarState();
@@ -285,6 +287,8 @@ class _CalendarState extends State<Calendar> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal,
         onPressed: () => _create(context),
+        //onPressed: () => Navigator.of(context)
+        //.push(MaterialPageRoute(builder: (context) => EventEditingPage())),
         child: Icon(
           Icons.add,
           color: Colors.white,
