@@ -3,6 +3,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sample1/calendar/addEventScreen.dart';
 import 'package:sample1/calendar/calendarModel.dart';
 import 'package:sample1/calendar/db.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -17,6 +18,10 @@ class Calendar extends StatefulWidget {
 
 class _CalendarState extends State<Calendar> {
   DateTime _selectedDay = DateTime.now();
+  DateTime _date = DateTime.now();
+  TextEditingController _dateController = TextEditingController();
+
+  final DateFormat _dateFormatter = DateFormat("MMM dd, yyyy");
 
   CalendarController _calendarController;
   Map<DateTime, List<dynamic>> _events = {};
@@ -39,37 +44,45 @@ class _CalendarState extends State<Calendar> {
 
   Widget events(var d) {
     return Container(
-      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+      padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
       child: Container(
-          width: MediaQuery.of(context).size.width * 0.9,
-          padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
-          decoration: BoxDecoration(
-              border: Border(
+        width: MediaQuery.of(context).size.width * 0.9,
+        padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+        decoration: BoxDecoration(
+          border: Border(
             top: BorderSide(color: Theme.of(context).dividerColor),
-          )),
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          )
+        ),
+        child:Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+          children: [
             Text(d, style: Theme.of(context).primaryTextTheme.bodyText1),
+            ),
             IconButton(
-                icon: FaIcon(
-                  FontAwesomeIcons.trashAlt,
-                  color: Colors.teal,
-                  size: 15,
-                ),
-                onPressed: () => _deleteEvent(d))
-          ])),
+              icon: FaIcon(
+                FontAwesomeIcons.trashAlt,
+                color: Colors.teal,
+                size: 15,
+              ),
+              onPressed: () => _deleteEvent(d),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
-  // void _onDaySelected(DateTime day, List events) {
-  //   setState(() {
-  //     _selectedDay = day;
-  //     _selectedEvents = events;
-  //   });
-  // }
-
+  void _onDaySelected(DateTime day, List events) {
+    setState(() {
+      _selectedDay = day;
+      _selectedEvents = events;
+    });
+  }
+  
   void _create(BuildContext context) {
     String _name = "";
+    String _description = "";
+    //String _time = "";
     var content = TextField(
       style: GoogleFonts.montserrat(
           color: Color.fromRGBO(105, 105, 108, 1), fontSize: 16),
@@ -91,7 +104,8 @@ class _CalendarState extends State<Calendar> {
               color: Color.fromRGBO(59, 57, 60, 1),
               fontSize: 16,
               fontWeight: FontWeight.bold)),
-      onPressed: () => _addEvent(_name),
+      onPressed: () { _addEvent(_name); 
+      }
     );
     var cancelButton = FlatButton(
         child: Text('Cancel',
@@ -133,7 +147,13 @@ class _CalendarState extends State<Calendar> {
                           color: Color.fromRGBO(59, 57, 60, 1),
                           fontSize: 18,
                           fontWeight: FontWeight.bold)),
-                  Container(padding: EdgeInsets.all(20), child: content),
+                  Container(padding: EdgeInsets.all(20), 
+                  child: Column(
+                    children: <Widget>[
+                      content
+                    ],
+                  ),
+                  ),
                   Row(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[btn, cancelButton]),
@@ -171,6 +191,7 @@ class _CalendarState extends State<Calendar> {
 
     Navigator.pop(context);
   }
+  
 
   // Delete doesnt refresh yet, thats it, then done!
   void _deleteEvent(String s) {
@@ -237,15 +258,20 @@ class _CalendarState extends State<Calendar> {
   Widget eventTitle() {
     if (_selectedEvents.length == 0) {
       return Container(
-        padding: EdgeInsets.fromLTRB(15, 20, 15, 15),
-        child: Text("No events",
-            style: Theme.of(context).primaryTextTheme.headline1),
+        padding: EdgeInsets.fromLTRB(15, 20, 15, 5),
+        child: Text('No Events',style: GoogleFonts.montserrat(
+            textStyle: Theme.of(context).textTheme.headline4,
+            fontSize: 18),
+        ),
       );
     }
     return Container(
-      padding: EdgeInsets.fromLTRB(15, 20, 15, 15),
+      padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
       child:
-          Text("Events", style: Theme.of(context).primaryTextTheme.headline1),
+        Text('Events',style: GoogleFonts.montserrat(
+            textStyle: Theme.of(context).textTheme.headline4,
+            fontSize: 18),
+        ),
     );
   }
 
@@ -279,14 +305,24 @@ class _CalendarState extends State<Calendar> {
             ),
           ),
           calendar(),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Text(
+              'Daily Events',
+              style: TextStyle(
+                  fontSize: 21, fontWeight: FontWeight.bold),
+            )
+          ),
           eventTitle(),
-          Column(children: _eventWidgets),
+          Column(
+          children: _eventWidgets,
+          ),
           SizedBox(height: 60)
         ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal,
-        onPressed: () => _create(context),
+        onPressed: () => _create(context),//Navigator.push(context, MaterialPageRoute(builder: (context) => AddEvent())),
         //onPressed: () => Navigator.of(context)
         //.push(MaterialPageRoute(builder: (context) => EventEditingPage())),
         child: Icon(

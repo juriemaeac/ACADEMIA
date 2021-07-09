@@ -24,7 +24,7 @@ abstract class DB {
 
   static FutureOr<void> onCreate(Database db, int version) async {
     await db.execute(
-      'CREATE TABLE events (id INTEGER PRIMARY KEY NOT NULL, name STRING, date STRING, setCounter INTEGER)');
+      'CREATE TABLE events (id INTEGER PRIMARY KEY NOT NULL, name STRING, date STRING, setCounter INTEGER, description STRING)');
   }
 
   static Future<List<Map<String, dynamic>>> query(String table) async =>
