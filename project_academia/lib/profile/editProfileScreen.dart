@@ -50,10 +50,10 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   void initState() {
-    super.initState();
     this.checkAuthentification();
     this.getUser();
     loadSharedPrefs();
+    super.initState();
   }
   
 
@@ -262,11 +262,8 @@ class _EditProfileState extends State<EditProfile> {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
-      // decoration: BoxDecoration(
-      //   color: CustomColors.menuBackgroundColor,
-      //   borderRadius: BorderRadius.all(Radius.circular(30)),
-      // ),
       child: TextFormField(
+        readOnly: true,
           controller: textEmail,
           style: TextStyle(color: Colors.black, fontSize: 20),
           cursorColor: Colors.black,
@@ -298,7 +295,8 @@ class _EditProfileState extends State<EditProfile> {
             setState(() {
               userSave.userEmail = value;
             });
-          }),
+          }
+          ),
     );
   }
 
@@ -332,7 +330,7 @@ class _EditProfileState extends State<EditProfile> {
             focusColor: Colors.black,
             isDense: true,
             prefixIcon: Icon(
-              Icons.email,
+              Icons.subtitles,
               color: Colors.black,
               size: 24,
             ),
@@ -377,7 +375,7 @@ class _EditProfileState extends State<EditProfile> {
             focusColor: Colors.black,
             isDense: true,
             prefixIcon: Icon(
-              Icons.email,
+              Icons.book,
               color: Colors.black,
               size: 24,
             ),
@@ -421,7 +419,7 @@ class _EditProfileState extends State<EditProfile> {
             focusColor: Colors.black,
             isDense: true,
             prefixIcon: Icon(
-              Icons.email,
+              Icons.description,
               color: Colors.black,
               size: 24,
             ),
@@ -466,7 +464,7 @@ class _EditProfileState extends State<EditProfile> {
             focusColor: Colors.black,
             isDense: true,
             prefixIcon: Icon(
-              Icons.email,
+              Icons.phone,
               color: Colors.black,
               size: 24,
             ),
@@ -559,15 +557,15 @@ class _EditProfileState extends State<EditProfile> {
                 'Edit Profile', style: TextStyle(color: Colors.white, fontSize: 24),
                 //textAlign: TextAlign.center,
               ),
-              SizedBox(width: 70),
-              IconButton(
-                icon: Icon(
-                  Icons.settings,
-                  color: Colors.white,
-                ),
-                onPressed: () async {
-                },
-              ),
+              // SizedBox(width: 70),
+              // IconButton(
+              //   icon: Icon(
+              //     Icons.settings,
+              //     color: Colors.white,
+              //   ),
+              //   onPressed: () async {
+              //   },
+              // ),
             ],
           ),
         leading: IconButton(
@@ -635,19 +633,38 @@ class _EditProfileState extends State<EditProfile> {
                                         ),
                                         child: Column(
                                           children: [
-                                            SizedBox(height: 80),
-                                            _buildUsername(),
+                                            SizedBox(height: 100),
+                                            Container(
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                "${user.displayName}",
+                                                style: TextStyle(
+                                                    fontSize: 25,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.black),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
                                             SizedBox(height: 10),
+                                            Container(
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                "${user.email}",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Colors.black),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                            SizedBox(height: 30),
                                             _buildUserDescription(),
-                                            SizedBox(height: 10),
-                                            _buildUserEmail(),
-                                            SizedBox(height: 10),
+                                            SizedBox(height: 13),
                                             _buildUserLRN(),
-                                            SizedBox(height: 10),
+                                            SizedBox(height: 13),
                                             _buildUserCourse(),
-                                            SizedBox(height: 10),
+                                            SizedBox(height: 13),
                                             _buildUserNumber(),
-                                            SizedBox(height: 20),
+                                            SizedBox(height: 30),
                                             _buildButton(),
                                           ],
                                         ), 

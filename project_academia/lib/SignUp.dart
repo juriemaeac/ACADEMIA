@@ -171,7 +171,10 @@ class _SignUpState extends State<SignUp> {
                     ),
                       
                   ),
-                  
+                  SizedBox(height: 20.0),
+                  Text('Note: Name and Email can not be changed after signing up.',
+                    style: TextStyle(color: Colors.grey, fontSize: 13),
+                  ),
                   SizedBox(height: 40.0),
                   ElevatedButton(
                     onPressed: signUp,
@@ -210,11 +213,10 @@ class _SignUpState extends State<SignUp> {
                     ],
                   )
                 ),
-                  SizedBox(height: 5.0),
-                  Text(
-                    'By signing up, You agree to Academia Terms and Conditions.',
-                    style: TextStyle(color: Colors.grey, fontSize: 13),
-                  ),
+                SizedBox(height: 10.0),
+                Text('By signing up, You agree to Academia Terms and Conditions.',
+                  style: TextStyle(color: Colors.grey, fontSize: 13),
+                ),
                 ],
               ),
             ),
