@@ -58,6 +58,15 @@ class _NavbarState extends State<Navbar> {
       child: Material(
         //color: Colors.transparent,//Color(0xFFEEBAB2),
         child: Container(
+          // child: SafeArea(
+          //   child: !isloggedin? CircularProgressIndicator(
+          //     backgroundColor: Color(0xFFE28C7E),
+          //     valueColor:
+          //         new AlwaysStoppedAnimation<Color>(Color(0xFFF2E2D2)),
+          //     strokeWidth: 10,
+              
+          //   )
+          //       :  
           // decoration: BoxDecoration(
           //       gradient: LinearGradient(
           //         begin: Alignment.topCenter,
@@ -68,7 +77,7 @@ class _NavbarState extends State<Navbar> {
           //         ],
           //       )
           //     ),
-          child: ListView(
+          child: ListView( //remove child if may progress
             padding: EdgeInsets.zero,
             children: <Widget>[
               Container(
@@ -94,10 +103,10 @@ class _NavbarState extends State<Navbar> {
                 ),
               ),
               UserAccountsDrawerHeader(
-                //accountName: Text("${user.displayName}"),
                 accountName: Text("name"),
-                //accountEmail: Text("${user.email}"),
+                //accountName: Text("name"),
                 accountEmail: Text("email"),
+                //accountEmail: Text("email"),
                 currentAccountPicture: CircleAvatar(
                   child: ClipOval(
                     child: Image.network(
@@ -181,7 +190,8 @@ class _NavbarState extends State<Navbar> {
             ],
           ),
         ),
-      ),
+        ),
+      
     );
   }
 }

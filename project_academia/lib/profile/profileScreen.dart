@@ -94,286 +94,296 @@ class _ProfileState extends State<Profile> {
       backgroundColor: Colors.white,
       body: Stack(
         children: <Widget>[
-          
-          CustomScrollView(
-            slivers: <Widget>[
-              SliverAppBar(
-                title: Row(
-                  children: <Widget>[
-                    SizedBox(width: 245,),
-                    IconButton(
-                      icon: Icon(
-                        Icons.mode_edit_outline, 
-                        size: 20,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context, 
-                          MaterialPageRoute(
-                            builder: (_)=> EditProfile(
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    GestureDetector(
-                      child: Text(
-                        'Edit',
-                        style: TextStyle(
+          Container(
+            child: !isloggedin? _progress():
+            CustomScrollView(
+              
+              slivers: <Widget>[
+                
+                SliverAppBar(
+                  
+                  title: Row(
+                    children: <Widget>[
+                      SizedBox(width: 245,),
+                      IconButton(
+                        icon: Icon(
+                          Icons.mode_edit_outline, 
+                          size: 20,
                           color: Colors.white,
-                          fontSize: 15,
-                          shadows: [
-                            // Shadow( // bottomLeft
-                            //   offset: Offset(-1.5, -1.5),
-                            //   color: Colors.white
-                            // ),
-                            Shadow( // bottomRight
-                              offset: Offset(1.5, -1.5),
-                              color: Colors.black
-                            ),
-                            // Shadow( // topRight
-                            //   offset: Offset(1.5, 1.5),
-                            //   color: Colors.white
-                            // ),
-                            // Shadow( // topLeft
-                            //   offset: Offset(-1.5, 1.5),
-                            //   color: Colors.white
-                            // ),
-                          ],
                         ),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context, 
-                          MaterialPageRoute(
-                            builder: (_)=> EditProfile(
+                        onPressed: () {
+                          Navigator.push(
+                            context, 
+                            MaterialPageRoute(
+                              builder: (_)=> EditProfile(
+                              ),
                             ),
+                          );
+                        },
+                      ),
+                      GestureDetector(
+                        child: Text(
+                          'Edit',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            shadows: [
+                              // Shadow( // bottomLeft
+                              //   offset: Offset(-1.5, -1.5),
+                              //   color: Colors.white
+                              // ),
+                              Shadow( // bottomRight
+                                offset: Offset(1.5, -1.5),
+                                color: Colors.black
+                              ),
+                              // Shadow( // topRight
+                              //   offset: Offset(1.5, 1.5),
+                              //   color: Colors.white
+                              // ),
+                              // Shadow( // topLeft
+                              //   offset: Offset(-1.5, 1.5),
+                              //   color: Colors.white
+                              // ),
+                            ],
                           ),
-                        );
-                      },
-                    ),
-                  ],
-            
-                ),
-                expandedHeight: 420,
-                backgroundColor: Colors.black,
-                flexibleSpace: FlexibleSpaceBar(
-                  collapseMode: CollapseMode.pin,
-                  background: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/profile.jpg'),
-                        fit: BoxFit.cover
-                      )
-                    ),
-                    child: Container(
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context, 
+                            MaterialPageRoute(
+                              builder: (_)=> EditProfile(
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  expandedHeight: 420,
+                  backgroundColor: Colors.black,
+                  flexibleSpace: FlexibleSpaceBar(
+                    collapseMode: CollapseMode.pin,
+                    background: Container(
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.bottomRight,
-                          colors: [
-                            Colors.white,
-                            Colors.white.withOpacity(.1)
-                          ]
+                        image: DecorationImage(
+                          image: AssetImage('assets/profile.jpg'),
+                          fit: BoxFit.cover
                         )
                       ),
-                      child: Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            FadeAnimation(1, Text("$_userName", style: 
-                              TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 40)
-                            ,)),
-                            SizedBox(height: 20,),
-                            Row(
-                              children: <Widget>[
-                                FadeAnimation(1.2, 
-                                  Text("$_userCourse", style: TextStyle(color: Colors.grey[850], fontSize: 16),)
-                                ),
-                                SizedBox(width: 50,),
-                                FadeAnimation(1.3, Text("$_userLRN", style: 
-                                  TextStyle(color: Colors.grey[850], fontSize: 16)
-                                ,))
-                              ],
-                            )
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.bottomRight,
+                            colors: [
+                              Colors.white,
+                              Colors.white.withOpacity(.1)
+                            ]
+                          )
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              FadeAnimation(1, Text("${user.displayName}", style: 
+                                TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 40)
+                              ,)),
+                              SizedBox(height: 20,),
+                              Row(
+                                children: <Widget>[
+                                  FadeAnimation(1.2, 
+                                    Text("$_userCourse", style: TextStyle(color: Colors.grey[850], fontSize: 16),)
+                                  ),
+                                  SizedBox(width: 50,),
+                                  FadeAnimation(1.3, Text("$_userLRN", style: 
+                                    TextStyle(color: Colors.grey[850], fontSize: 16)
+                                  ,))
+                                ],
+                              )
+                              
+                            ],
                             
-                          ],
-                          
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              SliverList(
-                delegate: SliverChildListDelegate([
-                  Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        FadeAnimation(1.6, Text("$_userDesription", 
-                        style: TextStyle(color: Colors.grey[850], height: 1.4,fontSize: 16,),)),
-                        
-                        SizedBox(height: 40,),
-                        
-                        Row(
-                          children: [
-                            FadeAnimation(1.6, 
-                            Icon(Icons.email, color: Color(0xFFFFB8AC),),),
-                            SizedBox(width: 10,),
-                            FadeAnimation(1.6, 
-                              Text("$_userEmail", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 5,),
-                        Row(
-                          children: [
-                            SizedBox(width: 33),
-                            FadeAnimation(1.6, 
-                              Text("Email", style: TextStyle(color: Colors.grey[850], ),)
-                            ),
-                          ],
-                        ),
-                            
-
-                        SizedBox(height: 20,),
-                        Row(
-                          children: [
-                            FadeAnimation(1.6, 
-                            Icon(Icons.phone, color: Color(0xFFFFB8AC),),),
-                            SizedBox(width: 10,),
-                            FadeAnimation(1.6, 
-                              Text("$_userNumber", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 5,),
-                        Row(
-                          children: [
-                            SizedBox(width: 33),
-                            FadeAnimation(1.6, 
-                              Text("Contact Number", style: TextStyle(color: Colors.grey[850], ),)
-                            ),
-                          ],
-                        ),
-
-                        SizedBox(height: 20,),
-                        Row(
-                          children: [
-                            FadeAnimation(1.6, 
-                            Icon(Icons.cake, color: Color(0xFFFFB8AC),),),
-                            SizedBox(width: 10,),
-                            FadeAnimation(1.6, 
-                              Text("January 02, 2001", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 5,),
-                        Row(
-                          children: [
-                            SizedBox(width: 33),
-                            FadeAnimation(1.6, 
-                              Text("Birthdate", style: TextStyle(color: Colors.grey[850], ),)
-                            ),
-                          ],
-                        ),
-                        
-                        SizedBox(height: 20,),
-                        FadeAnimation(1.6,
-                          Column(
+                SliverList(
+                  delegate: SliverChildListDelegate([
+                    Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          FadeAnimation(1.6, Text("$_userDesription", 
+                          style: TextStyle(color: Colors.grey[850], height: 1.4,fontSize: 16,),)),
+                          
+                          SizedBox(height: 40,),
+                          
+                          Row(
                             children: [
-                              Center(
-                                child: GestureDetector(
-                                  child: Text("Change Password",
-                                  textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Colors.grey[850], fontSize: 18, fontWeight: FontWeight.bold, ),
-                                  ),
-                                  onTap: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword()));
-                                  }
-                                ),
+                              FadeAnimation(1.6, 
+                              Icon(Icons.email, color: Color(0xFFFFB8AC),),),
+                              SizedBox(width: 10,),
+                              FadeAnimation(1.6, 
+                                Text("${user.email}", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
                               ),
                             ],
                           ),
-                        ),
-                        SizedBox(height: 10,),
-                        FadeAnimation(1.6,
-                          Column(
+                          SizedBox(height: 5,),
+                          Row(
                             children: [
-                              Center(
-                                child: GestureDetector(
-                                  child: Text("Delete Account",
-                                  textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Colors.grey[850], fontSize: 18, fontWeight: FontWeight.bold, ),
+                              SizedBox(width: 33),
+                              FadeAnimation(1.6, 
+                                Text("Email", style: TextStyle(color: Colors.grey[850], ),)
+                              ),
+                            ],
+                          ),
+                              
+
+                          SizedBox(height: 20,),
+                          Row(
+                            children: [
+                              FadeAnimation(1.6, 
+                              Icon(Icons.phone, color: Color(0xFFFFB8AC),),),
+                              SizedBox(width: 10,),
+                              FadeAnimation(1.6, 
+                                Text("$_userNumber", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 5,),
+                          Row(
+                            children: [
+                              SizedBox(width: 33),
+                              FadeAnimation(1.6, 
+                                Text("Contact Number", style: TextStyle(color: Colors.grey[850], ),)
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(height: 20,),
+                          Row(
+                            children: [
+                              FadeAnimation(1.6, 
+                              Icon(Icons.cake, color: Color(0xFFFFB8AC),),),
+                              SizedBox(width: 10,),
+                              FadeAnimation(1.6, 
+                                Text("January 02, 2001", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 5,),
+                          Row(
+                            children: [
+                              SizedBox(width: 33),
+                              FadeAnimation(1.6, 
+                                Text("Birthdate", style: TextStyle(color: Colors.grey[850], ),)
+                              ),
+                            ],
+                          ),
+                          
+                          SizedBox(height: 20,),
+                          FadeAnimation(1.6,
+                            Column(
+                              children: [
+                                Center(
+                                  child: GestureDetector(
+                                    child: Text("Change Password",
+                                    textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        color: Colors.grey[850], fontSize: 18, fontWeight: FontWeight.bold, ),
+                                    ),
+                                    onTap: (){
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword()));
+                                    }
                                   ),
-                                  onTap: (){
-                                    return showDialog(
-                                      context: context,
-                                      builder: (ctx) => AlertDialog(
-                                        title: Text("Delete Account",textAlign: TextAlign.center,
-                                          style: TextStyle(color: Colors.red[700], fontSize: 18, fontWeight: FontWeight.bold),
-                                        ),
-                                        content: Text("Are you sure you want to delete your account?"),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            onPressed: () {
-                                              delete();
-                                              Navigator.push(context, MaterialPageRoute(builder: (context) => Start()));
-                                            },
-                                            child: Text('Yes',style: TextStyle(color: Colors.red[700]),
-                                            ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 10,),
+                          FadeAnimation(1.6,
+                            Column(
+                              children: [
+                                Center(
+                                  child: GestureDetector(
+                                    child: Text("Delete Account",
+                                    textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        color: Colors.grey[850], fontSize: 18, fontWeight: FontWeight.bold, ),
+                                    ),
+                                    onTap: (){
+                                      return showDialog(
+                                        context: context,
+                                        builder: (ctx) => AlertDialog(
+                                          title: Text("Delete Account",textAlign: TextAlign.center,
+                                            style: TextStyle(color: Colors.red[700], fontSize: 18, fontWeight: FontWeight.bold),
                                           ),
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Text('No'))
-                                        ],
-                                      ),
-                                    );
-                                  }
+                                          content: Text("Are you sure you want to delete your account?"),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                delete();
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => Start()));
+                                              },
+                                              child: Text('Yes',style: TextStyle(color: Colors.red[700]),
+                                              ),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text('No'))
+                                          ],
+                                        ),
+                                      );
+                                    }
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                ]),
-              )
-            ],
+                        ],
+                      ),
+                    )
+                  ]),
+                )
+              ],
+            ),
+            // Positioned.fill(
+            //   bottom: 50,
+            //   child: Container(
+            //     child: Align(
+            //       alignment: Alignment.bottomCenter,
+            //       child: FadeAnimation(2,
+            //         Container(
+            //           margin: EdgeInsets.symmetric(horizontal: 30),
+            //           height: 50,
+            //           decoration: BoxDecoration(
+            //             borderRadius: BorderRadius.circular(50),
+            //             color: Colors.yellow[700]
+            //           ),
+            //           child: Align(child: Text("Edit", style: TextStyle(color: Colors.white),)),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // )
           ),
-          // Positioned.fill(
-          //   bottom: 50,
-          //   child: Container(
-          //     child: Align(
-          //       alignment: Alignment.bottomCenter,
-          //       child: FadeAnimation(2,
-          //         Container(
-          //           margin: EdgeInsets.symmetric(horizontal: 30),
-          //           height: 50,
-          //           decoration: BoxDecoration(
-          //             borderRadius: BorderRadius.circular(50),
-          //             color: Colors.yellow[700]
-          //           ),
-          //           child: Align(child: Text("Edit", style: TextStyle(color: Colors.white),)),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // )
         ],
       ),
     );
+  }
+
+  Future<bool> loginAction() async {
+    //replace the below line of code with your login request
+    await new Future.delayed(const Duration(seconds: 2));
+    return true;
   }
 
   Widget makeVideo({image}) {
@@ -405,4 +415,21 @@ class _ProfileState extends State<Profile> {
       ),
     );
   }
+}
+
+
+Widget _progress(){
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircularProgressIndicator(
+            backgroundColor: Color(0xFFE28C7E),
+            valueColor:
+                new AlwaysStoppedAnimation<Color>(Color(0xFFF2E2D2)),
+            strokeWidth: 10,
+          ),
+        ],
+      ),
+    );
 }

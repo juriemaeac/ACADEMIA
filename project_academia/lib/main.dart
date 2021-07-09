@@ -6,7 +6,7 @@ import 'package:sample1/profile/editProfileScreen.dart';
 import 'package:sample1/profile/profileScreen.dart';
 import 'package:sample1/Start.dart';
 import 'package:sample1/Login.dart';
-import 'package:sample1/HomePage.dart';
+import 'package:sample1/Home/HomePage.dart';
 import 'package:sample1/SignUp.dart';
 import 'package:sample1/Attendance.dart';
 import 'package:sample1/flashcards/Reviewer.dart';
@@ -30,10 +30,9 @@ void main() async { //change void to future
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
-  //static final String title = 'Todo App';
   @override
   Widget build(BuildContext context) {
-    return MaterialApp( //note dati itong return MaterialApp
+    return MaterialApp( 
       theme: ThemeData(
         
         primaryColor: Color(0xFFCDB193),
@@ -41,7 +40,6 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         
       ),
-      //home: Flashcard(),
       debugShowCheckedModeBanner: false,
       home: AnimatedSplashScreen(
         splash: Image.asset(

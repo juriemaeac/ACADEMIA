@@ -236,7 +236,7 @@ class _EditProfileState extends State<EditProfile> {
             focusedBorder: UnderlineInputBorder(
               borderRadius: BorderRadius.circular(15),
             ),
-            labelText: 'Name',
+            labelText: "${user.displayName}",
             labelStyle: TextStyle(
               color: Colors.black,
               fontSize: 14,
@@ -280,7 +280,7 @@ class _EditProfileState extends State<EditProfile> {
             focusedBorder: UnderlineInputBorder(
               borderRadius: BorderRadius.circular(15),
             ),
-            labelText: 'Email',
+            labelText: '${user.email}',
             labelStyle: TextStyle(
               color: Colors.black,
               fontSize: 14,
@@ -581,9 +581,10 @@ class _EditProfileState extends State<EditProfile> {
         ),
       ),
     
-      body: Container(
-        padding: EdgeInsets.only(left: 0, top: 0, right: 0),
-        child: Form(
+      body: Center(
+      child: Container(
+        child: !isloggedin? _progress():
+        Form(
           key: _formKey,
           child: GestureDetector(
             onTap: () {
@@ -677,6 +678,7 @@ class _EditProfileState extends State<EditProfile> {
           ),
         ),
       ),
+      ),
     );
   }
 }
@@ -743,4 +745,20 @@ class SharedPref {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove(key);
   }
+}
+
+Widget _progress(){
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircularProgressIndicator(
+            backgroundColor: Color(0xFFE28C7E),
+            valueColor:
+                new AlwaysStoppedAnimation<Color>(Color(0xFFF2E2D2)),
+            strokeWidth: 10,
+          ),
+        ],
+      ),
+    );
 }
