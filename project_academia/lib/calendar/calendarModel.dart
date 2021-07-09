@@ -4,15 +4,13 @@ class CalendarItem {
   int id;
   String name;
   String date;
-  String time;
 
-  CalendarItem({this.id, this.name, this.date, this.time});
+  CalendarItem({this.id, this.name, this.date});
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {
       'name': name, 
       'date': date,
-      'time': time
     };
 
     if (id != null) {
@@ -25,7 +23,6 @@ class CalendarItem {
     return CalendarItem(
         id: map['id'],
         name: map['name'],
-        time: map['time'],
         date: map['date']);
   }
 }

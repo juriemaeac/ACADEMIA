@@ -57,7 +57,7 @@ class _CalendarState extends State<Calendar> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween, 
           children: [
             Text(d, style: Theme.of(context).primaryTextTheme.bodyText1),
-            ),
+            
             IconButton(
               icon: FaIcon(
                 FontAwesomeIcons.trashAlt,
