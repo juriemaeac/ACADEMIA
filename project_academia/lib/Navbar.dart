@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sample1/profile/input.dart';
 import 'package:sample1/start.dart';
 
 class Navbar extends StatefulWidget {
@@ -103,19 +106,15 @@ class _NavbarState extends State<Navbar> {
                 ),
               ),
               UserAccountsDrawerHeader(
-                accountName: Text("name"),
+                accountName: Text("${textName}"),
                 //accountName: Text("name"),
-                accountEmail: Text("email"),
+                accountEmail: Text("${textEmail}"),
                 //accountEmail: Text("email"),
                 currentAccountPicture: CircleAvatar(
-                  child: ClipOval(
-                    child: Image.network(
-                      'https://i.pinimg.com/originals/21/59/c4/2159c493313c6084db38bee8e69a4fab.jpg',
-                      width: 90,
-                      height: 90,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                  radius: 30,
+                  backgroundImage: imagePath == null
+                    ? AssetImage('assets/profile.jpg')
+                    : FileImage(File(imagePath)),
                 ),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
