@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:intl/intl.dart';
 import 'package:sample1/Navbar.dart';
 import 'package:sample1/forgotPass.dart';
 import 'package:sample1/profile/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:sample1/profile/editProfileScreen.dart';
-import 'package:sample1/profile/theme.dart';
+import 'package:sample1/profile/input.dart';
 import 'package:sample1/start.dart';
 
 
@@ -17,21 +17,9 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  SharedPref sharedPref = SharedPref();
-  ProfileInfo userLoad = ProfileInfo();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User user;
   bool isloggedin = false;
-  //final userid = user.uid;
-  
-  checkAuthentification() async {
-    _auth.authStateChanges().listen((user) {
-      if (user == null) {
-        Navigator.of(context).pushReplacementNamed("start");
-        //Navigator.push(context, MaterialPageRoute(builder: (context)=> Navbar()));
-      }
-    });
-  }
 
   getUser() async {
     User firebaseUser = _auth.currentUser;
@@ -51,68 +39,37 @@ class _ProfileState extends State<Profile> {
     await firebaseUser.delete();
   }
 
-
-  signOut() async {
-    _auth.signOut();
-    final googleSignIn = GoogleSignIn();
-    await googleSignIn.signOut();
-  }
-
   @override
   void initState() {
-    super.initState();
-    this.checkAuthentification();
     this.getUser();
-    loadSharedPrefs();
-  }
-
-  loadSharedPrefs() async {
-    try {
-      ProfileInfo user = ProfileInfo.fromJson(await sharedPref.read("user"));
-      // ignore: deprecated_member_use
-      Scaffold.of(context).showSnackBar(SnackBar(
-          content: new Text("Loaded!"),
-          duration: const Duration(milliseconds: 500)));
-      setState(() {
-        userLoad = user;
-      });
-    } catch (Exception) {
-      // ignore: deprecated_member_use
-      Scaffold.of(context).showSnackBar(SnackBar(
-          content: new Text("Nothing found!"),
-          duration: const Duration(milliseconds: 500)));
-    }
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    String _userName = userLoad.userName ?? "Username";
-    String _userDesription = userLoad.userDescription ?? "<<Description>>";
-    var _userDesriptionTruncated = _userDesription.replaceRange(15, _userDesription.length, '..');
-    String _userEmail = userLoad.userEmail ?? "Email";
-    String _userCourse = userLoad.userCourse ?? "Course";
-    String _userLRN = userLoad.userLRN ?? "LRN";
-    String _userNumber = userLoad.userNumber ?? "Number";
+    //DateTime textBirthdate;
+    //var formattedBirth = DateFormat.yMMMMd('en_US').format(textBirthdate);
+    // DateTime textBirthdate1 = textBirthdate;
+    // var formattedDate = DateFormat('MMM dd, yyyy').format(textBirthdate1);
     return Scaffold(
       drawer: Navbar(),
       backgroundColor: Colors.white,
       body: Stack(
+        fit: StackFit.expand,
         children: <Widget>[
           Container(
             child: !isloggedin? _progress():
             CustomScrollView(
-
               slivers: <Widget>[
-                
                 SliverAppBar(
-
                   title: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      SizedBox(width: 245,),
+                      SizedBox(width: 240,),
                       IconButton(
                         icon: Icon(
                           Icons.mode_edit_outline, 
-                          size: 20,
+                          size: 23,
                           color: Colors.white,
                         ),
                         onPressed: () {
@@ -130,7 +87,7 @@ class _ProfileState extends State<Profile> {
                           'Edit',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 15,
+                            fontSize: 20,
                             shadows: [
                               // Shadow( // bottomLeft
                               //   offset: Offset(-1.5, -1.5),
@@ -163,14 +120,16 @@ class _ProfileState extends State<Profile> {
                       ),
                     ],
                   ),
-                  expandedHeight: 420,
+                  expandedHeight: 440,
                   backgroundColor: Colors.black,
                   flexibleSpace: FlexibleSpaceBar(
                     collapseMode: CollapseMode.pin,
                     background: Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/profile.jpg'),
+                          image: imagePath == null
+                                      ? AssetImage('assets/profile.jpg')
+                                      : FileImage(File(imagePath)),
                           fit: BoxFit.cover
                         )
                       ),
@@ -190,38 +149,32 @@ class _ProfileState extends State<Profile> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: CustomColors.menuBackgroundColor,
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: CustomColors.menuBackgroundColor,
-                                      blurRadius: 4,
-                                      spreadRadius: 4,
-                                    ),
-                                  ],
-                                ),
-                                child: CircleAvatar(
-                                  radius: 30.0,
-                                  backgroundImage: userLoad.imagePath == null
-                                      ? AssetImage('assets/jurie.jpg')
-                                      : FileImage(File(userLoad.imagePath)),
-                                ),
-                              ),
-                              FadeAnimation(1, Text("${user.displayName}", style: 
+                              FadeAnimation(1, Text("${textName}", style: 
                                 TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 40)
                               ,)),
                               SizedBox(height: 20,),
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  FadeAnimation(1.2, 
-                                    Text("$_userCourse", style: TextStyle(color: Colors.grey[850], fontSize: 16),)
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      FadeAnimation(1.2, 
+                                        Text("$textCourse" ?? "Input Course", style: TextStyle(color: Colors.grey[850], fontSize: 16),)
+                                      ),
+                                    ],
                                   ),
-                                  SizedBox(width: 50,),
-                                  FadeAnimation(1.3, Text("$_userLRN", style: 
-                                    TextStyle(color: Colors.grey[850], fontSize: 16)
-                                  ,))
+                                  //SizedBox(width: 100,),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      FadeAnimation(1.3, 
+                                        Text("$textLRN" ?? "Input LRN", style: 
+                                          TextStyle(color: Colors.grey[850], fontSize: 16)
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               )
                               
@@ -240,10 +193,10 @@ class _ProfileState extends State<Profile> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          FadeAnimation(1.6, Text("$_userDesriptionTruncated", 
+                          FadeAnimation(1.6, Text("$textDescription" ?? "Input Description", 
                           style: TextStyle(color: Colors.grey[850], height: 1.4,fontSize: 16,),)),
                           
-                          SizedBox(height: 40,),
+                          SizedBox(height: 30,),
                           
                           Row(
                             children: [
@@ -251,7 +204,7 @@ class _ProfileState extends State<Profile> {
                               Icon(Icons.email, color: Color(0xFFFFB8AC),),),
                               SizedBox(width: 10,),
                               FadeAnimation(1.6, 
-                                Text("${user.email}", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
+                                Text("${textEmail}", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
                               ),
                             ],
                           ),
@@ -273,7 +226,7 @@ class _ProfileState extends State<Profile> {
                               Icon(Icons.phone, color: Color(0xFFFFB8AC),),),
                               SizedBox(width: 10,),
                               FadeAnimation(1.6, 
-                                Text("$_userNumber", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
+                                Text("$textNumber" ?? "Input Number", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
                               ),
                             ],
                           ),
@@ -294,7 +247,7 @@ class _ProfileState extends State<Profile> {
                               Icon(Icons.cake, color: Color(0xFFFFB8AC),),),
                               SizedBox(width: 10,),
                               FadeAnimation(1.6, 
-                                Text("January 02, 2001", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
+                                Text("${textBirthdate}" ?? "Input Birthdate", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
                               ),
                             ],
                           ),
@@ -378,25 +331,6 @@ class _ProfileState extends State<Profile> {
                 )
               ],
             ),
-            // Positioned.fill(
-            //   bottom: 50,
-            //   child: Container(
-            //     child: Align(
-            //       alignment: Alignment.bottomCenter,
-            //       child: FadeAnimation(2,
-            //         Container(
-            //           margin: EdgeInsets.symmetric(horizontal: 30),
-            //           height: 50,
-            //           decoration: BoxDecoration(
-            //             borderRadius: BorderRadius.circular(50),
-            //             color: Colors.yellow[700]
-            //           ),
-            //           child: Align(child: Text("Edit", style: TextStyle(color: Colors.white),)),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // )
           ),
         ],
       ),
@@ -408,38 +342,7 @@ class _ProfileState extends State<Profile> {
     await new Future.delayed(const Duration(seconds: 2));
     return true;
   }
-
-  Widget makeVideo({image}) {
-    return AspectRatio(
-      aspectRatio: 1.5/ 1,
-      child: Container(
-        margin: EdgeInsets.only(right: 20),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          image: DecorationImage(
-            image: AssetImage(image),
-            fit: BoxFit.cover
-          )
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.bottomRight,
-              colors: [
-                Colors.black.withOpacity(.9),
-                Colors.black.withOpacity(.3)
-              ]
-            )
-          ),
-          child: Align(
-            child: Icon(Icons.play_arrow, color: Colors.white, size: 70,),
-          ),
-        ),
-      ),
-    );
-  }
 }
-
 
 Widget _progress(){
     return Center(

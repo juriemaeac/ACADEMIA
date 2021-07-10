@@ -1,13 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:sample1/profile/input.dart';
 import 'package:sample1/profile/profileScreen.dart';
 import 'package:sample1/profile/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+
 class EditProfile extends StatefulWidget {
 
   @override
@@ -15,19 +17,12 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User user;
   bool isloggedin = false;
-  
-  checkAuthentification() async {
-    _auth.authStateChanges().listen((user) {
-      if (user == null) {
-        Navigator.of(context).pushReplacementNamed("start");
-        //Navigator.push(context, MaterialPageRoute(builder: (context)=> Navbar()));
-      }
-    });
-  }
+  DateTime _date = DateTime.now();
+
+  final DateFormat _dateFormatter = DateFormat.yMMMMd('en_US');
 
   getUser() async {
     User firebaseUser = _auth.currentUser;
@@ -38,56 +33,97 @@ class _EditProfileState extends State<EditProfile> {
       setState(() {
         this.user = firebaseUser;
         this.isloggedin = true;
+        textName = '${user.displayName}';
+        textEmail = '${user.email}';
       });
     }
   }
-
-  signOut() async {
-    _auth.signOut();
-    final googleSignIn = GoogleSignIn();
-    await googleSignIn.signOut();
-  }
-
+  // @override
+  // void dispose() {
+  //   textDescription;
+  //   super.dispose();
+  // }
   @override
   void initState() {
-    this.checkAuthentification();
     this.getUser();
-    loadSharedPrefs();
+    //loadSharedPrefs();
+    textBirthdateController.text = _dateFormatter.format(_date);
+    loadData();
     super.initState();
   }
-  
 
   PickedFile _imageFile;
   static ImagePicker _picker = ImagePicker();
-  static final TextEditingController textName = TextEditingController();
-  static final TextEditingController textCourse = TextEditingController();
-  static final TextEditingController textLRN = TextEditingController();
-  static final TextEditingController textDescription = TextEditingController();
-  static final TextEditingController textEmail = TextEditingController();
-  static final TextEditingController textNumber = TextEditingController();
+  //controller
+  static final TextEditingController textNameController = TextEditingController();
+  static final TextEditingController textCourseController = TextEditingController();
+  static final TextEditingController textLRNController = TextEditingController();
+  static final TextEditingController textDescriptionController = TextEditingController();
+  static final TextEditingController textEmailController = TextEditingController();
+  static final TextEditingController textNumberController = TextEditingController();
+  static final TextEditingController textBirthdateController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  SharedPref sharedPref = SharedPref();
-  ProfileInfo userSave = ProfileInfo();
-  ProfileInfo userLoad = ProfileInfo();
-
-  loadSharedPrefs() async {
-    try {
-      ProfileInfo user = ProfileInfo.fromJson(await sharedPref.read("user"));
-      // ignore: deprecated_member_use
-      Scaffold.of(context).showSnackBar(SnackBar(
-          content: new Text("Data Loaded!"),
-          duration: const Duration(milliseconds: 500)));
+  _handleDatePicker() async {
+    final DateTime date = await showDatePicker(
+      context: context, 
+      initialDate: _date, 
+      lastDate: DateTime.now(), 
+      firstDate: DateTime(1900),
+    );
+    if (date != null && date != _date){
       setState(() {
-        userLoad = user;
+        textBirthdate = date;
       });
-    } catch (Excepetion) {
-      // ignore: deprecated_member_use
-      Scaffold.of(context).showSnackBar(SnackBar(
-          content: new Text("No Data Available"),
-          duration: const Duration(milliseconds: 500)));
+      textBirthdateController.text = _dateFormatter.format(date);
     }
+  }
+
+  loadData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String json = prefs.getString('TestUser_Key');
+    print("load info $json");
+
+    if (json == null){
+      print('no data');
+    }
+    else{
+      Map<String, dynamic> map = jsonDecode(json);
+      print('map $map');
+      
+      final user1 = UserInfoPref.fromJson(map);
+      print('Name: ${user1.userName}');
+      print('Email: ${user1.userEmail}');
+      print('Description: ${user1.userDescription}');
+      print('LRN: ${user1.userLRN}');
+      print('Course: ${user1.userCourse}');
+      print('Number: ${user1.userNumber}');
+    }
+  }
+
+  saveData() async {
+    String textName = '${user.displayName}';
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final testUser =  UserInfoPref(
+      userName: '$textName',
+      userEmail: '$textEmail',
+      userDescription: '$textDescription',
+      userLRN: '$textLRN',
+      userCourse: '$textCourse',
+      userNumber: '$textNumber',
+    );
+
+    String json = jsonEncode(testUser);
+    print("save info $json");
+    prefs.setString('TestUser_Key', json);
+
+  }
+
+  cleardata() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+    print("Data cleared");
   }
 
   Widget _buildImage() {
@@ -106,9 +142,9 @@ class _EditProfileState extends State<EditProfile> {
             ),
             child: CircleAvatar(
               radius: 90.0,
-              backgroundImage: userLoad.imagePath == null
+              backgroundImage: imagePath == null
                   ? AssetImage('assets/profile.jpg')
-                  : FileImage(File(userLoad.imagePath)),
+                  : FileImage(File(imagePath)),
             ),
             
           ),
@@ -212,72 +248,34 @@ class _EditProfileState extends State<EditProfile> {
     final pickedFile = await _picker.getImage(source: source);
     setState(() {
       _imageFile = pickedFile;
-      userSave.imagePath = _imageFile.path;
+      imagePath = _imageFile.path;
     });
     Navigator.of(context).pop();
   }
 
-  Widget _buildUsername() {
+  Widget _buildUserBirthdate(){
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
-      
-      child: TextFormField(
-          controller: textName,
-          style: TextStyle(color: Colors.black, fontSize: 20),
-          cursorColor: Colors.black,
-          validator: (String value) {
-            if (value.isEmpty) {
-              return 'Enter Name';
-            }
-            return null;
-          },
-          decoration: InputDecoration(
-            focusedBorder: UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            labelText: "${user.displayName}",
-            labelStyle: TextStyle(
-              color: Colors.black,
-              fontSize: 14,
-            ),
-            focusColor: Colors.black,
-            isDense: true,
-            prefixIcon: Icon(
-              Icons.face_unlock_rounded,
-              color: Colors.black,
-              size: 24,
-            ),
-          ),
-          /////using shared preferences
-          onChanged: (value) {
-            setState(() {
-              userSave.userName = value;
-            });
-          }),
-    );
-  }
-
-  Widget _buildUserEmail() {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+      padding: EdgeInsets.symmetric(
+        horizontal: 10, 
+        vertical: 0,
+      ),
       child: TextFormField(
         readOnly: true,
-          controller: textEmail,
-          style: TextStyle(color: Colors.black, fontSize: 20),
+        controller: textBirthdateController?? "Input Birthdate",
+        style: TextStyle(color: Colors.black, fontSize: 20),
           cursorColor: Colors.black,
           validator: (String value) {
             if (value.isEmpty) {
-              return 'Enter Email';
+              return 'Enter Birthdate';
             }
             return null;
           },
-          decoration: InputDecoration(
-            focusedBorder: UnderlineInputBorder(
+        onTap: _handleDatePicker,
+        decoration: InputDecoration(
+          focusedBorder: UnderlineInputBorder(
               borderRadius: BorderRadius.circular(15),
             ),
-            labelText: '${user.email}',
+            labelText: 'Birthdate',
             labelStyle: TextStyle(
               color: Colors.black,
               fontSize: 14,
@@ -285,31 +283,21 @@ class _EditProfileState extends State<EditProfile> {
             focusColor: Colors.black,
             isDense: true,
             prefixIcon: Icon(
-              Icons.email,
+              Icons.cake,
               color: Colors.black,
               size: 24,
             ),
           ),
-          /////using shared preferences
-          onChanged: (value) {
-            setState(() {
-              userSave.userEmail = value;
-            });
-          }
-          ),
+      ),
     );
   }
 
   Widget _buildUserLRN() {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
-      // decoration: BoxDecoration(
-      //   color: CustomColors.menuBackgroundColor,
-      //   borderRadius: BorderRadius.all(Radius.circular(30)),
-      // ),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
       child: TextFormField(
-          controller: textLRN,
+          controller: textLRNController ?? "Input LRN",
           style: TextStyle(color: Colors.black, fontSize: 20),
           cursorColor: Colors.black,
           validator: (String value) {
@@ -338,23 +326,24 @@ class _EditProfileState extends State<EditProfile> {
           /////using shared preferences
           onChanged: (value) {
             setState(() {
-              userSave.userEmail = value;
+              //userSave.userLRN = value;
+              textLRN = value;
             });
-          }),
+          }
+      ),
     );
   }
 
   Widget _buildUserCourse() {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
       // decoration: BoxDecoration(
       //   color: CustomColors.menuBackgroundColor,
       //   borderRadius: BorderRadius.all(Radius.circular(30)),
       // ),
       child: TextFormField(
-          controller: textCourse,
-          
+          controller: textCourseController?? "Input Course",
           style: TextStyle(color: Colors.black, fontSize: 20),
           cursorColor: Colors.black,
           validator: (String value) {
@@ -383,7 +372,7 @@ class _EditProfileState extends State<EditProfile> {
           /////using shared preferences
           onChanged: (value) {
             setState(() {
-              userSave.userEmail = value;
+              textCourse =value;
             });
           }),
     );
@@ -392,13 +381,15 @@ class _EditProfileState extends State<EditProfile> {
   Widget _buildUserDescription() {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
       // decoration: BoxDecoration(
       //   color: CustomColors.menuBackgroundColor,
       //   borderRadius: BorderRadius.all(Radius.circular(30)),
       // ),
       child: TextFormField(
-          controller: textDescription,
+          keyboardType: TextInputType.multiline,
+          maxLines: null,
+          controller: textDescriptionController?? "Input Description",
           style: TextStyle(color: Colors.black, fontSize: 20),
           cursorColor: Colors.black,
           validator: (String value) {
@@ -427,7 +418,8 @@ class _EditProfileState extends State<EditProfile> {
           /////using shared preferences
           onChanged: (value) {
             setState(() {
-              userSave.userEmail = value;
+              //userSave.userDescription = value;
+              textDescription = value;
             });
           }),
     );
@@ -436,13 +428,9 @@ class _EditProfileState extends State<EditProfile> {
   Widget _buildUserNumber() {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
-      // decoration: BoxDecoration(
-      //   color: CustomColors.menuBackgroundColor,
-      //   borderRadius: BorderRadius.all(Radius.circular(30)),
-      // ),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
       child: TextFormField(
-          controller: textNumber,
+          controller: textNumberController?? "Input Contact Number",
           keyboardType: TextInputType.number,
           style: TextStyle(color: Colors.black, fontSize: 20),
           cursorColor: Colors.black,
@@ -472,74 +460,14 @@ class _EditProfileState extends State<EditProfile> {
           /////using shared preferences
           onChanged: (value) {
             setState(() {
-              userSave.userEmail = value;
+              textNumber = value;
             });
           }),
     );
   }
 
-  Widget _buildButton(){
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(width: 10.0),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 50),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20)
-              ),
-              primary: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text("CANCEL",
-                style: TextStyle(
-                    fontSize: 14,
-                    letterSpacing: 2.2,
-                    color: Colors.black)),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              if (!_formKey.currentState.validate()) {
-                return;
-              }
-              _formKey.currentState.save();
+  
 
-              sharedPref.save("user", userSave);
-              print("Profile Saved");
-              loadSharedPrefs();
-              Navigator.push(
-                context, 
-                MaterialPageRoute(
-                  builder: (_)=> Profile(
-                  ),
-                ),
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              primary: Color(0xFFFFB8AC),
-            padding: EdgeInsets.symmetric(horizontal: 50),
-            elevation: 2,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20)),
-            ),
-            child: Text(
-              " SAVE ",
-              style: TextStyle(
-                  fontSize: 14,
-                  letterSpacing: 2.2,
-                  color: Colors.white),
-            ),
-          ),
-          SizedBox(width: 10.0),
-        ],
-      ),
-
-    );
-  }
   
   @override
   Widget build(BuildContext context) {
@@ -555,17 +483,7 @@ class _EditProfileState extends State<EditProfile> {
               SizedBox(width: 80),
               Text(
                 'Edit Profile', style: TextStyle(color: Colors.white, fontSize: 24),
-                //textAlign: TextAlign.center,
               ),
-              // SizedBox(width: 70),
-              // IconButton(
-              //   icon: Icon(
-              //     Icons.settings,
-              //     color: Colors.white,
-              //   ),
-              //   onPressed: () async {
-              //   },
-              // ),
             ],
           ),
         leading: IconButton(
@@ -580,7 +498,9 @@ class _EditProfileState extends State<EditProfile> {
       ),
     
       body: Center(
+        
       child: Container(
+        //child: SingleChildScrollView(
         child: !isloggedin? _progress():
         Form(
           key: _formKey,
@@ -591,6 +511,7 @@ class _EditProfileState extends State<EditProfile> {
             child:  Stack(
               fit: StackFit.expand,
               children: [
+                
                 Container(
                   decoration: BoxDecoration(
                     color: Color(0xFFFFB8AC),
@@ -625,37 +546,44 @@ class _EditProfileState extends State<EditProfile> {
                                         width: innerWidth,
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(130.0),
-                                        bottomRight: Radius.circular(0.0),
-                                        topLeft: Radius.circular(130.0),
-                                        bottomLeft: Radius.circular(0.0)),
+                                            topRight: Radius.circular(130.0),
+                                            bottomRight: Radius.circular(0.0),
+                                            topLeft: Radius.circular(130.0),
+                                            bottomLeft: Radius.circular(0.0)
+                                          ),
                                           color: Colors.white,
                                         ),
                                         child: Column(
                                           children: [
-                                            SizedBox(height: 100),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              child: Text(
-                                                "${user.displayName}",
-                                                style: TextStyle(
-                                                    fontSize: 25,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.black),
-                                                textAlign: TextAlign.center,
+                                            SizedBox(height: 80),
+                                            Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  
+                                                  Center(
+                                                    child: Text(
+                                                      '${textName}',
+                                                      //textName ?? "NAME",
+                                                      style: TextStyle(
+                                                          fontWeight: FontWeight.bold,
+                                                          color: Colors.black,
+                                                          fontSize: 22),
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 10),
+                                                  Center(
+                                                    child: Text(
+                                                      '${user.email}',
+                                                      //textEmail ?? "EMAIL",
+                                                      style: TextStyle(
+                                                          fontWeight: FontWeight.bold,
+                                                          color: Colors.black,
+                                                          fontSize: 16),
+                                                    ),
+                                                  ),
+                                                  
+                                                ],
                                               ),
-                                            ),
-                                            SizedBox(height: 10),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              child: Text(
-                                                "${user.email}",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    color: Colors.black),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                            ),
                                             SizedBox(height: 30),
                                             _buildUserDescription(),
                                             SizedBox(height: 13),
@@ -664,6 +592,8 @@ class _EditProfileState extends State<EditProfile> {
                                             _buildUserCourse(),
                                             SizedBox(height: 13),
                                             _buildUserNumber(),
+                                            SizedBox(height: 13),
+                                            _buildUserBirthdate(),
                                             SizedBox(height: 30),
                                             //_buildButton(),
                                             Row(
@@ -680,6 +610,7 @@ class _EditProfileState extends State<EditProfile> {
                                                   ),
                                                   onPressed: () {
                                                     Navigator.pop(context);
+                                                    loadData();
                                                   },
                                                   child: Text("CANCEL",
                                                       style: TextStyle(
@@ -693,17 +624,17 @@ class _EditProfileState extends State<EditProfile> {
                                                       return;
                                                     }
                                                     _formKey.currentState.save();
-
-                                                    sharedPref.save("user", userSave);
+                                                    saveData();
                                                     print("Profile Saved");
-                                                    loadSharedPrefs();
-                                                    Navigator.push(
-                                                      context, 
-                                                      MaterialPageRoute(
-                                                        builder: (_)=> Profile(
-                                                        ),
-                                                      ),
-                                                    );
+                                                    loadData();
+                                                    print('${textName}');
+                                                    print('${textEmail}');
+                                                    print('${textDescription}');
+                                                    print('${textLRN}');
+                                                    print('${textCourse}');
+                                                    print('${textNumber}');
+                                                    print('${textBirthdate}');
+                                                    Navigator.push(context, MaterialPageRoute(builder: (_)=> Profile(),),);
                                                   },
                                                   style: ElevatedButton.styleFrom(
                                                     primary: Color(0xFFFFB8AC),
@@ -720,9 +651,10 @@ class _EditProfileState extends State<EditProfile> {
                                                         color: Colors.white),
                                                   ),
                                                 ),
-                                                SizedBox(width: 10.0),
+                                                SizedBox(width: 20.0),
                                               ],
                                             ),
+                                            SizedBox(width: 20.0),
                                           ],
                                         ), 
                                       ),
@@ -750,74 +682,11 @@ class _EditProfileState extends State<EditProfile> {
               ],
             ),
           ),
+        //),
         ),
       ),
       ),
     );
-  }
-}
-
-class ProfileInfo {
-  var imagePath;
-  String userName;
-  String userEmail;
-  String userLRN;
-  String userDescription;
-  String userCourse;
-  String userNumber;
-
-  ProfileInfo.createProfile(
-    var imagePath,
-    String userName,
-    String userEmail,
-    String userLRN,
-    String userDescription,
-    String userCourse,
-    String userNumber) {
-    imagePath = imagePath;
-    userName = userName;
-    userEmail = userEmail;
-    userLRN = userLRN;
-    userDescription = userDescription;
-    userCourse = userCourse;
-    userNumber = userNumber;
-  }
-
-  ProfileInfo();
-
-  ProfileInfo.fromJson(Map<String, dynamic> json)
-    : imagePath = json['imagePath'],
-    userName = json['userName'],
-    userEmail = json['userEmail'],
-    userLRN = json['userLRN'],
-    userDescription = json['userDescription'],
-    userCourse = json['userCourse'],
-    userNumber = json['userNumber'];
-  Map<String, dynamic> toJson() => {
-    'imagePath': imagePath,
-    'userName': userName,
-    'userEmail': userEmail,
-    'userLRN': userLRN,
-    'userDescription': userDescription,
-    'userCourse': userCourse,
-    'userNumber': userNumber,
-  };
-}
-
-class SharedPref {
-  read(String key) async {
-    final prefs = await SharedPreferences.getInstance();
-    return json.decode(prefs.getString(key));
-  }
-
-  save(String key, value) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString(key, json.encode(value));
-  }
-
-  remove(String key) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.remove(key);
   }
 }
 
