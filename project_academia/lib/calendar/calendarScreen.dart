@@ -14,6 +14,7 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
+  TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
   DateTime _selectedDay = DateTime.now();
   DateTime _date = DateTime.now();
   TextEditingController _dateController = TextEditingController();
@@ -74,6 +75,18 @@ class _CalendarState extends State<Calendar> {
     });
   }
 
+  void _selectTime() async {
+    final TimeOfDay newTime = await showTimePicker(
+      context: context,
+      initialTime: _time,
+    );
+    if (newTime != null) {
+      setState(() {
+        _time = newTime;
+      });
+    }
+  }
+
   void _create(BuildContext context) {
     String _name = "";
     String _details = "";
@@ -124,6 +137,15 @@ class _CalendarState extends State<Calendar> {
                 fontSize: 16,
                 fontWeight: FontWeight.bold)),
         onPressed: () => Navigator.of(context).pop(false));
+    var pickTime = FlatButton(
+        child: Text('Pick Time',
+            style: GoogleFonts.montserrat(
+                color: Color.fromRGBO(59, 57, 60, 1),
+                fontSize: 16,
+                fontWeight: FontWeight.bold)),
+        onPressed: () {
+          _selectTime();
+        });
     showDialog(
       context: context,
       builder: (BuildContext context) => Dialog(
@@ -134,45 +156,59 @@ class _CalendarState extends State<Calendar> {
         backgroundColor: Colors.transparent,
         child: Stack(
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(6),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 10.0,
-                    offset: const Offset(0.0, 10.0),
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min, // To make the card compact
-                children: <Widget>[
-                  SizedBox(height: 16.0),
-                  Text("Add Event",
-                      style: GoogleFonts.montserrat(
-                          color: Color.fromRGBO(59, 57, 60, 1),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold)),
-                  Container(
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      children: <Widget>[content],
+            SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(6),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 10.0,
+                      offset: const Offset(0.0, 10.0),
                     ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-                    child: Column(
-                      children: <Widget>[content1],
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min, // To make the card compact
+                  children: <Widget>[
+                    SizedBox(height: 24.0),
+                    Text("Add Event",
+                        style: GoogleFonts.montserrat(
+                            color: Color.fromRGBO(59, 57, 60, 1),
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold)),
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        children: <Widget>[content],
+                      ),
                     ),
-                  ),
-                  Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[btn, cancelButton]),
-                ],
+                    Container(
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+                      child: Column(
+                        children: <Widget>[content1],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: Column(
+                        children: <Widget>[pickTime],
+                      ),
+                    ),
+                    Text(
+                      'Selected time: ${_time.format(context)}',
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                      child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[btn, cancelButton]),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -342,6 +378,47 @@ class _CalendarState extends State<Calendar> {
         child: Icon(
           Icons.add,
           color: Colors.white,
+        ),
+      ),
+    );
+  }
+}
+
+class TimePicker extends StatefulWidget {
+  @override
+  _TimePickerState createState() => _TimePickerState();
+}
+
+class _TimePickerState extends State<TimePicker> {
+  TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
+
+  void _selectTime() async {
+    final TimeOfDay newTime = await showTimePicker(
+      context: context,
+      initialTime: _time,
+    );
+    if (newTime != null) {
+      setState(() {
+        _time = newTime;
+      });
+    }
+  }
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: _selectTime,
+              child: Text('SELECT TIME'),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Selected time: ${_time.format(context)}',
+            ),
+          ],
         ),
       ),
     );
