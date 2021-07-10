@@ -665,7 +665,64 @@ class _EditProfileState extends State<EditProfile> {
                                             SizedBox(height: 13),
                                             _buildUserNumber(),
                                             SizedBox(height: 30),
-                                            _buildButton(),
+                                            //_buildButton(),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                SizedBox(width: 10.0),
+                                                ElevatedButton(
+                                                  style: ElevatedButton.styleFrom(
+                                                    padding: EdgeInsets.symmetric(horizontal: 50),
+                                                    shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(20)
+                                                    ),
+                                                    primary: Colors.white,
+                                                  ),
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text("CANCEL",
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          letterSpacing: 2.2,
+                                                          color: Colors.black)),
+                                                ),
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    if (!_formKey.currentState.validate()) {
+                                                      return;
+                                                    }
+                                                    _formKey.currentState.save();
+
+                                                    sharedPref.save("user", userSave);
+                                                    print("Profile Saved");
+                                                    loadSharedPrefs();
+                                                    Navigator.push(
+                                                      context, 
+                                                      MaterialPageRoute(
+                                                        builder: (_)=> Profile(
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                  style: ElevatedButton.styleFrom(
+                                                    primary: Color(0xFFFFB8AC),
+                                                  padding: EdgeInsets.symmetric(horizontal: 50),
+                                                  elevation: 2,
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(20)),
+                                                  ),
+                                                  child: Text(
+                                                    " SAVE ",
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        letterSpacing: 2.2,
+                                                        color: Colors.white),
+                                                  ),
+                                                ),
+                                                SizedBox(width: 10.0),
+                                              ],
+                                            ),
                                           ],
                                         ), 
                                       ),

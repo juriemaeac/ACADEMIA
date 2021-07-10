@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sample1/Navbar.dart';
@@ -5,6 +7,7 @@ import 'package:sample1/forgotPass.dart';
 import 'package:sample1/profile/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:sample1/profile/editProfileScreen.dart';
+import 'package:sample1/profile/theme.dart';
 import 'package:sample1/start.dart';
 
 
@@ -85,6 +88,7 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     String _userName = userLoad.userName ?? "Username";
     String _userDesription = userLoad.userDescription ?? "<<Description>>";
+    var _userDesriptionTruncated = _userDesription.replaceRange(15, _userDesription.length, '..');
     String _userEmail = userLoad.userEmail ?? "Email";
     String _userCourse = userLoad.userCourse ?? "Course";
     String _userLRN = userLoad.userLRN ?? "LRN";
@@ -97,11 +101,11 @@ class _ProfileState extends State<Profile> {
           Container(
             child: !isloggedin? _progress():
             CustomScrollView(
-              
+
               slivers: <Widget>[
                 
                 SliverAppBar(
-                  
+
                   title: Row(
                     children: <Widget>[
                       SizedBox(width: 245,),
@@ -186,6 +190,25 @@ class _ProfileState extends State<Profile> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: CustomColors.menuBackgroundColor,
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: CustomColors.menuBackgroundColor,
+                                      blurRadius: 4,
+                                      spreadRadius: 4,
+                                    ),
+                                  ],
+                                ),
+                                child: CircleAvatar(
+                                  radius: 30.0,
+                                  backgroundImage: userLoad.imagePath == null
+                                      ? AssetImage('assets/jurie.jpg')
+                                      : FileImage(File(userLoad.imagePath)),
+                                ),
+                              ),
                               FadeAnimation(1, Text("${user.displayName}", style: 
                                 TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 40)
                               ,)),
@@ -217,7 +240,7 @@ class _ProfileState extends State<Profile> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          FadeAnimation(1.6, Text("$_userDesription", 
+                          FadeAnimation(1.6, Text("$_userDesriptionTruncated", 
                           style: TextStyle(color: Colors.grey[850], height: 1.4,fontSize: 16,),)),
                           
                           SizedBox(height: 40,),
