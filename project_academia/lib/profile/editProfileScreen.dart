@@ -9,9 +9,7 @@ import 'package:sample1/profile/profileScreen.dart';
 import 'package:sample1/profile/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class EditProfile extends StatefulWidget {
-
   @override
   _EditProfileState createState() => _EditProfileState();
 }
@@ -38,6 +36,7 @@ class _EditProfileState extends State<EditProfile> {
       });
     }
   }
+
   // @override
   // void dispose() {
   //   textDescription;
@@ -55,24 +54,31 @@ class _EditProfileState extends State<EditProfile> {
   PickedFile _imageFile;
   static ImagePicker _picker = ImagePicker();
   //controller
-  static final TextEditingController textNameController = TextEditingController();
-  static final TextEditingController textCourseController = TextEditingController();
-  static final TextEditingController textLRNController = TextEditingController();
-  static final TextEditingController textDescriptionController = TextEditingController();
-  static final TextEditingController textEmailController = TextEditingController();
-  static final TextEditingController textNumberController = TextEditingController();
-  static final TextEditingController textBirthdateController = TextEditingController();
+  static final TextEditingController textNameController =
+      TextEditingController();
+  static final TextEditingController textCourseController =
+      TextEditingController();
+  static final TextEditingController textLRNController =
+      TextEditingController();
+  static final TextEditingController textDescriptionController =
+      TextEditingController();
+  static final TextEditingController textEmailController =
+      TextEditingController();
+  static final TextEditingController textNumberController =
+      TextEditingController();
+  static final TextEditingController textBirthdateController =
+      TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   _handleDatePicker() async {
     final DateTime date = await showDatePicker(
-      context: context, 
-      initialDate: _date, 
-      lastDate: DateTime.now(), 
+      context: context,
+      initialDate: _date,
+      lastDate: DateTime.now(),
       firstDate: DateTime(1900),
     );
-    if (date != null && date != _date){
+    if (date != null && date != _date) {
       setState(() {
         textBirthdate = date;
       });
@@ -85,13 +91,12 @@ class _EditProfileState extends State<EditProfile> {
     String json = prefs.getString('TestUser_Key');
     print("load info $json");
 
-    if (json == null){
+    if (json == null) {
       print('no data');
-    }
-    else{
+    } else {
       Map<String, dynamic> map = jsonDecode(json);
       print('map $map');
-      
+
       final user1 = UserInfoPref.fromJson(map);
       print('Name: ${user1.userName}');
       print('Email: ${user1.userEmail}');
@@ -105,7 +110,7 @@ class _EditProfileState extends State<EditProfile> {
   saveData() async {
     String textName = '${user.displayName}';
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    final testUser =  UserInfoPref(
+    final testUser = UserInfoPref(
       userName: '$textName',
       userEmail: '$textEmail',
       userDescription: '$textDescription',
@@ -117,7 +122,6 @@ class _EditProfileState extends State<EditProfile> {
     String json = jsonEncode(testUser);
     print("save info $json");
     prefs.setString('TestUser_Key', json);
-
   }
 
   cleardata() async {
@@ -131,53 +135,50 @@ class _EditProfileState extends State<EditProfile> {
       child: Stack(
         children: <Widget>[
           Positioned(
-          child: Container(
-            decoration: BoxDecoration(
-              color: CustomColors.menuBackgroundColor,
-              shape: BoxShape.circle,
-              border: Border.all(
-                width: 8,
-                color: Colors.white,
+            child: Container(
+              decoration: BoxDecoration(
+                color: CustomColors.menuBackgroundColor,
+                shape: BoxShape.circle,
+                border: Border.all(
+                  width: 8,
+                  color: Colors.white,
+                ),
+              ),
+              child: CircleAvatar(
+                radius: 90.0,
+                backgroundImage: imagePath == null
+                    ? AssetImage('assets/profile.jpg')
+                    : FileImage(File(imagePath)),
               ),
             ),
-            child: CircleAvatar(
-              radius: 90.0,
-              backgroundImage: imagePath == null
-                  ? AssetImage('assets/profile.jpg')
-                  : FileImage(File(imagePath)),
-            ),
-            
-          ),
           ),
           Positioned(
             bottom: 20,
             right: 20,
             child: Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                // border: Border.all(
-                //   width: 4,
-                //   color: Theme.of(context).scaffoldBackgroundColor,
-                // ),
-                color: Color(0xFFEEBAB2).withOpacity(.8),
-              ),
-              child: InkWell(
-              onTap: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: ((builder) => _buildSheet()),
-                );
-              },
-              child: Icon(
-                Icons.edit,
-                color: Colors.white,
-              ),
-              )
-            ),
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  // border: Border.all(
+                  //   width: 4,
+                  //   color: Theme.of(context).scaffoldBackgroundColor,
+                  // ),
+                  color: Color(0xFFEEBAB2).withOpacity(.8),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: ((builder) => _buildSheet()),
+                    );
+                  },
+                  child: Icon(
+                    Icons.edit,
+                    color: Colors.white,
+                  ),
+                )),
           ),
-          
         ],
       ),
     );
@@ -190,9 +191,9 @@ class _EditProfileState extends State<EditProfile> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-                    Color(0xFFEEBAB2),
-                    Color(0xFFF2E2D2),
-                  ],
+            Color(0xFFEEBAB2),
+            Color(0xFFF2E2D2),
+          ],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),
@@ -231,11 +232,10 @@ class _EditProfileState extends State<EditProfile> {
                   takePhoto(ImageSource.gallery);
                 },
                 label: Text('Gallery',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.white)
-                ),
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.white)),
               ),
             ],
           )
@@ -253,41 +253,41 @@ class _EditProfileState extends State<EditProfile> {
     Navigator.of(context).pop();
   }
 
-  Widget _buildUserBirthdate(){
+  Widget _buildUserBirthdate() {
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: 10, 
+        horizontal: 10,
         vertical: 0,
       ),
       child: TextFormField(
         readOnly: true,
-        controller: textBirthdateController?? "Input Birthdate",
+        controller: textBirthdateController ?? "Input Birthdate",
         style: TextStyle(color: Colors.black, fontSize: 20),
-          cursorColor: Colors.black,
-          validator: (String value) {
-            if (value.isEmpty) {
-              return 'Enter Birthdate';
-            }
-            return null;
-          },
+        cursorColor: Colors.black,
+        validator: (String value) {
+          if (value.isEmpty) {
+            return 'Enter Birthdate';
+          }
+          return null;
+        },
         onTap: _handleDatePicker,
         decoration: InputDecoration(
           focusedBorder: UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            labelText: 'Birthdate',
-            labelStyle: TextStyle(
-              color: Colors.black,
-              fontSize: 14,
-            ),
-            focusColor: Colors.black,
-            isDense: true,
-            prefixIcon: Icon(
-              Icons.cake,
-              color: Colors.black,
-              size: 24,
-            ),
+            borderRadius: BorderRadius.circular(15),
           ),
+          labelText: 'Birthdate',
+          labelStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 14,
+          ),
+          focusColor: Colors.black,
+          isDense: true,
+          prefixIcon: Icon(
+            Icons.cake,
+            color: Colors.black,
+            size: 24,
+          ),
+        ),
       ),
     );
   }
@@ -329,8 +329,7 @@ class _EditProfileState extends State<EditProfile> {
               //userSave.userLRN = value;
               textLRN = value;
             });
-          }
-      ),
+          }),
     );
   }
 
@@ -343,7 +342,7 @@ class _EditProfileState extends State<EditProfile> {
       //   borderRadius: BorderRadius.all(Radius.circular(30)),
       // ),
       child: TextFormField(
-          controller: textCourseController?? "Input Course",
+          controller: textCourseController ?? "Input Course",
           style: TextStyle(color: Colors.black, fontSize: 20),
           cursorColor: Colors.black,
           validator: (String value) {
@@ -372,7 +371,7 @@ class _EditProfileState extends State<EditProfile> {
           /////using shared preferences
           onChanged: (value) {
             setState(() {
-              textCourse =value;
+              textCourse = value;
             });
           }),
     );
@@ -389,7 +388,7 @@ class _EditProfileState extends State<EditProfile> {
       child: TextFormField(
           keyboardType: TextInputType.multiline,
           maxLines: null,
-          controller: textDescriptionController?? "Input Description",
+          controller: textDescriptionController ?? "Input Description",
           style: TextStyle(color: Colors.black, fontSize: 20),
           cursorColor: Colors.black,
           validator: (String value) {
@@ -430,7 +429,7 @@ class _EditProfileState extends State<EditProfile> {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
       child: TextFormField(
-          controller: textNumberController?? "Input Contact Number",
+          controller: textNumberController ?? "Input Contact Number",
           keyboardType: TextInputType.number,
           style: TextStyle(color: Colors.black, fontSize: 20),
           cursorColor: Colors.black,
@@ -466,9 +465,6 @@ class _EditProfileState extends State<EditProfile> {
     );
   }
 
-  
-
-  
   @override
   Widget build(BuildContext context) {
     //double width = MediaQuery.of(context).size.width;
@@ -478,14 +474,15 @@ class _EditProfileState extends State<EditProfile> {
         elevation: 0.0,
         backgroundColor: Color(0xFFFFB8AC),
         title: Row(
-            //mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              SizedBox(width: 80),
-              Text(
-                'Edit Profile', style: TextStyle(color: Colors.white, fontSize: 24),
-              ),
-            ],
-          ),
+          //mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(width: 80),
+            Text(
+              'Edit Profile',
+              style: TextStyle(color: Colors.white, fontSize: 24),
+            ),
+          ],
+        ),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -496,212 +493,265 @@ class _EditProfileState extends State<EditProfile> {
           },
         ),
       ),
-    
       body: Center(
-        
-      child: Container(
-        //child: SingleChildScrollView(
-        child: !isloggedin? _progress():
-        Form(
-          key: _formKey,
-          child: GestureDetector(
-            onTap: () {
-              FocusScope.of(context).unfocus();
-            }, 
-            child:  Stack(
-              fit: StackFit.expand,
-              children: [
-                
-                Container(
-                  decoration: BoxDecoration(
-                    color: Color(0xFFFFB8AC),
-                  ),
-                ),
-                Scaffold(
-                  backgroundColor: Colors.transparent,
-                  body: SingleChildScrollView(
-                    //physics: BouncingScrollPhysics(),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(left: 0, top: 0, right: 0),
-                            //height: height * 0.43,
-                            height: height -80,
-                            child: LayoutBuilder(
-                              builder: (context, constraints) {
-                                //double innerHeight = constraints.maxHeight;
-                                double innerWidth = constraints.maxWidth;
-                                return Stack(
-                                  fit: StackFit.expand,
-                                  children: [
-                                    Positioned(
-                                      top: 120,
-                                      bottom: 0,
-                                      left: 0,
-                                      right: 0,
-                                      child: Container(
-                                        //height: (innerHeight + 400 ),
-                                        width: innerWidth,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(130.0),
-                                            bottomRight: Radius.circular(0.0),
-                                            topLeft: Radius.circular(130.0),
-                                            bottomLeft: Radius.circular(0.0)
-                                          ),
-                                          color: Colors.white,
-                                        ),
-                                        child: Column(
+        child: Container(
+          //child: SingleChildScrollView(
+          child: !isloggedin
+              ? _progress()
+              : Form(
+                  key: _formKey,
+                  child: GestureDetector(
+                    onTap: () {
+                      FocusScope.of(context).unfocus();
+                    },
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xFFFFB8AC),
+                          ),
+                        ),
+                        Scaffold(
+                          backgroundColor: Colors.transparent,
+                          body: SingleChildScrollView(
+                            //physics: BouncingScrollPhysics(),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 0, vertical: 0),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        left: 0, top: 0, right: 0),
+                                    //height: height * 0.43,
+                                    height: height + 50,
+                                    child: LayoutBuilder(
+                                      builder: (context, constraints) {
+                                        //double innerHeight = constraints.maxHeight;
+                                        double innerWidth =
+                                            constraints.maxWidth;
+                                        return Stack(
+                                          fit: StackFit.expand,
                                           children: [
-                                            SizedBox(height: 80),
-                                            Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  
-                                                  Center(
-                                                    child: Text(
-                                                      '${textName}',
-                                                      //textName ?? "NAME",
-                                                      style: TextStyle(
-                                                          fontWeight: FontWeight.bold,
-                                                          color: Colors.black,
-                                                          fontSize: 22),
+                                            Positioned(
+                                              top: 120,
+                                              bottom: 0,
+                                              left: 0,
+                                              right: 0,
+                                              child: Container(
+                                                //height: (innerHeight + 400 ),
+                                                width: innerWidth,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  130.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  0.0),
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  130.0),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  0.0)),
+                                                  color: Colors.white,
+                                                ),
+                                                child: Column(
+                                                  children: [
+                                                    SizedBox(height: 80),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: <Widget>[
+                                                        Center(
+                                                          child: Text(
+                                                            '${textName}',
+                                                            //textName ?? "NAME",
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 22),
+                                                          ),
+                                                        ),
+                                                        SizedBox(height: 10),
+                                                        Center(
+                                                          child: Text(
+                                                            '${user.email}',
+                                                            //textEmail ?? "EMAIL",
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 16),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ),
-                                                  SizedBox(height: 10),
-                                                  Center(
-                                                    child: Text(
-                                                      '${user.email}',
-                                                      //textEmail ?? "EMAIL",
-                                                      style: TextStyle(
-                                                          fontWeight: FontWeight.bold,
-                                                          color: Colors.black,
-                                                          fontSize: 16),
+                                                    SizedBox(height: 30),
+                                                    _buildUserDescription(),
+                                                    SizedBox(height: 13),
+                                                    _buildUserLRN(),
+                                                    SizedBox(height: 13),
+                                                    _buildUserCourse(),
+                                                    SizedBox(height: 13),
+                                                    _buildUserNumber(),
+                                                    SizedBox(height: 13),
+                                                    _buildUserBirthdate(),
+                                                    SizedBox(height: 30),
+                                                    //_buildButton(),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        SizedBox(width: 10.0),
+                                                        ElevatedButton(
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    horizontal:
+                                                                        50),
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20)),
+                                                            primary:
+                                                                Colors.white,
+                                                          ),
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                            loadData();
+                                                          },
+                                                          child: Text("CANCEL",
+                                                              style: TextStyle(
+                                                                  fontSize: 14,
+                                                                  letterSpacing:
+                                                                      2.2,
+                                                                  color: Colors
+                                                                      .black)),
+                                                        ),
+                                                        ElevatedButton(
+                                                          onPressed: () {
+                                                            if (!_formKey
+                                                                .currentState
+                                                                .validate()) {
+                                                              return;
+                                                            }
+                                                            _formKey
+                                                                .currentState
+                                                                .save();
+                                                            saveData();
+                                                            print(
+                                                                "Profile Saved");
+                                                            loadData();
+                                                            print(
+                                                                '${textName}');
+                                                            print(
+                                                                '${textEmail}');
+                                                            print(
+                                                                '${textDescription}');
+                                                            print('${textLRN}');
+                                                            print(
+                                                                '${textCourse}');
+                                                            print(
+                                                                '${textNumber}');
+                                                            print(
+                                                                '${textBirthdate}');
+                                                            Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                builder: (_) =>
+                                                                    Profile(),
+                                                              ),
+                                                            );
+                                                          },
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                            primary: Color(
+                                                                0xFFFFB8AC),
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    horizontal:
+                                                                        50),
+                                                            elevation: 2,
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20)),
+                                                          ),
+                                                          child: Text(
+                                                            " SAVE ",
+                                                            style: TextStyle(
+                                                                fontSize: 14,
+                                                                letterSpacing:
+                                                                    2.2,
+                                                                color: Colors
+                                                                    .white),
+                                                          ),
+                                                        ),
+                                                        SizedBox(width: 20.0),
+                                                      ],
                                                     ),
-                                                  ),
-                                                  
-                                                ],
+                                                    SizedBox(width: 20.0),
+                                                  ],
+                                                ),
                                               ),
-                                            SizedBox(height: 30),
-                                            _buildUserDescription(),
-                                            SizedBox(height: 13),
-                                            _buildUserLRN(),
-                                            SizedBox(height: 13),
-                                            _buildUserCourse(),
-                                            SizedBox(height: 13),
-                                            _buildUserNumber(),
-                                            SizedBox(height: 13),
-                                            _buildUserBirthdate(),
-                                            SizedBox(height: 30),
-                                            //_buildButton(),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                SizedBox(width: 10.0),
-                                                ElevatedButton(
-                                                  style: ElevatedButton.styleFrom(
-                                                    padding: EdgeInsets.symmetric(horizontal: 50),
-                                                    shape: RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius.circular(20)
-                                                    ),
-                                                    primary: Colors.white,
-                                                  ),
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                    loadData();
-                                                  },
-                                                  child: Text("CANCEL",
-                                                      style: TextStyle(
-                                                          fontSize: 14,
-                                                          letterSpacing: 2.2,
-                                                          color: Colors.black)),
-                                                ),
-                                                ElevatedButton(
-                                                  onPressed: () {
-                                                    if (!_formKey.currentState.validate()) {
-                                                      return;
-                                                    }
-                                                    _formKey.currentState.save();
-                                                    saveData();
-                                                    print("Profile Saved");
-                                                    loadData();
-                                                    print('${textName}');
-                                                    print('${textEmail}');
-                                                    print('${textDescription}');
-                                                    print('${textLRN}');
-                                                    print('${textCourse}');
-                                                    print('${textNumber}');
-                                                    print('${textBirthdate}');
-                                                    Navigator.push(context, MaterialPageRoute(builder: (_)=> Profile(),),);
-                                                  },
-                                                  style: ElevatedButton.styleFrom(
-                                                    primary: Color(0xFFFFB8AC),
-                                                  padding: EdgeInsets.symmetric(horizontal: 50),
-                                                  elevation: 2,
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius.circular(20)),
-                                                  ),
-                                                  child: Text(
-                                                    " SAVE ",
-                                                    style: TextStyle(
-                                                        fontSize: 14,
-                                                        letterSpacing: 2.2,
-                                                        color: Colors.white),
-                                                  ),
-                                                ),
-                                                SizedBox(width: 20.0),
-                                              ],
                                             ),
-                                            SizedBox(width: 20.0),
+                                            Positioned(
+                                              top: 0,
+                                              left: 0,
+                                              right: 0,
+                                              child: Center(
+                                                child: Container(
+                                                  child: _buildImage(),
+                                                ),
+                                              ),
+                                            ),
                                           ],
-                                        ), 
-                                      ),
+                                        );
+                                      },
                                     ),
-                                    Positioned(
-                                      top: 0,
-                                      left: 0,
-                                      right: 0,
-                                      child: Center(
-                                        child: Container(
-                                          child: _buildImage(),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              },
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ],
-                      ),
+                        )
+                      ],
                     ),
                   ),
-                )
-              ],
-            ),
-          ),
-        //),
+                  //),
+                ),
         ),
-      ),
       ),
     );
   }
 }
 
-Widget _progress(){
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CircularProgressIndicator(
-            backgroundColor: Color(0xFFE28C7E),
-            valueColor:
-                new AlwaysStoppedAnimation<Color>(Color(0xFFF2E2D2)),
-            strokeWidth: 10,
-          ),
-        ],
-      ),
-    );
+Widget _progress() {
+  return Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        CircularProgressIndicator(
+          backgroundColor: Color(0xFFE28C7E),
+          valueColor: new AlwaysStoppedAnimation<Color>(Color(0xFFF2E2D2)),
+          strokeWidth: 10,
+        ),
+      ],
+    ),
+  );
 }
