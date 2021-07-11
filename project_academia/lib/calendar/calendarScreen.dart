@@ -3,13 +3,10 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sample1/calendar/addEventScreen.dart';
 import 'package:sample1/calendar/calendarModel.dart';
 import 'package:sample1/calendar/db.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
-
-import 'event_editing_page.dart';
 
 class Calendar extends StatefulWidget {
   @override
@@ -17,6 +14,7 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
+  TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
   DateTime _selectedDay = DateTime.now();
   DateTime _date = DateTime.now();
   TextEditingController _dateController = TextEditingController();
@@ -49,15 +47,13 @@ class _CalendarState extends State<Calendar> {
         width: MediaQuery.of(context).size.width * 0.9,
         padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
         decoration: BoxDecoration(
-          border: Border(
-            top: BorderSide(color: Theme.of(context).dividerColor),
-          )
-        ),
-        child:Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+            border: Border(
+          top: BorderSide(color: Theme.of(context).dividerColor),
+        )),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(d, style: Theme.of(context).primaryTextTheme.bodyText1),
-            
             IconButton(
               icon: FaIcon(
                 FontAwesomeIcons.trashAlt,
@@ -78,10 +74,22 @@ class _CalendarState extends State<Calendar> {
       _selectedEvents = events;
     });
   }
-  
+
+  void _selectTime() async {
+    final TimeOfDay newTime = await showTimePicker(
+      context: context,
+      initialTime: _time,
+    );
+    if (newTime != null) {
+      setState(() {
+        _time = newTime;
+      });
+    }
+  }
+
   void _create(BuildContext context) {
     String _name = "";
-    String _description = "";
+    String _details = "";
     //String _time = "";
     var content = TextField(
       style: GoogleFonts.montserrat(
@@ -98,15 +106,30 @@ class _CalendarState extends State<Calendar> {
         _name = value;
       },
     );
-    var btn = FlatButton(
-      child: Text('Save',
-          style: GoogleFonts.montserrat(
-              color: Color.fromRGBO(59, 57, 60, 1),
-              fontSize: 16,
-              fontWeight: FontWeight.bold)),
-      onPressed: () { _addEvent(_name); 
-      }
+    var content1 = TextField(
+      style: GoogleFonts.montserrat(
+          color: Color.fromRGBO(105, 105, 108, 1), fontSize: 16),
+      autofocus: true,
+      decoration: InputDecoration(
+        labelStyle: GoogleFonts.montserrat(
+            color: Color.fromRGBO(59, 57, 60, 1),
+            fontSize: 18,
+            fontWeight: FontWeight.normal),
+        labelText: 'Details',
+      ),
+      onChanged: (value) {
+        _details = value;
+      },
     );
+    var btn = FlatButton(
+        child: Text('Save',
+            style: GoogleFonts.montserrat(
+                color: Color.fromRGBO(59, 57, 60, 1),
+                fontSize: 16,
+                fontWeight: FontWeight.bold)),
+        onPressed: () {
+          _addEvent(_name);
+        });
     var cancelButton = FlatButton(
         child: Text('Cancel',
             style: GoogleFonts.montserrat(
@@ -114,6 +137,15 @@ class _CalendarState extends State<Calendar> {
                 fontSize: 16,
                 fontWeight: FontWeight.bold)),
         onPressed: () => Navigator.of(context).pop(false));
+    var pickTime = FlatButton(
+        child: Text('Pick Time',
+            style: GoogleFonts.montserrat(
+                color: Color.fromRGBO(59, 57, 60, 1),
+                fontSize: 16,
+                fontWeight: FontWeight.bold)),
+        onPressed: () {
+          _selectTime();
+        });
     showDialog(
       context: context,
       builder: (BuildContext context) => Dialog(
@@ -124,40 +156,59 @@ class _CalendarState extends State<Calendar> {
         backgroundColor: Colors.transparent,
         child: Stack(
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(6),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 10.0,
-                    offset: const Offset(0.0, 10.0),
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min, // To make the card compact
-                children: <Widget>[
-                  SizedBox(height: 16.0),
-                  Text("Add Event",
-                      style: GoogleFonts.montserrat(
-                          color: Color.fromRGBO(59, 57, 60, 1),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold)),
-                  Container(padding: EdgeInsets.all(20), 
-                  child: Column(
-                    children: <Widget>[
-                      content
-                    ],
-                  ),
-                  ),
-                  Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[btn, cancelButton]),
-                ],
+            SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(6),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 10.0,
+                      offset: const Offset(0.0, 10.0),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min, // To make the card compact
+                  children: <Widget>[
+                    SizedBox(height: 24.0),
+                    Text("Add Event",
+                        style: GoogleFonts.montserrat(
+                            color: Color.fromRGBO(59, 57, 60, 1),
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold)),
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        children: <Widget>[content],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+                      child: Column(
+                        children: <Widget>[content1],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: Column(
+                        children: <Widget>[pickTime],
+                      ),
+                    ),
+                    Text(
+                      'Selected time: ${_time.format(context)}',
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                      child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[btn, cancelButton]),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -191,7 +242,6 @@ class _CalendarState extends State<Calendar> {
 
     Navigator.pop(context);
   }
-  
 
   // Delete doesnt refresh yet, thats it, then done!
   void _deleteEvent(String s) {
@@ -259,19 +309,20 @@ class _CalendarState extends State<Calendar> {
     if (_selectedEvents.length == 0) {
       return Container(
         padding: EdgeInsets.fromLTRB(15, 20, 15, 5),
-        child: Text('No Events',style: GoogleFonts.montserrat(
-            textStyle: Theme.of(context).textTheme.headline4,
-            fontSize: 18),
+        child: Text(
+          'No Events',
+          style: GoogleFonts.montserrat(
+              textStyle: Theme.of(context).textTheme.headline4, fontSize: 18),
         ),
       );
     }
     return Container(
       padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-      child:
-        Text('Events',style: GoogleFonts.montserrat(
-            textStyle: Theme.of(context).textTheme.headline4,
-            fontSize: 18),
-        ),
+      child: Text(
+        'Events',
+        style: GoogleFonts.montserrat(
+            textStyle: Theme.of(context).textTheme.headline4, fontSize: 18),
+      ),
     );
   }
 
@@ -306,28 +357,68 @@ class _CalendarState extends State<Calendar> {
           ),
           calendar(),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            child: Text(
-              'Daily Events',
-              style: TextStyle(
-                  fontSize: 21, fontWeight: FontWeight.bold),
-            )
-          ),
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Text(
+                'Daily Events',
+                style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+              )),
           eventTitle(),
           Column(
-          children: _eventWidgets,
+            children: _eventWidgets,
           ),
           SizedBox(height: 60)
         ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal,
-        onPressed: () => _create(context),//Navigator.push(context, MaterialPageRoute(builder: (context) => AddEvent())),
+        onPressed: () => _create(
+            context), //Navigator.push(context, MaterialPageRoute(builder: (context) => AddEvent())),
         //onPressed: () => Navigator.of(context)
         //.push(MaterialPageRoute(builder: (context) => EventEditingPage())),
         child: Icon(
           Icons.add,
           color: Colors.white,
+        ),
+      ),
+    );
+  }
+}
+
+class TimePicker extends StatefulWidget {
+  @override
+  _TimePickerState createState() => _TimePickerState();
+}
+
+class _TimePickerState extends State<TimePicker> {
+  TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
+
+  void _selectTime() async {
+    final TimeOfDay newTime = await showTimePicker(
+      context: context,
+      initialTime: _time,
+    );
+    if (newTime != null) {
+      setState(() {
+        _time = newTime;
+      });
+    }
+  }
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: _selectTime,
+              child: Text('SELECT TIME'),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Selected time: ${_time.format(context)}',
+            ),
+          ],
         ),
       ),
     );
