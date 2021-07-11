@@ -1,7 +1,6 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sample1/calendar/calendarModel.dart';
 import 'package:sample1/calendar/db.dart';
@@ -16,10 +15,7 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
   DateTime _selectedDay = DateTime.now();
-  DateTime _date = DateTime.now();
-  TextEditingController _dateController = TextEditingController();
-
-  final DateFormat _dateFormatter = DateFormat("MMM dd, yyyy");
+  
 
   CalendarController _calendarController;
   Map<DateTime, List<dynamic>> _events = {};
@@ -92,11 +88,11 @@ class _CalendarState extends State<Calendar> {
     String _details = "";
     //String _time = "";
     var content = TextField(
-      style: GoogleFonts.montserrat(
+      style: TextStyle(
           color: Color.fromRGBO(105, 105, 108, 1), fontSize: 16),
       autofocus: true,
       decoration: InputDecoration(
-        labelStyle: GoogleFonts.montserrat(
+        labelStyle: TextStyle(
             color: Color.fromRGBO(59, 57, 60, 1),
             fontSize: 18,
             fontWeight: FontWeight.normal),
@@ -107,11 +103,11 @@ class _CalendarState extends State<Calendar> {
       },
     );
     var content1 = TextField(
-      style: GoogleFonts.montserrat(
+      style: TextStyle(
           color: Color.fromRGBO(105, 105, 108, 1), fontSize: 16),
       autofocus: true,
       decoration: InputDecoration(
-        labelStyle: GoogleFonts.montserrat(
+        labelStyle: TextStyle(
             color: Color.fromRGBO(59, 57, 60, 1),
             fontSize: 18,
             fontWeight: FontWeight.normal),
@@ -121,25 +117,58 @@ class _CalendarState extends State<Calendar> {
         _details = value;
       },
     );
-    var btn = FlatButton(
+    var btn = ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        elevation: 0,
+        padding: EdgeInsets.symmetric(
+            horizontal: 0, vertical: 0),
+        primary: Colors.white,
+        onPrimary: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(0),
+        )),
         child: Text('Save',
-            style: GoogleFonts.montserrat(
+            style: TextStyle(
                 color: Color.fromRGBO(59, 57, 60, 1),
                 fontSize: 16,
                 fontWeight: FontWeight.bold)),
         onPressed: () {
+          if (_name != null){
           _addEvent(_name);
+          }
+          else{
+            Navigator.of(context).pop(false);
+          }
         });
-    var cancelButton = FlatButton(
+    SizedBox(width: 40);
+    var cancelButton = ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        elevation: 0,
+        padding: EdgeInsets.symmetric(
+            horizontal: 0, vertical: 0),
+        primary: Colors.white,
+        onPrimary: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(0),
+        )),
         child: Text('Cancel',
-            style: GoogleFonts.montserrat(
+            style: TextStyle(
                 color: Color.fromRGBO(59, 57, 60, 1),
                 fontSize: 16,
                 fontWeight: FontWeight.bold)),
         onPressed: () => Navigator.of(context).pop(false));
-    var pickTime = FlatButton(
+    var pickTime = ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        elevation: 0,
+        padding: EdgeInsets.symmetric(
+            horizontal: 0, vertical: 0),
+        primary: Colors.white,
+        onPrimary: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(0),
+        )),
         child: Text('Pick Time',
-            style: GoogleFonts.montserrat(
+            style: TextStyle(
                 color: Color.fromRGBO(59, 57, 60, 1),
                 fontSize: 16,
                 fontWeight: FontWeight.bold)),
@@ -176,7 +205,7 @@ class _CalendarState extends State<Calendar> {
                   children: <Widget>[
                     SizedBox(height: 24.0),
                     Text("Add Event",
-                        style: GoogleFonts.montserrat(
+                        style: TextStyle(
                             color: Color.fromRGBO(59, 57, 60, 1),
                             fontSize: 18,
                             fontWeight: FontWeight.bold)),
@@ -294,12 +323,12 @@ class _CalendarState extends State<Calendar> {
             rightChevronIcon:
                 Icon(Icons.arrow_forward_ios, size: 15, color: Colors.black),
             titleTextStyle:
-                GoogleFonts.montserrat(color: Colors.black, fontSize: 16),
+                TextStyle(color: Colors.black, fontSize: 16),
             formatButtonDecoration: BoxDecoration(
               color: Colors.white60,
               borderRadius: BorderRadius.circular(20),
             ),
-            formatButtonTextStyle: GoogleFonts.montserrat(
+            formatButtonTextStyle: TextStyle(
                 color: Colors.teal, fontSize: 13, fontWeight: FontWeight.bold),
           ),
         ));
@@ -310,18 +339,22 @@ class _CalendarState extends State<Calendar> {
       return Container(
         padding: EdgeInsets.fromLTRB(15, 20, 15, 5),
         child: Text(
-          'No Events',
-          style: GoogleFonts.montserrat(
-              textStyle: Theme.of(context).textTheme.headline4, fontSize: 18),
-        ),
+        'No Event',
+        style: TextStyle(
+            color: Colors.grey[600], 
+        fontSize: 18,
+      ),
+      ),
       );
     }
     return Container(
       padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
       child: Text(
         'Events',
-        style: GoogleFonts.montserrat(
-            textStyle: Theme.of(context).textTheme.headline4, fontSize: 18),
+        style: TextStyle(
+            color: Colors.grey[600], 
+        fontSize: 18,
+      ),
       ),
     );
   }

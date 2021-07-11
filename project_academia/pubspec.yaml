@@ -52,11 +52,17 @@ dependencies:
   table_calendar: ^2.2.3
   synchronized: ^3.0.0
   path: ^1.8.0
-  google_fonts: ^2.1.0
+  flutter_launcher_icons: ^0.7.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  image_path_android: "assets/logo.png"
+  image_path_ios: "assets/logo.png"
+  android: true
+  ios: true 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
