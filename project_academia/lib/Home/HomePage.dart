@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 //import 'package:sample1/models/book.dart';
 import 'package:sample1/Navbar.dart';
 import 'package:intl/intl.dart';
+import 'package:sample1/profile/input.dart';
 //import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
+  //int _currentIndex = 0;
   
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -38,6 +39,12 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         this.user = firebaseUser;
         this.isloggedin = true;
+        textName = '${user.displayName}';
+        textEmail = '${user.email}';
+        textDescription = '<<No description>>';
+        textLRN = '<<No LRN>>';
+        textCourse = '<<No Course>>';
+        textNumber = '<<No Contact Number>>';
       });
     }
   }
@@ -48,11 +55,11 @@ class _HomePageState extends State<HomePage> {
     await googleSignIn.signOut();
   }
 
-  void onTabTapped(int index) {
-   setState(() {
-     _currentIndex = index;
-   });
- }
+//   void onTabTapped(int index) {
+//    setState(() {
+//      _currentIndex = index;
+//    });
+//  }
 
   @override
   void initState() {

@@ -31,8 +31,6 @@ class _EditProfileState extends State<EditProfile> {
       setState(() {
         this.user = firebaseUser;
         this.isloggedin = true;
-        textName = '${user.displayName}';
-        textEmail = '${user.email}';
       });
     }
   }
@@ -54,16 +52,16 @@ class _EditProfileState extends State<EditProfile> {
   PickedFile _imageFile;
   static ImagePicker _picker = ImagePicker();
   //controller
-  static final TextEditingController textNameController =
-      TextEditingController();
+  // static final TextEditingController textNameController =
+  //     TextEditingController();
   static final TextEditingController textCourseController =
       TextEditingController();
   static final TextEditingController textLRNController =
       TextEditingController();
   static final TextEditingController textDescriptionController =
       TextEditingController();
-  static final TextEditingController textEmailController =
-      TextEditingController();
+  // static final TextEditingController textEmailController =
+  //     TextEditingController();
   static final TextEditingController textNumberController =
       TextEditingController();
   static final TextEditingController textBirthdateController =
@@ -261,7 +259,7 @@ class _EditProfileState extends State<EditProfile> {
       ),
       child: TextFormField(
         readOnly: true,
-        controller: textBirthdateController ?? "Input Birthdate",
+        controller: textBirthdateController,
         style: TextStyle(color: Colors.black, fontSize: 20),
         cursorColor: Colors.black,
         validator: (String value) {
@@ -297,7 +295,7 @@ class _EditProfileState extends State<EditProfile> {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
       child: TextFormField(
-          controller: textLRNController ?? "Input LRN",
+          controller: textLRNController,
           style: TextStyle(color: Colors.black, fontSize: 20),
           cursorColor: Colors.black,
           validator: (String value) {
@@ -342,7 +340,7 @@ class _EditProfileState extends State<EditProfile> {
       //   borderRadius: BorderRadius.all(Radius.circular(30)),
       // ),
       child: TextFormField(
-          controller: textCourseController ?? "Input Course",
+          controller: textCourseController,
           style: TextStyle(color: Colors.black, fontSize: 20),
           cursorColor: Colors.black,
           validator: (String value) {
@@ -388,7 +386,7 @@ class _EditProfileState extends State<EditProfile> {
       child: TextFormField(
           keyboardType: TextInputType.multiline,
           maxLines: null,
-          controller: textDescriptionController ?? "Input Description",
+          controller: textDescriptionController,
           style: TextStyle(color: Colors.black, fontSize: 20),
           cursorColor: Colors.black,
           validator: (String value) {
@@ -429,7 +427,7 @@ class _EditProfileState extends State<EditProfile> {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
       child: TextFormField(
-          controller: textNumberController ?? "Input Contact Number",
+          controller: textNumberController,
           keyboardType: TextInputType.number,
           style: TextStyle(color: Colors.black, fontSize: 20),
           cursorColor: Colors.black,
@@ -570,7 +568,6 @@ class _EditProfileState extends State<EditProfile> {
                                                         Center(
                                                           child: Text(
                                                             '${textName}',
-                                                            //textName ?? "NAME",
                                                             style: TextStyle(
                                                                 fontWeight:
                                                                     FontWeight

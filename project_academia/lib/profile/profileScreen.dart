@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:intl/intl.dart';
+//import 'package:intl/intl.dart';
 import 'package:sample1/Navbar.dart';
 import 'package:sample1/forgotPass.dart';
 import 'package:sample1/profile/animation.dart';
