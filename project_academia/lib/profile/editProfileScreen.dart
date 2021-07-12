@@ -523,7 +523,7 @@ class _EditProfileState extends State<EditProfile> {
                                     padding: EdgeInsets.only(
                                         left: 0, top: 0, right: 0),
                                     //height: height * 0.43,
-                                    height: height - 80,
+                                    height: height + 50,
                                     child: LayoutBuilder(
                                       builder: (context, constraints) {
                                         //double innerHeight = constraints.maxHeight;
