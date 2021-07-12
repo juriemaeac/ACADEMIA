@@ -65,6 +65,9 @@ class _SignUpState extends State<SignUp> {
   navigateToLogin() async {
     Navigator.pushReplacementNamed(context, "Login");
   }
+  navigateToPolicies() async {
+    Navigator.pushReplacementNamed(context, "Policies");
+  }
   // navigateToHomePage() async {
   //   Navigator.pushReplacementNamed(context, "HomePage");
   // }
@@ -214,8 +217,11 @@ class _SignUpState extends State<SignUp> {
                   )
                 ),
                 SizedBox(height: 10.0),
-                Text('By signing up, You agree to Academia Terms and Conditions.',
+                GestureDetector(
+                child: Text('By signing up, You agree to Academia Terms and Conditions.',
                   style: TextStyle(color: Colors.grey, fontSize: 13),
+                ),
+                onTap: navigateToPolicies,
                 ),
                 ],
               ),
