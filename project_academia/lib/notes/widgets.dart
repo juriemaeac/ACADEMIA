@@ -63,9 +63,7 @@ class _PriorityPickerState extends State<PriorityPicker> {
                         ? priorityColor[index]
                         : Colors.transparent,
                     borderRadius: BorderRadius.circular(8.0),
-                    border: selectedIndex == index
-                        ? Border.all(width: 2, color: Colors.black)
-                        : Border.all(width: 0,color: Colors.transparent)),
+                ),
               ),
             ),
           );
@@ -118,7 +116,7 @@ class _ColorPickerState extends State<ColorPicker> {
                 decoration: BoxDecoration(
                     color: colors[index],
                     shape: BoxShape.circle,
-                    border: Border.all(width: 2, color: Colors.black)),
+                    ),
               ),
             ),
           );
