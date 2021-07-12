@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sample1/Navbar.dart';
 import 'package:intl/intl.dart';
 import 'package:sample1/profile/input.dart';
+import 'package:sample1/todolist/sharedTodo.dart';
 //import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -174,25 +175,88 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       
-                      
-                      SizedBox(height: 40.0),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Assignments',
+                      // SizedBox(height: 10),
+                      // Container(
+                      //   padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                      //   margin: EdgeInsets.symmetric(vertical: 0,horizontal: 20),
+                      //   decoration: BoxDecoration(
+                      //     color: Colors.grey[350],
+                      //     borderRadius: BorderRadius.circular(20)
+                      //   ),
+                      //   child: Row(
+                      //     //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //     children: [
+                      //       Icon(Icons.search),
+                      //       SizedBox(width: 20),
+                      //       Text('Search'),
+                      //       //Icon(Icons.settings)
+
+                      //     ],
+                      //   ),
+                      // ),
+                      SizedBox(height: 40),
+                      Text(
+                          "Tasks Overview",
                           style: TextStyle(
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
+                          //textAlign: TextAlign.center,
+                      
+                      ),
+                      SizedBox(height: 20.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Center(
+                            child: Container(
+                              width: 170,
+                              height: 70,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFE28C7E).withOpacity(0.3),
+                                borderRadius: BorderRadius.all(Radius.circular(10))
+                              ),
+                            child: Column(
+                              children: <Widget>[
+                            SizedBox(height: 10.0),
+                            Text('${textCountFinished}',
+                                  style: TextStyle(color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center,
+                                ),
+                            SizedBox(height: 10.0),
+                            Text('Finished Tasks',
+                                  style: TextStyle(color: Colors.grey[700], fontSize: 13,),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                            ),
                           ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 40, vertical: 40),
-                            primary: Color(0xFF98BD91),
-                            onPrimary: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25.0),
-                            )),
+                          Center(
+                            child: Container(
+                              width: 170,
+                              height: 70,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFE28C7E).withOpacity(0.3),
+                                borderRadius: BorderRadius.all(Radius.circular(10))
+                              ),
+                            child: Column(
+                              children: <Widget>[
+                            SizedBox(height: 10.0),
+                            Text('${textCountPending}',
+                                  style: TextStyle(color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center,
+                                ),
+                            SizedBox(height: 10.0),
+                            Text('Pending Tasks',
+                                  style: TextStyle(color: Colors.grey[700], fontSize: 13,),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(height: 10.0),
                       ElevatedButton(

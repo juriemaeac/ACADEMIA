@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sample1/todolist/addTaskScreen.dart';
 import 'package:sample1/databaseHelpers.dart';
+import 'package:sample1/todolist/sharedTodo.dart';
 import 'package:sample1/todolist/taskModel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TodoListScreen extends StatefulWidget {
   @override
@@ -23,6 +27,44 @@ class _TodoListScreenState extends State<TodoListScreen> {
     setState(() {
       _taskList = DatabaseHelper.instance.getTaskList();
     });
+  }
+
+  loadData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String json = prefs.getString('TestUser_Key');
+    print("load info $json");
+
+    if (json == null) {
+      print('no data');
+    } else {
+      Map<String, dynamic> map = jsonDecode(json);
+      print('map $map');
+
+      final task = TaskInfoPref.fromJson(map);
+      print('CountPending: ${task.countTodoPending}');
+      print('CountFinished: ${task.countTodoFinished}');
+      print('Task: ${task.taskTodo}');
+    }
+  }
+
+  saveData() async {
+    String textCountPending = '0';
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final testUser = TaskInfoPref(
+      countTodoPending: '$textCountPending',
+      countTodoFinished: '$textCountFinished',
+      taskTodo: '$textTodo',
+    );
+
+    String json = jsonEncode(testUser);
+    print("save info $json");
+    prefs.setString('TestUser_Key', json);
+  }
+
+  cleardata() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+    print("Data cleared");
   }
 
   Widget _buildTask (Task task){
@@ -110,8 +152,11 @@ class _TodoListScreenState extends State<TodoListScreen> {
           .where((Task task) => task.status == 1)
           .toList()
           .length;
+          textCountPending = '${snapshot.data.length - completedTaskCount}';
+          textCountFinished = '$completedTaskCount';
 
           return ListView.builder(
+            
           padding: EdgeInsets.symmetric(vertical: 0),
           itemCount: 1 + snapshot.data.length,
           itemBuilder: (BuildContext context, int index){
@@ -134,6 +179,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                     ),
                     ),
                     SizedBox(height: 10),
+                    
                     Center( 
                       child: Text('$completedTaskCount of ${snapshot.data.length}',
                       style: TextStyle(
