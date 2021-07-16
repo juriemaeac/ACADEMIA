@@ -53,14 +53,15 @@ dependencies:
   synchronized: ^3.0.0
   path: ^1.8.0
   flutter_launcher_icons: ^0.7.3
+  flutter_svg: ^0.19.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
 flutter_icons:
-  image_path_android: "assets/logo.png"
-  image_path_ios: "assets/logo.png"
+  image_path_android: "assets/logo1.png"
+  image_path_ios: "assets/logo1.png"
   android: true
   ios: true 
 
@@ -82,6 +83,13 @@ flutter:
    - assets/signin1.png
    - assets/design.png
    - assets/profile.jpg
+   - icons/notes.png
+   - icons/todo.png
+   - icons/schedule.png
+   - icons/calendar.png
+   - icons/profile.png
+   - icons/attendance.png
+   - icons/reviewer.png
    
 
 
