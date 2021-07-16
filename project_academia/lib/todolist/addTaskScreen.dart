@@ -102,24 +102,25 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 30),
+                SizedBox(height: 50),
+                Row(
+                  children: [
                 GestureDetector(
                   onTap: () => Navigator.pop(context),
                   child: Icon(Icons.arrow_back, 
-                  size: 40,
+                  //size: 40,
                   color: Colors.black,
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(width: 20),
                 Center(
                 child: Text(
                   widget.task == null ? 'Add Task' : 'Update task', 
                   style: TextStyle(
                   color: Colors.black,
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold),
+                  fontSize: 25),
                 ),
-                ),
+                ),],),
                 SizedBox(height: 20),
                 Form(
                   key: _formKey,
@@ -244,7 +245,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           ),
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.only(left: 40, right: 40),
-                            primary: Color(0xFF98BD91),
+                            primary: Color(0xFFE28C7E),
                             onPrimary: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40),

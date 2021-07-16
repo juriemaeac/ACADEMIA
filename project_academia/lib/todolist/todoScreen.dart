@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:sample1/Navbar.dart';
 import 'package:sample1/todolist/addTaskScreen.dart';
 import 'package:sample1/databaseHelpers.dart';
 import 'package:sample1/todolist/sharedTodo.dart';
@@ -95,12 +96,14 @@ class _TodoListScreenState extends State<TodoListScreen> {
             ),
             isThreeLine: true,
             trailing: Checkbox(
+              checkColor: Colors.white,
+              shape: CircleBorder(),
               onChanged: (value){
                 task.status = value ? 1 : 0;
                 DatabaseHelper.instance.updateTask(task);
                 _updateTaskList();
               },
-              activeColor: Colors.red,
+              activeColor: Color(0xFFEEBAB2),
               value: task.status == 1 ? true : false,
             ),
             onTap: ()=> Navigator.push(
@@ -122,14 +125,18 @@ class _TodoListScreenState extends State<TodoListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Todo List'),
+      //drawer: Navbar(),
+      appBar: AppBar(centerTitle: true,
+        title: Text('Todo List', style: TextStyle(fontSize: 25),),
+        elevation: 0,
+        backgroundColor: Colors.white,
       ),
+
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(30),
         ),
-        backgroundColor: Color(0xFFCDB193),
+        backgroundColor: Color(0xFFE28C7E),
         child: Icon(Icons.add),
         onPressed: () => Navigator.push(
           context, 
@@ -140,7 +147,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
           ),
         ),
       ),
-      body: FutureBuilder(
+      body:FutureBuilder(
         future: _taskList,
         builder: (context, snapshot) {
           if (!snapshot.hasData){
@@ -155,6 +162,15 @@ class _TodoListScreenState extends State<TodoListScreen> {
           textCountPending = '${snapshot.data.length - completedTaskCount}';
           textCountFinished = '$completedTaskCount';
 
+          if (snapshot.data.length == 0){
+            return Container(
+              color: Colors.white,
+              child: Center(
+                  child: Text('Click on the add button to add a new task!',
+                      style: Theme.of(context).textTheme.bodyText2),
+                ),
+            );
+          }
           return ListView.builder(
             
           padding: EdgeInsets.symmetric(vertical: 0),
@@ -164,22 +180,11 @@ class _TodoListScreenState extends State<TodoListScreen> {
               return Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: 40, 
-                  vertical: 20,
+                  //vertical: 20,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Center (
-                    child: Text("My Tasks", 
-                      style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,  
-                      )
-                    ),
-                    ),
-                    SizedBox(height: 10),
-                    
                     Center( 
                       child: Text('$completedTaskCount of ${snapshot.data.length}',
                       style: TextStyle(
@@ -189,16 +194,11 @@ class _TodoListScreenState extends State<TodoListScreen> {
                       ),
                     ),
                     ),
+                    SizedBox(height: 40),
                   ]
                 ),
               );
             }
-            // return Container(
-            //   margin: EdgeInsets.all(3),
-            //   height: 100, 
-            //   width: double.infinity, 
-            //   color: Colors.red,
-            // );
             return _buildTask(snapshot.data[index-1]);
           },
         );
