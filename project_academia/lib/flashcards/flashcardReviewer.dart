@@ -83,10 +83,10 @@ class _FlashcardState extends State<Flashcard> {
             );
           }
 
-          final int completedReviewerCount = snapshot.data
-          .where((Reviewer reviewer) => reviewer.statusReviewer == 1)
-          .toList()
-          .length;
+          // final int completedReviewerCount = snapshot.data
+          // .where((Reviewer reviewer) => reviewer.statusReviewer == 1)
+          // .toList()
+          // .length;
 
           return ListView.builder(
           //shrinkWrap: true,

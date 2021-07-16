@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:sample1/Navbar.dart';
 import 'package:sample1/reviewer/addTopic.dart';
 import 'package:sample1/reviewer/topicModel.dart';
 import 'package:sample1/databaseHelpers.dart';
