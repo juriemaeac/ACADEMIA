@@ -97,9 +97,9 @@ class NoteListState extends State<NoteList> {
             side: BorderSide(color: Colors.transparent, width: 2.0)),
         child: Icon(
           Icons.add,
-          color: Colors.black45,
+          color: Colors.white,
         ),
-        backgroundColor: Color(0xFFCDB193),
+        backgroundColor: Color(0xFFE28C7E),
       ),
       
     );

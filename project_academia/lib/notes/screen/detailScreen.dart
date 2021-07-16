@@ -48,7 +48,7 @@ class NoteDetailState extends State<NoteDetail> {
             ),
             backgroundColor: colors[color],
             leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                icon: Icon(Icons.arrow_back, color: Colors.black),
                 onPressed: () {
                   isEdited ? showDiscardDialog(context) : moveToLastScreen();
                 }),
