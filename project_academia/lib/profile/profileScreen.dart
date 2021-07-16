@@ -52,7 +52,7 @@ class _ProfileState extends State<Profile> {
     // DateTime textBirthdate1 = textBirthdate;
     // var formattedDate = DateFormat('MMM dd, yyyy').format(textBirthdate1);
     return Scaffold(
-      drawer: Navbar(),
+      //drawer: Navbar(),
       backgroundColor: Colors.white,
       body: Stack(
         fit: StackFit.expand,
@@ -160,7 +160,10 @@ class _ProfileState extends State<Profile> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       FadeAnimation(1.2, 
-                                        Text("$textCourse" ?? "Input Course", style: TextStyle(color: Colors.grey[850], fontSize: 16),)
+                                        Text(textCourse == null
+                                          ? '<<No Course>>'
+                                          : '${textCourse}', 
+                                          style: TextStyle(color: Colors.grey[850], fontSize: 16),)
                                       ),
                                     ],
                                   ),
@@ -169,8 +172,10 @@ class _ProfileState extends State<Profile> {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       FadeAnimation(1.3, 
-                                        Text("$textLRN" ?? "Input LRN", style: 
-                                          TextStyle(color: Colors.grey[850], fontSize: 16)
+                                        Text(textLRN == null
+                                          ? '<<No Student Number>>'
+                                          : '${textLRN}', 
+                                        style: TextStyle(color: Colors.grey[850], fontSize: 16)
                                         ),
                                       ),
                                     ],
@@ -193,7 +198,9 @@ class _ProfileState extends State<Profile> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          FadeAnimation(1.6, Text("$textDescription" ?? "Input Description", 
+                          FadeAnimation(1.6, Text(textDescription == null
+                                          ? '<<No Description>>'
+                                          : '${textDescription}',
                           style: TextStyle(color: Colors.grey[850], height: 1.4,fontSize: 16,),)),
                           
                           SizedBox(height: 30,),
@@ -226,7 +233,10 @@ class _ProfileState extends State<Profile> {
                               Icon(Icons.phone, color: Color(0xFFFFB8AC),),),
                               SizedBox(width: 10,),
                               FadeAnimation(1.6, 
-                                Text("$textNumber" ?? "Input Number", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
+                                Text(textNumber == null
+                                          ? '<<No Contact Number>>'
+                                          : '${textNumber}', 
+                                style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
                               ),
                             ],
                           ),
@@ -247,7 +257,10 @@ class _ProfileState extends State<Profile> {
                               Icon(Icons.cake, color: Color(0xFFFFB8AC),),),
                               SizedBox(width: 10,),
                               FadeAnimation(1.6, 
-                                Text("${textBirthdate}" ?? "Input Birthdate", style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
+                                Text(textBirthdate == null
+                                          ? '<<No Birthdate>>'
+                                          : '${textBirthdate}',  
+                                style: TextStyle(color: Color(0xFFFFB8AC),fontSize: 18,fontWeight: FontWeight.bold),)
                               ),
                             ],
                           ),

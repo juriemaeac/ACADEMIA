@@ -282,7 +282,7 @@ class _EditProfileState extends State<EditProfile> {
           isDense: true,
           prefixIcon: Icon(
             Icons.cake,
-            color: Colors.black,
+            color: Color(0xFFFFB8AC),
             size: 24,
           ),
         ),
@@ -300,7 +300,7 @@ class _EditProfileState extends State<EditProfile> {
           cursorColor: Colors.black,
           validator: (String value) {
             if (value.isEmpty) {
-              return 'Enter LRN';
+              return 'Enter Student Number';
             }
             return null;
           },
@@ -308,7 +308,7 @@ class _EditProfileState extends State<EditProfile> {
             focusedBorder: UnderlineInputBorder(
               borderRadius: BorderRadius.circular(15),
             ),
-            labelText: 'LRN',
+            labelText: 'Student Number',
             labelStyle: TextStyle(
               color: Colors.black,
               fontSize: 14,
@@ -317,7 +317,7 @@ class _EditProfileState extends State<EditProfile> {
             isDense: true,
             prefixIcon: Icon(
               Icons.subtitles,
-              color: Colors.black,
+              color: Color(0xFFFFB8AC),
               size: 24,
             ),
           ),
@@ -362,7 +362,7 @@ class _EditProfileState extends State<EditProfile> {
             isDense: true,
             prefixIcon: Icon(
               Icons.book,
-              color: Colors.black,
+              color: Color(0xFFFFB8AC),
               size: 24,
             ),
           ),
@@ -408,7 +408,7 @@ class _EditProfileState extends State<EditProfile> {
             isDense: true,
             prefixIcon: Icon(
               Icons.description,
-              color: Colors.black,
+              color: Color(0xFFFFB8AC),
               size: 24,
             ),
           ),
@@ -450,7 +450,7 @@ class _EditProfileState extends State<EditProfile> {
             isDense: true,
             prefixIcon: Icon(
               Icons.phone,
-              color: Colors.black,
+              color: Color(0xFFFFB8AC),
               size: 24,
             ),
           ),
