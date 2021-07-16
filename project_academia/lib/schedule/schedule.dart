@@ -8,6 +8,8 @@ class Schedule extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Schedule'),
+      elevation: 0,
+      backgroundColor: Colors.white,
       ),
       body: SfCalendar(
         view: CalendarView.week,
@@ -27,7 +29,7 @@ List<Appointment> getAppointments(){
     startTime: startTime,
     endTime: endTime,
     subject: 'Conference',
-    color: Colors.blue,
+    color: Color(0xFFE28C7E),
     recurrenceRule: 'FREQ=DAILY;COUNT=10',
     isAllDay: true));
 
