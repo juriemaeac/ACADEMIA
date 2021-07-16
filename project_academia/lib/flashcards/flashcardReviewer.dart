@@ -107,51 +107,37 @@ class _FlashcardState extends State<Flashcard> {
                     Row(
                       //mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        SizedBox(width: 20),
+                        //SizedBox(width: 20),
                         GestureDetector(
                           onTap: () => Navigator.pop(context),
-                          child: Icon(Icons.arrow_back_ios_new_outlined, 
-                          size: 15,
+                          child: Icon(Icons.arrow_back, 
+                          //size: 15,
                           color: Colors.black,
                           ),
                         ),
-                        SizedBox(width: 10,),
-                        GestureDetector(
-                        child: Text(
-                          'back',
+                        Spacer(),
+                        Text(
+                          "My Flashcards",
                           style: TextStyle(
+                              fontSize: 25,
                               color: Colors.black,
-                              fontSize: 15),
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        onTap: () => Navigator.pop(context),
-                      ),
+                        Spacer(),
+                        SizedBox(width: 20,),
                       ]
                     ),
-                        Container(  
-                          alignment: Alignment.center,
-                          child: Text(
-                            "My Flashcards",
-                            style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFFE28C7E),
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                    SizedBox(height: 10),
-                    
-                    
-                    Center( 
-                      child: Text('$completedReviewerCount of ${snapshot.data.length}',
-                      style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 20, 
-                      fontWeight: FontWeight.w600,  
-                      ),
-                    ),
-                    ),
-                    
+                    // Center( 
+                    //   child: Text('$completedReviewerCount of ${snapshot.data.length}',
+                    //   style: TextStyle(
+                    //   color: Colors.grey,
+                    //   fontSize: 20, 
+                    //   fontWeight: FontWeight.w600,  
+                    //   ),
+                    // ),
+                    // ),
+                    SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -173,7 +159,7 @@ class _FlashcardState extends State<Flashcard> {
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                              primary: Color(0xFF98BD91),
+                              primary: Color(0xFFE28C7E),
                               onPrimary: Colors.white,
                           ),
                         ),
@@ -197,7 +183,7 @@ class _FlashcardState extends State<Flashcard> {
                           ),
                           
                           style: ElevatedButton.styleFrom(
-                              primary: Color(0xFF98BD91),
+                              primary: Color(0xFFE28C7E),
                               onPrimary: Colors.white,
                           ),
                         ), 
