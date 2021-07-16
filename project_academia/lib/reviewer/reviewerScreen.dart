@@ -86,7 +86,7 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
               ),
               trailing: Icon(Icons.bookmark_border_outlined,
                   size: 25,
-                  color: Color(0xFF98BD91)),
+                  color: Color(0xFFE28C7E)),
             ),
             Divider(),
           ],
@@ -134,6 +134,8 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
       PreferredSize(
         preferredSize: Size(double.infinity, 60),
         child: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
           centerTitle: false,
           title: Row(
             //mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -146,14 +148,13 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
               //     color: Colors.black,
               //     ),
               //   ),
-              Text(
-              'Topic Title',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold, 
-                  fontSize: 20),
-              ),
-              SizedBox(width: 95),
+              // Text(
+              // '<<Topic Title>>',
+              // style: TextStyle(
+              //     color: Colors.black,
+              //     fontSize: 20),
+              // ),
+              Spacer(),
               IconButton(
                 icon: Icon(
                   Icons.add, 
@@ -175,8 +176,7 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
                 child: Text(
                   'Add Card',
                   style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold, 
+                      color: Colors.black, 
                       fontSize: 20),
                 ),
                 onTap: () {
@@ -266,7 +266,7 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
                               style: ElevatedButton.styleFrom(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 50, vertical: 8),
-                                  primary: Color(0xFF98BD91),
+                                  primary: Color(0xFFE28C7E),
                                   onPrimary: Colors.white,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30.0),

@@ -73,26 +73,33 @@ class _AddReviewerScreenState extends State<AddReviewerScreen> {
             vertical: 10,
           ),
             child: Column(
+              
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 30),
-                GestureDetector(
+                SizedBox(height: 50),
+                Row(
+                  children: [
+                    SizedBox(height: 30),
+                    GestureDetector(
                   onTap: () => Navigator.pop(context),
                   child: Icon(Icons.arrow_back, 
-                  size: 40,
+                  //size: 40,
                   color: Colors.black,
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(width: 20),
                 Center(
                 child: Text(
                   widget.reviewer == null ? 'Add Reviewer' : 'Update Reviewer', 
                   style: TextStyle(
                   color: Colors.black,
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold),
+                  fontSize: 25
                 ),
                 ),
+                ),
+                  ],
+                ),
+                
                 SizedBox(height: 20),
                 Form(
                   key: _formKey,
@@ -147,7 +154,7 @@ class _AddReviewerScreenState extends State<AddReviewerScreen> {
                         height: 50,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: Color(0xFF98BD91),
+                          //color: Color(0xFFE28C7E).withOpacity(0.1),
                           borderRadius: BorderRadius.circular(25),
                         ),
                         child: ElevatedButton(
@@ -155,12 +162,12 @@ class _AddReviewerScreenState extends State<AddReviewerScreen> {
                             widget.reviewer == null ? 'Add' : 'Update', 
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 25,
+                              fontSize: 15,
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.only(left: 40, right: 40),
-                            primary: Color(0xFF98BD91),
+                            primary: Color(0xFFE28C7E),
                             onPrimary: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40),
@@ -182,7 +189,7 @@ class _AddReviewerScreenState extends State<AddReviewerScreen> {
                             'Delete', 
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 25,
+                              fontSize: 15,
                             ),
                           ),
                           style: ElevatedButton.styleFrom(

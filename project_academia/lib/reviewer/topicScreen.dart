@@ -149,12 +149,12 @@ class _TopicScreenState extends State<TopicScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Navbar(),
       appBar:
       PreferredSize(
         preferredSize: Size(double.infinity, 60),
         child: AppBar(
-          centerTitle: false,
+          backgroundColor: Colors.white,
+          centerTitle: true,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
