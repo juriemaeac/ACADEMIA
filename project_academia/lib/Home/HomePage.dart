@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   checkAuthentification() async {
     _auth.authStateChanges().listen((user) {
       if (user == null) {
-        //Navigator.of(context).pushReplacementNamed("start");
+        Navigator.of(context).pushReplacementNamed("start");
         //Navigator.push(context, MaterialPageRoute(builder: (context)=> Navbar()));
       }
     });
@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
               color: Colors.white,
             ),
             onPressed: () {
-
+              signOut();
             },
           ),
           SizedBox(width: 10,),
