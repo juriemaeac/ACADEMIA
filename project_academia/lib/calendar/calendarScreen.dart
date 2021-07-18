@@ -53,7 +53,7 @@ class _CalendarState extends State<Calendar> {
             IconButton(
               icon: FaIcon(
                 FontAwesomeIcons.trashAlt,
-                color: Colors.teal,
+                color: Color(0xFFE28C7E),
                 size: 15,
               ),
               onPressed: () => _deleteEvent(d),
@@ -303,9 +303,9 @@ class _CalendarState extends State<Calendar> {
             canEventMarkersOverflow: true,
             markersColor: Colors.black54,
             weekdayStyle: TextStyle(color: Colors.black),
-            todayColor: Colors.teal[300],
+            todayColor: Color(0xFFE28C7E).withOpacity(0.6),
             todayStyle: TextStyle(color: Colors.white, fontSize: 15),
-            selectedColor: Colors.teal,
+            selectedColor: Color(0xFFE28C7E),
             outsideWeekendStyle: TextStyle(color: Colors.grey),
             outsideStyle: TextStyle(color: Colors.grey),
             weekendStyle: TextStyle(color: Colors.black54),
@@ -331,7 +331,7 @@ class _CalendarState extends State<Calendar> {
               borderRadius: BorderRadius.circular(20),
             ),
             formatButtonTextStyle: TextStyle(
-                color: Colors.teal, fontSize: 13, fontWeight: FontWeight.bold),
+                color: Color(0xFFE28C7E), fontSize: 13, fontWeight: FontWeight.bold),
           ),
         ));
   }
@@ -405,7 +405,7 @@ class _CalendarState extends State<Calendar> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.teal,
+        backgroundColor: Color(0xFFE28C7E),
         onPressed: () => _create(
             context), //Navigator.push(context, MaterialPageRoute(builder: (context) => AddEvent())),
         //onPressed: () => Navigator.of(context)
