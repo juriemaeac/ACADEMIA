@@ -5,7 +5,7 @@ String textDescription;
 String textLRN;
 String textCourse;
 String textNumber;
-DateTime textBirthdate;
+String textBirthdate;
 
 class UserInfoPref{
   var imagePath;
@@ -15,9 +15,16 @@ class UserInfoPref{
   String userDescription;
   String userCourse;
   String userNumber;
-  DateTime userBirthdate;
+  String userBirthdate;
 
-  UserInfoPref({this.imagePath, this.userName, this.userEmail, this.userLRN, this.userDescription, this.userCourse, this.userNumber, this.userBirthdate});
+  UserInfoPref({this.imagePath, 
+  this.userName, 
+  this.userEmail, 
+  this.userLRN, 
+  this.userDescription, 
+  this.userCourse, 
+  this.userNumber, 
+  this.userBirthdate});
 
   Map<String, dynamic> toJson(){
     return{

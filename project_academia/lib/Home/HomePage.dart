@@ -71,6 +71,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       //drawer: Navbar(),
       appBar: new AppBar(
+        automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color(0xFFE28C7E),
         elevation: 0,
