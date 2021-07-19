@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:sample1/Home/HomePage.dart';
 import 'package:sample1/todolist/addTaskScreen.dart';
 import 'package:sample1/databaseHelpers.dart';
 import 'package:sample1/todolist/sharedTodo.dart';
@@ -126,7 +127,32 @@ class _TodoListScreenState extends State<TodoListScreen> {
     return Scaffold(
       //drawer: Navbar(),
       appBar: AppBar(centerTitle: true,
-        title: Text('Todo List', style: TextStyle(fontSize: 25),),
+      automaticallyImplyLeading: false,
+        //title: Text('Todo List', style: TextStyle(fontSize: 25),),
+        title: Row(
+          //mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.arrow_back, 
+                size: 23,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(
+                    builder: (_)=> HomePage(),
+                  ),
+                );
+              },
+            ),
+            Spacer(),
+            Text('Todo List', style: TextStyle(fontSize: 25),),
+            Spacer(),
+            SizedBox(width: 45,)
+          ],
+        ),
         elevation: 0,
         backgroundColor: Colors.white,
       ),
