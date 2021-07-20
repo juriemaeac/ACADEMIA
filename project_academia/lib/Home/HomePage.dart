@@ -4,11 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 //import 'package:path/path.dart';
 import 'package:sample1/Attendance.dart';
-//import 'package:sample1/Navbar.dart';
 import 'package:intl/intl.dart';
-import 'package:sample1/Policies.dart';
 import 'package:sample1/calendar/calendarScreen.dart';
 import 'package:sample1/notes/screen/noteScreen.dart';
+import 'package:sample1/policies/policiesHome.dart';
 import 'package:sample1/profile/input.dart';
 import 'package:sample1/profile/profileScreen.dart';
 import 'package:sample1/reviewer/reviewerScreen.dart';
@@ -115,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 10 * 2.5),
+                  margin: EdgeInsets.only(bottom: 8 * 2.5),
                   // It will cover 20% of our total height
                   height: ((MediaQuery.of(context).size.height)) * 0.2,
                   child: Stack(
@@ -124,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                         padding: EdgeInsets.only(
                           left: 20,
                           right: 20,
-                          bottom: 40,
+                          bottom: 13,
                         ),
                         height: (MediaQuery.of(context).size.height)* 0.2 - 27,
                         decoration: BoxDecoration(
@@ -139,8 +138,7 @@ class _HomePageState extends State<HomePage> {
                             Container(
                               child: Row(
                                 children: <Widget>[
-                                  Text(
-                                    'Hi ${textName}!',
+                                  Text(textName == null ? 'Loading...' : 'Hi ${textName}!',
                                     style: Theme.of(context).textTheme.headline5.copyWith(
                                         color: Colors.white, fontWeight: FontWeight.bold),
                                   ),
@@ -202,24 +200,27 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ],
                           ),
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: TextField(
-                                  onChanged: (value) {},
-                                  decoration: InputDecoration(
-                                    hintText: "Search",
-                                    hintStyle: TextStyle(
-                                      color: Color(0xFFE28C7E).withOpacity(0.7),
-                                    ),
-                                    enabledBorder: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                  ),
-                                ),
-                              ),
-                              Icon(Icons.search, color: Color(0xFFE28C7E).withOpacity(0.7),),
-                            ],
+                          child: Text(
+                            'ACADEMIA'
                           ),
+                          // child: Row(
+                          //   children: <Widget>[
+                          //     Expanded(
+                          //       child: TextField(
+                          //         onChanged: (value) {},
+                          //         decoration: InputDecoration(
+                          //           hintText: "Search",
+                          //           hintStyle: TextStyle(
+                          //             color: Color(0xFFE28C7E).withOpacity(0.7),
+                          //           ),
+                          //           enabledBorder: InputBorder.none,
+                          //           focusedBorder: InputBorder.none,
+                          //         ),
+                          //       ),
+                          //     ),
+                          //     Icon(Icons.search, color: Color(0xFFE28C7E).withOpacity(0.7),),
+                          //   ],
+                          // ),
                         ),
                       ),
                     ],
@@ -621,7 +622,7 @@ class _HomePageState extends State<HomePage> {
                   ), 
                   onTap: () => Navigator.push(
                     context, MaterialPageRoute(
-                      builder: (_)=> Policies(),
+                      builder: (_)=> PoliciesHome(),
                     ),
                   ),  
                 ),                                                    
