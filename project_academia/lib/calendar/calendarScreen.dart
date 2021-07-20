@@ -323,13 +323,9 @@ class _CalendarState extends State<Calendar> {
               borderRadius: BorderRadius.circular(20),
             ),
             formatButtonTextStyle: TextStyle(
-<<<<<<< HEAD
                 color: Color(0xFFE28C7E),
                 fontSize: 13,
                 fontWeight: FontWeight.bold),
-=======
-                color: Color(0xFFE28C7E), fontSize: 13, fontWeight: FontWeight.bold),
->>>>>>> 9654e3d57d5929f3e2ed8ed6e0fa5d0014497ab3
           ),
         ));
   }
