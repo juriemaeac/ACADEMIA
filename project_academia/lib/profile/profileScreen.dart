@@ -1,13 +1,14 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:intl/intl.dart';
+import 'package:sample1/Home/HomePage.dart';
 import 'package:sample1/forgotPass.dart';
 import 'package:sample1/profile/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:sample1/profile/editProfileScreen.dart';
 import 'package:sample1/profile/input.dart';
 import 'package:sample1/start.dart';
+import 'package:icon_shadow/icon_shadow.dart';
 
 
 class Profile extends StatefulWidget {
@@ -46,10 +47,7 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    //DateTime textBirthdate;
-    //var formattedBirth = DateFormat.yMMMMd('en_US').format(textBirthdate);
-    // DateTime textBirthdate1 = textBirthdate;
-    // var formattedDate = DateFormat('MMM dd, yyyy').format(textBirthdate1);
+    //var formattedBirth = DateFormat('yMMMMd').format(textBirthdate);
     return Scaffold(
       //drawer: Navbar(),
       backgroundColor: Colors.white,
@@ -61,17 +59,40 @@ class _ProfileState extends State<Profile> {
             CustomScrollView(
               slivers: <Widget>[
                 SliverAppBar(
+                  automaticallyImplyLeading: false,
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      SizedBox(width: 240,),
-                      IconButton(
-                        icon: Icon(
-                          Icons.mode_edit_outline, 
-                          size: 23,
-                          color: Colors.white,
+                      GestureDetector(
+                        child: IconShadowWidget(
+                          Icon(
+                              Icons.arrow_back,
+                              size: 23,
+                              color: Colors.white,
+                          ),
+                          shadowColor: Colors.black,
                         ),
-                        onPressed: () {
+                      onTap: () {
+                          Navigator.push(
+                            context, 
+                            MaterialPageRoute(
+                              builder: (_)=> HomePage(
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      Spacer(),
+                      GestureDetector(
+                        child: IconShadowWidget(
+                          Icon(
+                            Icons.mode_edit_outline, 
+                            size: 23,
+                            color: Colors.white,
+                          ),
+                          shadowColor: Colors.black,
+                        ),
+                        onTap: () {
                           Navigator.push(
                             context, 
                             MaterialPageRoute(

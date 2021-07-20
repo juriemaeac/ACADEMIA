@@ -54,6 +54,7 @@ dependencies:
   path: ^1.8.0
   flutter_launcher_icons: ^0.7.3
   flutter_svg: ^0.19.1
+  icon_shadow: ^1.0.1
 
 dev_dependencies:
   flutter_test:

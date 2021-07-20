@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   checkAuthentification() async {
     _auth.authStateChanges().listen((user) {
       if (user == null) {
-        //Navigator.of(context).pushReplacementNamed("start");
+        Navigator.of(context).pushReplacementNamed("start");
         //Navigator.push(context, MaterialPageRoute(builder: (context)=> Navbar()));
       }
     });
@@ -70,6 +70,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       //drawer: Navbar(),
       appBar: new AppBar(
+        automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color(0xFFE28C7E),
         elevation: 0,
@@ -80,10 +81,16 @@ class _HomePageState extends State<HomePage> {
               Icons.logout,
               color: Colors.white,
             ),
+<<<<<<< HEAD
             onPressed: () {},
           ),
           SizedBox(
             width: 10,
+=======
+            onPressed: () {
+              signOut();
+            },
+>>>>>>> 9654e3d57d5929f3e2ed8ed6e0fa5d0014497ab3
           ),
         ],
       ),
