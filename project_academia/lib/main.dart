@@ -9,13 +9,12 @@ import 'package:sample1/Login.dart';
 import 'package:sample1/Home/HomePage.dart';
 import 'package:sample1/SignUp.dart';
 import 'package:sample1/Attendance.dart';
-import 'package:sample1/flashcards/Reviewer.dart';
 import 'package:sample1/Settings.dart';
 import 'package:sample1/flashcards/flashcardReviewer.dart';
 import 'package:sample1/notes/screen/noteScreen.dart';
 import 'package:sample1/reviewer/topicScreen.dart';
 import 'package:sample1/schedule/schedule.dart';
-import 'package:sample1/Policies.dart';
+import 'package:sample1/policies/Policies.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:sample1/todolist/todoScreen.dart';
 import 'package:sample1/reviewer/reviewerScreen.dart';
@@ -62,8 +61,7 @@ class MyApp extends StatelessWidget {
         "Schedule": (BuildContext context) => Schedule(),
         "Calendar": (BuildContext context) => Calendar(),
         "Attendance": (BuildContext context) => Attendance(),
-        "Flashcard": (BuildContext context) => Reviewer(),
-        "FR": (BuildContext context) => Flashcard(),
+        "Flashcard": (BuildContext context) => Flashcard(),
         "Policies": (BuildContext context) => Policies(),
         "Settings": (BuildContext context) => Settings(),
         "Reviewer": (BuildContext context) => ReviewerScreen(),
