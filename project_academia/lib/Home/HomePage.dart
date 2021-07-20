@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 //import 'package:path/path.dart';
 import 'package:sample1/Attendance.dart';
 import 'package:intl/intl.dart';
+import 'package:sample1/Home/about.dart';
 import 'package:sample1/calendar/calendarScreen.dart';
 import 'package:sample1/notes/screen/noteScreen.dart';
 import 'package:sample1/policies/policiesHome.dart';
@@ -184,7 +185,7 @@ class _HomePageState extends State<HomePage> {
                         bottom: 0,
                         left: 0,
                         right: 0,
-                        child: Container(
+                        child: GestureDetector(child:Container(
                           alignment: Alignment.center,
                           margin: EdgeInsets.symmetric(horizontal: 20),
                           padding: EdgeInsets.symmetric(horizontal: 20),
@@ -203,26 +204,18 @@ class _HomePageState extends State<HomePage> {
                           child: Text(
                             'ACADEMIA'
                           ),
-                          // child: Row(
-                          //   children: <Widget>[
-                          //     Expanded(
-                          //       child: TextField(
-                          //         onChanged: (value) {},
-                          //         decoration: InputDecoration(
-                          //           hintText: "Search",
-                          //           hintStyle: TextStyle(
-                          //             color: Color(0xFFE28C7E).withOpacity(0.7),
-                          //           ),
-                          //           enabledBorder: InputBorder.none,
-                          //           focusedBorder: InputBorder.none,
-                          //         ),
-                          //       ),
-                          //     ),
-                          //     Icon(Icons.search, color: Color(0xFFE28C7E).withOpacity(0.7),),
-                          //   ],
-                          // ),
                         ),
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => About()),
+                          );
+                        },
+                        ),
+                        
                       ),
+                      
+                      
                     ],
                   ),
                 ),
