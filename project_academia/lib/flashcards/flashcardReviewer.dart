@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:sample1/flashcards/flashcard_view.dart';
 import 'package:sample1/reviewer/reviewerModel.dart';
 import 'package:sample1/databaseHelpers.dart';
+import 'package:sample1/reviewer/reviewerScreen.dart';
 
 class Flashcard extends StatefulWidget {
   final Function updateReviewerList;
@@ -24,7 +25,7 @@ class _FlashcardState extends State<Flashcard> {
     //_delete();
   }
 
-  int _currentIndex = 0;
+  //int _currentIndex = 0;
 
   _updateReviewerList() {
     setState(() {
@@ -109,7 +110,13 @@ class _FlashcardState extends State<Flashcard> {
                       children: [
                         //SizedBox(width: 20),
                         GestureDetector(
-                          onTap: () => Navigator.pop(context),
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  ReviewerScreen(),
+                            ),
+                          ),
                           child: Icon(Icons.arrow_back, 
                           //size: 15,
                           color: Colors.black,
@@ -137,56 +144,56 @@ class _FlashcardState extends State<Flashcard> {
                     //   ),
                     // ),
                     // ),
-                    SizedBox(height: 20),
+                    //SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        ElevatedButton.icon(
-                          onPressed: (){
-                            setState((){
-                                _currentIndex = 
-                                  (_currentIndex - 1 >= 0) ? _currentIndex - 1: snapshot.data.length - 1;
-                              });
-                          },
-                          icon: Icon(
-                            Icons.chevron_left,
-                          ),
-                          label: Text('Prev',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              primary: Color(0xFFE28C7E),
-                              onPrimary: Colors.white,
-                          ),
-                        ),
-                        ElevatedButton.icon(
-                          onPressed: (){
-                            setState((){
-                              _currentIndex = 
-                                (_currentIndex + 1 < snapshot.data.length) ? _currentIndex + 1: 0;
-                            });
-                          },
-                          icon: Icon(
-                            Icons.chevron_right,
-                            color: Colors.white,
-                          ),
-                          label: Text('Next',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
+                        // ElevatedButton.icon(
+                        //   onPressed: (){
+                        //     setState((){
+                        //         _currentIndex = 
+                        //           (_currentIndex - 1 >= 0) ? _currentIndex - 1: snapshot.data.length - 1;
+                        //       });
+                        //   },
+                        //   icon: Icon(
+                        //     Icons.chevron_left,
+                        //   ),
+                        //   label: Text('Prev',
+                        //     style: TextStyle(
+                        //       fontSize: 15,
+                        //       fontWeight: FontWeight.bold,
+                        //       color: Colors.white,
+                        //     ),
+                        //   ),
+                        //   style: ElevatedButton.styleFrom(
+                        //       primary: Color(0xFFE28C7E),
+                        //       onPrimary: Colors.white,
+                        //   ),
+                        // ),
+                        // ElevatedButton.icon(
+                        //   onPressed: (){
+                        //     setState((){
+                        //       _currentIndex = 
+                        //         (_currentIndex + 1 < snapshot.data.length) ? _currentIndex + 1: 0;
+                        //     });
+                        //   },
+                        //   icon: Icon(
+                        //     Icons.chevron_right,
+                        //     color: Colors.white,
+                        //   ),
+                        //   label: Text('Next',
+                        //     style: TextStyle(
+                        //       fontSize: 15,
+                        //       fontWeight: FontWeight.bold,
+                        //       color: Colors.white,
+                        //     ),
+                        //   ),
                           
-                          style: ElevatedButton.styleFrom(
-                              primary: Color(0xFFE28C7E),
-                              onPrimary: Colors.white,
-                          ),
-                        ), 
+                        //   style: ElevatedButton.styleFrom(
+                        //       primary: Color(0xFFE28C7E),
+                        //       onPrimary: Colors.white,
+                        //   ),
+                        // ), 
                       ],
                     )
                   ]
