@@ -20,8 +20,6 @@ class _EditProfileState extends State<EditProfile> {
   bool isloggedin = false;
   DateTime _date = DateTime.now();
 
-  final DateFormat _dateFormatter = DateFormat('yMMMMd');
-
   getUser() async {
     User firebaseUser = _auth.currentUser;
     await firebaseUser?.reload();
