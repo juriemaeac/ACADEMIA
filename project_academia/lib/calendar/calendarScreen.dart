@@ -15,7 +15,6 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
   DateTime _selectedDay = DateTime.now();
-  
 
   CalendarController _calendarController;
   Map<DateTime, List<dynamic>> _events = {};
@@ -85,10 +84,9 @@ class _CalendarState extends State<Calendar> {
 
   void _create(BuildContext context) {
     String _name = "";
-    String _details = "";
+    //String _details = "";
     var content = TextField(
-      style: TextStyle(
-          color: Color.fromRGBO(105, 105, 108, 1), fontSize: 16),
+      style: TextStyle(color: Color.fromRGBO(105, 105, 108, 1), fontSize: 16),
       autofocus: true,
       decoration: InputDecoration(
         labelStyle: TextStyle(
@@ -101,9 +99,8 @@ class _CalendarState extends State<Calendar> {
         _name = value;
       },
     );
-    var content1 = TextField(
-      style: TextStyle(
-          color: Color.fromRGBO(105, 105, 108, 1), fontSize: 16),
+    /*var content1 = TextField(
+      style: TextStyle(color: Color.fromRGBO(105, 105, 108, 1), fontSize: 16),
       autofocus: true,
       decoration: InputDecoration(
         labelStyle: TextStyle(
@@ -115,57 +112,53 @@ class _CalendarState extends State<Calendar> {
       onChanged: (value) {
         _details = value;
       },
-    );
+    );*/
     var btn = ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        elevation: 0,
-        padding: EdgeInsets.symmetric(
-            horizontal: 0, vertical: 0),
-        primary: Colors.white,
-        onPrimary: Colors.black,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(0),
-        )),
+        style: ElevatedButton.styleFrom(
+            elevation: 0,
+            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            primary: Colors.white,
+            onPrimary: Colors.black,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(0),
+            )),
         child: Text('Save',
             style: TextStyle(
                 color: Color.fromRGBO(59, 57, 60, 1),
                 fontSize: 16,
                 fontWeight: FontWeight.bold)),
         onPressed: () {
-          if (_name != null){
-          _addEvent(_name);
-          }
-          else{
+          if (_name != null) {
+            _addEvent(_name);
+          } else {
             Navigator.of(context).pop(false);
           }
         });
     SizedBox(width: 40);
     var cancelButton = ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        elevation: 0,
-        padding: EdgeInsets.symmetric(
-            horizontal: 0, vertical: 0),
-        primary: Colors.white,
-        onPrimary: Colors.black,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(0),
-        )),
+        style: ElevatedButton.styleFrom(
+            elevation: 0,
+            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            primary: Colors.white,
+            onPrimary: Colors.black,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(0),
+            )),
         child: Text('Cancel',
             style: TextStyle(
                 color: Color.fromRGBO(59, 57, 60, 1),
                 fontSize: 16,
                 fontWeight: FontWeight.bold)),
         onPressed: () => Navigator.of(context).pop(false));
-    var pickTime = ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        elevation: 0,
-        padding: EdgeInsets.symmetric(
-            horizontal: 0, vertical: 0),
-        primary: Colors.white,
-        onPrimary: Colors.black,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(0),
-        )),
+    /*var pickTime = ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            elevation: 0,
+            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            primary: Colors.white,
+            onPrimary: Colors.black,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(0),
+            )),
         child: Text('Pick Time',
             style: TextStyle(
                 color: Color.fromRGBO(59, 57, 60, 1),
@@ -173,7 +166,7 @@ class _CalendarState extends State<Calendar> {
                 fontWeight: FontWeight.bold)),
         onPressed: () {
           _selectTime();
-        });
+        });*/
     showDialog(
       context: context,
       builder: (BuildContext context) => Dialog(
@@ -216,13 +209,13 @@ class _CalendarState extends State<Calendar> {
                           children: <Widget>[content],
                         ),
                       ),
-                      Container(
+                      /*Container(
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
                         child: Column(
                           children: <Widget>[content1],
                         ),
-                      ),
-                      Container(
+                      ),*/
+                      /*Container(
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: Column(
                           children: <Widget>[pickTime],
@@ -230,7 +223,7 @@ class _CalendarState extends State<Calendar> {
                       ),
                       Text(
                         'Selected time: ${_time.format(context)}',
-                      ),
+                      ),*/
                       Container(
                         padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
                         child: Row(
@@ -324,14 +317,15 @@ class _CalendarState extends State<Calendar> {
                 Icon(Icons.arrow_back_ios, size: 15, color: Colors.black),
             rightChevronIcon:
                 Icon(Icons.arrow_forward_ios, size: 15, color: Colors.black),
-            titleTextStyle:
-                TextStyle(color: Colors.black, fontSize: 16),
+            titleTextStyle: TextStyle(color: Colors.black, fontSize: 16),
             formatButtonDecoration: BoxDecoration(
               color: Colors.white60,
               borderRadius: BorderRadius.circular(20),
             ),
             formatButtonTextStyle: TextStyle(
-                color: Color(0xFFE28C7E), fontSize: 13, fontWeight: FontWeight.bold),
+                color: Color(0xFFE28C7E),
+                fontSize: 13,
+                fontWeight: FontWeight.bold),
           ),
         ));
   }
@@ -341,12 +335,12 @@ class _CalendarState extends State<Calendar> {
       return Container(
         padding: EdgeInsets.fromLTRB(15, 20, 15, 5),
         child: Text(
-        'No Event',
-        style: TextStyle(
-            color: Colors.grey[600], 
-        fontSize: 18,
-      ),
-      ),
+          'No Event',
+          style: TextStyle(
+            color: Colors.grey[600],
+            fontSize: 18,
+          ),
+        ),
       );
     }
     return Container(
@@ -354,9 +348,9 @@ class _CalendarState extends State<Calendar> {
       child: Text(
         'Events',
         style: TextStyle(
-            color: Colors.grey[600], 
-        fontSize: 18,
-      ),
+          color: Colors.grey[600],
+          fontSize: 18,
+        ),
       ),
     );
   }
@@ -419,7 +413,7 @@ class _CalendarState extends State<Calendar> {
   }
 }
 
-class TimePicker extends StatefulWidget {
+/*class TimePicker extends StatefulWidget {
   @override
   _TimePickerState createState() => _TimePickerState();
 }
@@ -458,4 +452,4 @@ class _TimePickerState extends State<TimePicker> {
       ),
     );
   }
-}
+}*/
