@@ -49,11 +49,12 @@ class Attendance extends StatelessWidget {
       ),
       body: SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
         child: Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
+              SizedBox(height: 5,),
               Text(
                 formattedDate + " — $formattedTime",
                 textAlign: TextAlign.right,
