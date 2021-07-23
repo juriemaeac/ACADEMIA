@@ -205,26 +205,10 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
                 },
               ),
             ],
-            
            )
            //backgroundColor: Color.fromRGBO(232, 232, 242, 1),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   shape: RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.circular(25),
-      //   ),
-      //   backgroundColor: Color(0xFFCDB193),
-      //   child: Icon(Icons.add),
-      //   onPressed: () => Navigator.push(
-      //     context, 
-      //     MaterialPageRoute(
-      //       builder: (_)=> AddReviewerScreen(
-      //         updateReviewerList: _updateReviewerList,
-      //       ),
-      //     ),
-      //   ),
-      // ),
       body: FutureBuilder(
         future: _reviewerList,
         builder: (context, snapshot) {
@@ -233,10 +217,10 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
             );
           }
 
-          final int completedReviewerCount = snapshot.data
-          .where((Reviewer reviewer) => reviewer.statusReviewer == 1)
-          .toList()
-          .length;
+          // final int completedReviewerCount = snapshot.data
+          // .where((Reviewer reviewer) => reviewer.statusReviewer == 1)
+          // .toList()
+          // .length;
 
           return ListView.builder(
           padding: EdgeInsets.symmetric(vertical: 0),
@@ -298,16 +282,17 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
                           ],
                         ),
                       ),
-                    // SizedBox(height: 10),
-                    // Center( 
-                    //   child: Text('$completedReviewerCount of ${snapshot.data.length}',
-                    //   style: TextStyle(
-                    //   color: Colors.grey,
-                    //   fontSize: 20, 
-                    //   fontWeight: FontWeight.w600,  
-                    //   ),
-                    // ),
-                    // ),
+                    SizedBox(height: 10),
+                    Center( 
+                      //child: Text('$completedReviewerCount of ${snapshot.data.length}',
+                      child: Text('Items: ${snapshot.data.length}',
+                      style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20, 
+                      fontWeight: FontWeight.w600,  
+                      ),
+                    ),
+                    ),
                   ]
                 ),
               );

@@ -24,7 +24,7 @@ class _FlashcardState extends State<Flashcard> {
     //_delete();
   }
 
-  //int _currentIndex = 0;
+  int _currentIndex = 0;
 
   _updateReviewerList() {
     setState(() {
@@ -33,6 +33,7 @@ class _FlashcardState extends State<Flashcard> {
   }
 
   int itemCount;
+
   @override
   void dispose() {
     //_dateController.dispose();
@@ -52,13 +53,16 @@ class _FlashcardState extends State<Flashcard> {
                 height: 500,
                 child: FlipCard(
                   front: FlashcardView(
+                    text1: 'DESCRIPTION / QUESTION',
                     text: reviewer.descriptionReviewer,
                   ),
                   back: FlashcardView(
+                    text1: 'ANSWER',
                     text: '${reviewer.titleReviewer}',
                   ),
                 ),
               ),
+              SizedBox(height: 20,)
             ],
           ),
         ),
@@ -69,6 +73,7 @@ class _FlashcardState extends State<Flashcard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: Color(0xFFE28C7E),
       body: FutureBuilder(
         future: _reviewerList,
         builder: (context, snapshot) {
@@ -82,12 +87,30 @@ class _FlashcardState extends State<Flashcard> {
           // .where((Reviewer reviewer) => reviewer.statusReviewer == 1)
           // .toList()
           // .length;
-
+          // var rndItems  = snapshot.data.shuffle();
+          //                                return ListView.separated(
+          //                           separatorBuilder:
+          //                               (BuildContext context, int index) {
+          //                             return SizedBox(height: 3);
+          //                           },
+          //                           scrollDirection: Axis.horizontal,
+          //                           shrinkWrap: true,
+          //                           itemCount: rndItems ,
+          //                           itemBuilder: (ctx, i) => (PdtItem(
+          //                               title: snapshot.data[i].title,
+          //                               imgUrl: snapshot.data[i].imgUrl,
+          //                               price: snapshot.data[i].price,
+          //                               pdt2: snapshot.data[i])),
+          //                         );
+          //var rndItems  = item.data.shuffle();
+          //List<String> list = _reviewerList;
+          //var item = snapshot.data.shuffle();
           return ListView.builder(
-            //shrinkWrap: true,
-
             padding: EdgeInsets.symmetric(horizontal: 0),
             itemCount: 1 + snapshot.data.length,
+            //scrollDirection: Axis.horizontal,
+            //itemCount: item,
+            //shrinkWrap: true,
             itemBuilder: (BuildContext context, int index) {
               if (index == 0) {
                 return Padding(
@@ -139,6 +162,17 @@ class _FlashcardState extends State<Flashcard> {
                         // ),
                         // ),
                         //SizedBox(height: 20),
+                        SizedBox(height: 10),
+                          Center( 
+                            //child: Text('$completedReviewerCount of ${snapshot.data.length}',
+                            child: Text('Items: ${snapshot.data.length}',
+                            style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 20, 
+                            fontWeight: FontWeight.w600,  
+                            ),
+                          ),
+                          ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -193,12 +227,32 @@ class _FlashcardState extends State<Flashcard> {
                       ]),
                 );
               }
+              // void nextCard(){
+              //   setState(() {
+              //     _currentIndex = (_currentIndex + 1 < snapshot.data.length) ? _currentIndex + 1 : 0;
+              //   });
+              // }
+              // void previousCard(){
+              //   setState(() {
+              //     _currentIndex = (_currentIndex - 1 >= 0) ? _currentIndex - 1 : snapshot.data.length - 1;
+              //   });
+              // }
 
-              return _buildReviewer(snapshot.data[index - 1]);
+              return _buildReviewer(snapshot.data[index-1]);
             },
+            // itemBuilder: (ctx, i) => (Flashcard(
+            //                             updateReviewerList: snapshot.data[i].descriptionReviewer,
+            //                             reviewer: snapshot.data[i].titleReviewer,
+            //                             )
+            //                             ),
+                                  
           );
         },
+        
       ),
     );
   }
+
+  
+
 }
