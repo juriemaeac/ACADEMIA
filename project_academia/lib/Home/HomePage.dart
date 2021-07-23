@@ -12,6 +12,7 @@ import 'package:sample1/notes/screen/noteScreen.dart';
 import 'package:sample1/profile/input.dart';
 import 'package:sample1/profile/profileScreen.dart';
 import 'package:sample1/reviewer/reviewerScreen.dart';
+import 'package:sample1/schedule/Addschedule.dart';
 import 'package:sample1/schedule/schedule.dart';
 import 'package:sample1/todolist/sharedTodo.dart';
 import 'package:sample1/todolist/todoScreen.dart';

@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 import 'package:sample1/reviewer/reviewerModel.dart';
 import 'package:sample1/reviewer/topicModel.dart';
+import 'package:sample1/schedule/scratchFolder%20(dont%20use)/schedModel.dart';
 import 'package:sample1/todolist/taskModel.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sample1/notes/noteModel.dart';
@@ -288,4 +289,6 @@ class DatabaseHelper {
     int result = Sqflite.firstIntValue(x);
     return result;
   }
+
+  void insertSched(Sched sched) {}
 }
