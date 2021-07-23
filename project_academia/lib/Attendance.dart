@@ -9,15 +9,47 @@ class Attendance extends StatelessWidget {
 
     TextStyle def = TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400);
     DateTime now = DateTime.now();
-    String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+    String formattedDate = DateFormat.yMMMMd('en_US').format(DateTime.now());
     String formattedTime = DateFormat('HH:mm aa').format(now);
     return Scaffold(
       backgroundColor: Colors.grey[25],
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
         title: Text('Attendance'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(22.0),
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            return showDialog(
+              context: context,
+              builder: (ctx) => AlertDialog(
+                title: Text("Premium Account Only",textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.red[700], fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                content: Text("This feature is available for premium users only, get yours now!"),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Okay',style: TextStyle(color: Colors.red[700]),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+          label: Text('Import Schedule',style: TextStyle(
+                  fontSize: 14.0,
+                  color: Colors.black,
+                  //fontWeight: FontWeight.w300,
+                ),),
+          icon: Icon(Icons.upload, color: Colors.black,),
+          backgroundColor: Color(0xFF98BD91),
+      ),
+      body: SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -27,20 +59,79 @@ class Attendance extends StatelessWidget {
                 textAlign: TextAlign.right,
                 style: TextStyle(
                   fontSize: 14.0,
-                  fontWeight: FontWeight.w300,
+                  color: Colors.grey[600],
+                  //fontWeight: FontWeight.w300,
                 ),
               ),
+              
+              SizedBox(height: 10,),
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Center(
+                      child: Container(
+                        width: 170,
+                        height: 70,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFE28C7E).withOpacity(0.3),
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                        ),
+                      child: Column(
+                        children: <Widget>[
+                      SizedBox(height: 10.0),
+                      Text('0',
+                            style: TextStyle(color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
+                      SizedBox(height: 10.0),
+                      Text('Present',
+                            style: TextStyle(color: Colors.grey[700], fontSize: 13,),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                      ),
+                    ),
+                    Center(
+                      child: Container(
+                        width: 170,
+                        height: 70,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFE28C7E).withOpacity(0.3),
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                        ),
+                      child: Column(
+                        children: <Widget>[
+                      SizedBox(height: 10.0),
+                      Text('0',
+                            style: TextStyle(color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
+                      SizedBox(height: 10.0),
+                      Text('Absent',
+                            style: TextStyle(color: Colors.grey[700], fontSize: 13,),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20,),
               Text(
                 'Current Class:',
                 style: TextStyle(
-                  fontSize: 28.0,
+                  fontSize: 20.0,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               SizedBox(height: 5.0),
               Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE28C7E),
+                  color: const Color(0xFFE28C7E).withOpacity(0.7),
                   borderRadius: BorderRadius.circular(12)),
                 child: SizedBox(
                     child: Padding(
@@ -67,32 +158,51 @@ class Attendance extends StatelessWidget {
                 child: RaisedButton(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('Say Present!',
+                    child: Text('Present',
                         style: TextStyle(
                             color: Colors.black87,
-                            fontSize: 30.0,
+                            fontSize: 20.0,
                             fontWeight: FontWeight.w600)),
                   ),
-                  color: Colors.red[200],
+                  color: Color(0xFF98BD91),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(16.0),
                     )
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    return showDialog(
+                      context: context,
+                      builder: (ctx) => AlertDialog(
+                        title: Text("Premium Account Only",textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.red[700], fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        content: Text("This feature is available for premium users only, get yours now!"),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text('Okay',style: TextStyle(color: Colors.red[700]),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ),
               Text(
                 'Next Class:',
                 style: TextStyle(
-                  fontSize: 28.0,
+                  fontSize: 20.0,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               SizedBox(height: 5.0),
               Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE28C7E),
+                  color: const Color(0xFFE28C7E).withOpacity(0.7),
                   borderRadius: BorderRadius.circular(12)),
                 child: SizedBox(
                   child: Padding(
@@ -113,6 +223,7 @@ class Attendance extends StatelessWidget {
             ],
           ),
         ),
+      ),
       ),
     );
   }
