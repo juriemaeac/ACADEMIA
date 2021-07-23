@@ -1,14 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:sample1/Home/HomePage.dart';
 
 
-class Policies extends StatelessWidget {
+class PoliciesHome extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(centerTitle: true,title: Text('Policies'),
+      appBar: AppBar(centerTitle: true,title: Row(
+          //mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(width: 80),
+            Text(
+              'Policies',
+              style: TextStyle(color: Colors.black, fontSize: 24),
+            ),
+          ],
+        ),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+            //Navigator.pop(context);
+          },
+        ),
       elevation: 0,
       backgroundColor: Colors.white,
+      automaticallyImplyLeading: false,
       ),
       body: Container(
         child: SingleChildScrollView(

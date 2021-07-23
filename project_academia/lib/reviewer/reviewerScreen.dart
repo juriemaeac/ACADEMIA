@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:sample1/Home/HomePage.dart';
 import 'package:sample1/reviewer/addReviewer.dart';
 import 'package:sample1/reviewer/reviewerModel.dart';
 import 'package:sample1/databaseHelpers.dart';
@@ -16,12 +17,12 @@ class ReviewerScreen extends StatefulWidget {
 
 class _ReviewerScreenState extends State<ReviewerScreen> {
   Future<List<Reviewer>> _reviewerList;
+  bool selected = true;
 
   @override
   void initState() { 
     super.initState();
     _updateReviewerList();
-    //_delete();
   }
 
   _updateReviewerList() {
@@ -41,8 +42,6 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
   //   widget.updateReviewerList();
   //   Navigator.pop(context);
   // }
-
-  
 
   Widget _buildReviewer (Reviewer reviewer){
     return Padding(
@@ -84,10 +83,15 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
                   ),
                 ),
               ),
-              trailing: Icon(Icons.bookmark_border_outlined,
+              trailing: IconButton(
+              icon: Icon(selected ? Icons.bookmark_border_outlined : Icons.bookmark_added_rounded,
                   size: 25,
                   color: Color(0xFFE28C7E)),
-            ),
+                  onPressed: () {
+                setState(() {
+                  selected = !selected;
+                });}
+            ),),
             Divider(),
           ],
         ),
@@ -110,26 +114,28 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
           ),
         ],
         
-        secondaryActions: <Widget>[
-          IconSlideAction(
-            caption: 'Delete',
-            color: Colors.red,
-            icon: Icons.delete,
-            onTap: () {},
-            ),
-        ],
+        // secondaryActions: <Widget>[
+        //   IconSlideAction(
+        //     caption: 'Delete',
+        //     color: Colors.red,
+        //     icon: Icons.delete,
+        //     onTap: () {
+        //       AddReviewerScreen();
+        //       _delete();
+        //     },
+        //     ),
+        // ],
       ),
     );
   }
 
   navigateToFlashcard() async {
-    Navigator.pushReplacementNamed(context, "FR");//Flashcard
+    Navigator.pushReplacementNamed(context, "Flashcard");//Flashcard
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar:
       PreferredSize(
         preferredSize: Size(double.infinity, 60),
@@ -137,23 +143,31 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
           backgroundColor: Colors.white,
           elevation: 0,
           centerTitle: false,
+          automaticallyImplyLeading: false,
           title: Row(
             //mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               // SizedBox(height: 30),
-              //   GestureDetector(
-              //     onTap: () => Navigator.pop(context),
-              //     child: Icon(Icons.arrow_back, 
-              //     size: 40,
-              //     color: Colors.black,
-              //     ),
-              //   ),
-              // Text(
-              // '<<Topic Title>>',
-              // style: TextStyle(
-              //     color: Colors.black,
-              //     fontSize: 20),
-              // ),
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) =>
+                          HomePage(),
+                    ),
+                  ),
+                  child: Icon(Icons.arrow_back, 
+                  //size: 40,
+                  color: Colors.black,
+                  ),
+                ),
+                SizedBox(width: 20,),
+              Text(
+              'Reviewer',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20),
+              ),
               Spacer(),
               IconButton(
                 icon: Icon(
@@ -243,12 +257,12 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
                         child: new Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            GestureDetector(
-                              onTap: (){},
-                              child: Icon(Icons.sort_outlined, 
+                            IconButton(
+                              icon: Icon(Icons.sort_outlined, 
                               size: 30,
                               color: Colors.black,
                               ),
+                              onPressed: (){},
                             ),
                             ElevatedButton.icon(
                               icon: Icon(
@@ -273,27 +287,27 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
                                   ),
                               ),
                             ),
-                            GestureDetector(
-                              onTap: () {},
-                              child: Icon(Icons.search, 
+                            IconButton(
+                              icon: Icon(Icons.search, 
                               size: 30,
                               color: Colors.black,
                               ),
+                              onPressed: () async {
+                              },
                             ),
-                            
                           ],
                         ),
                       ),
-                    SizedBox(height: 10),
-                    Center( 
-                      child: Text('$completedReviewerCount of ${snapshot.data.length}',
-                      style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 20, 
-                      fontWeight: FontWeight.w600,  
-                      ),
-                    ),
-                    ),
+                    // SizedBox(height: 10),
+                    // Center( 
+                    //   child: Text('$completedReviewerCount of ${snapshot.data.length}',
+                    //   style: TextStyle(
+                    //   color: Colors.grey,
+                    //   fontSize: 20, 
+                    //   fontWeight: FontWeight.w600,  
+                    //   ),
+                    // ),
+                    // ),
                   ]
                 ),
               );

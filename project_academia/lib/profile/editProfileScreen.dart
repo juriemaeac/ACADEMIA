@@ -20,8 +20,6 @@ class _EditProfileState extends State<EditProfile> {
   bool isloggedin = false;
   DateTime _date = DateTime.now();
 
-  final DateFormat _dateFormatter = DateFormat.yMMMMd('en_US');
-
   getUser() async {
     User firebaseUser = _auth.currentUser;
     await firebaseUser?.reload();
@@ -44,7 +42,7 @@ class _EditProfileState extends State<EditProfile> {
   void initState() {
     this.getUser();
     //loadSharedPrefs();
-    textBirthdateController.text = _dateFormatter.format(_date);
+    textBirthdateController.text = textBirthdate;
     loadData();
     super.initState();
   }
@@ -78,9 +76,9 @@ class _EditProfileState extends State<EditProfile> {
     );
     if (date != null && date != _date) {
       setState(() {
-        textBirthdate = date;
+        textBirthdate = DateFormat('yMMMMd').format(date);
       });
-      textBirthdateController.text = _dateFormatter.format(date);
+      textBirthdateController.text = textBirthdate;
     }
   }
 
