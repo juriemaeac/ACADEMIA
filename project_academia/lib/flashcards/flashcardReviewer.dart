@@ -140,7 +140,7 @@ class _FlashcardState extends State<Flashcard> {
                               ),
                               Spacer(),
                               Text(
-                                "My Flashcards",
+                                "Flashcards",
                                 style: TextStyle(
                                   fontSize: 25,
                                   color: Colors.black,
@@ -148,8 +148,32 @@ class _FlashcardState extends State<Flashcard> {
                                 textAlign: TextAlign.center,
                               ),
                               Spacer(),
-                              SizedBox(
-                                width: 20,
+                              GestureDetector(
+                                onTap: (){
+                                      return showDialog(
+                                        context: context,
+                                        builder: (ctx) => AlertDialog(
+                                          title: Text("Premium Account Only",textAlign: TextAlign.center,
+                                            style: TextStyle(color: Colors.red[700], fontSize: 18, fontWeight: FontWeight.bold),
+                                          ),
+                                          content: Text("This feature is available for premium users only, get yours now!"),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text('Okay',style: TextStyle(color: Colors.red[700]),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                child: Icon(
+                                  Icons.repeat_rounded,
+                                  //size: 15,
+                                  color: Colors.black,
+                                ),
                               ),
                             ]),
                         // Center(
