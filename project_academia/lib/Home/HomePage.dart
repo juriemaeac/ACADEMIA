@@ -6,14 +6,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sample1/Attendance.dart';
 import 'package:intl/intl.dart';
 import 'package:sample1/Home/about.dart';
+import 'package:sample1/Reminder/reminderScreen.dart';
 import 'package:sample1/calendar/calendarScreen.dart';
 import 'package:sample1/notes/screen/noteScreen.dart';
 import 'package:sample1/policies/policiesHome.dart';
 import 'package:sample1/profile/input.dart';
 import 'package:sample1/profile/profileScreen.dart';
 import 'package:sample1/reviewer/reviewerScreen.dart';
-import 'package:sample1/schedule/Addschedule.dart';
-import 'package:sample1/schedule/schedule.dart';
 import 'package:sample1/todolist/sharedTodo.dart';
 import 'package:sample1/todolist/todoScreen.dart';
 
@@ -445,7 +444,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         onTap: () => Navigator.push(
                           context, MaterialPageRoute(
-                            builder: (_)=> Schedule(),
+                            builder: (_)=> ReminderScreen(),
                           ),
                         ),
                       ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:sample1/Navbar.dart';
+import 'package:sample1/Reminder/reminderScreen.dart';
 import 'package:sample1/calendar/calendarScreen.dart';
 import 'package:sample1/profile/editProfileScreen.dart';
 import 'package:sample1/profile/profileScreen.dart';
@@ -18,17 +20,22 @@ import 'package:sample1/policies/Policies.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:sample1/todolist/todoScreen.dart';
 import 'package:sample1/reviewer/reviewerScreen.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+
 
 
 void main() async { //change void to future
   WidgetsFlutterBinding.ensureInitialized();
+  tz.initializeTimeZones();
   await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
   
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp( 
@@ -58,7 +65,7 @@ class MyApp extends StatelessWidget {
         "Profile": (BuildContext context) => Profile(),
         "Todolist": (BuildContext context) => TodoListScreen(),
         "Notes": (BuildContext context) => NoteList(),
-        "Schedule": (BuildContext context) => Schedule(),
+        "Schedule": (BuildContext context) => ReminderScreen(),
         "Calendar": (BuildContext context) => Calendar(),
         "Attendance": (BuildContext context) => Attendance(),
         "Flashcard": (BuildContext context) => Flashcard(),

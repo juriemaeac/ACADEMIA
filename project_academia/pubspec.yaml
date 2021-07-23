@@ -23,7 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  syncfusion_flutter_calendar: ^18.4.46
+  #syncfusion_flutter_calendar: ^18.4.46
+  flutter_local_notifications: ^6.0.0
   firebase_core: ^1.1.1
   
 
@@ -56,12 +57,16 @@ dependencies:
   flutter_launcher_icons: ^0.7.3
   flutter_svg: ^0.19.1
   icon_shadow: ^1.0.1
+  charts_flutter: ^0.11.0
+  flutter_datetime_picker: ^1.5.1
+  flutter_native_timezone: ^1.0.4
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  charts_flutter: ^0.11.0
+
 
 flutter_icons:
   image_path_android: "assets/logo1.png"
