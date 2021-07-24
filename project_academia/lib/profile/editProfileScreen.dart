@@ -645,6 +645,7 @@ class _EditProfileState extends State<EditProfile> {
                                                           ),
                                                           ElevatedButton(
                                                             onPressed: () {
+                                                              setState(() {
                                                               if (!_formKey
                                                                   .currentState
                                                                   .validate()) {
@@ -673,6 +674,8 @@ class _EditProfileState extends State<EditProfile> {
                                                                   '${textBirthdate}');
                                                               Navigator.pop(
                                                                   context);
+                                                              },
+                                                              ); 
                                                             },
                                                             style:
                                                                 ElevatedButton

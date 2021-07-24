@@ -97,13 +97,12 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(left: 20, top: 20),
+              padding: EdgeInsets.only(left: 20, top: 15),
               color: Color(0xFFE28C7E),
               alignment: FractionalOffset.center,
               child: new Row(
                 //mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  
                   Text(
                     DateFormat.yMMMMd('en_US').format(DateTime.now()),
                     style: TextStyle(
@@ -594,31 +593,31 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+            // SizedBox(height: 20.0),
+            // Container(
+            //   height: 70,
+            //   width: (MediaQuery.of(context).size.width) - 40,
+            //   decoration: BoxDecoration(
+            //       color: Color(0xFFE28C7E).withOpacity(0.3),
+            //       borderRadius: BorderRadius.all(Radius.circular(10))),
+            //   child: Column(
+            //     children: <Widget>[
+            //       SizedBox(height: 10.0),
+            //       Text(
+            //         'Upcoming Events',
+            //         style: TextStyle(
+            //           color: Colors.grey[700],
+            //           fontSize: 13,
+            //         ),
+            //         textAlign: TextAlign.center,
+            //       ),
+            //       Divider(),
+            //     ],
+            //   ),
+            // ),
             SizedBox(height: 20.0),
             Container(
-              height: 70,
-              width: (MediaQuery.of(context).size.width) - 40,
-              decoration: BoxDecoration(
-                  color: Color(0xFFE28C7E).withOpacity(0.3),
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              child: Column(
-                children: <Widget>[
-                  SizedBox(height: 10.0),
-                  Text(
-                    'Upcoming Events',
-                    style: TextStyle(
-                      color: Colors.grey[700],
-                      fontSize: 13,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  Divider(),
-                ],
-              ),
-            ),
-            SizedBox(height: 20.0),
-            Container(
-              height: 100,
+              height: 190,
               width: (MediaQuery.of(context).size.width) - 40,
               decoration: BoxDecoration(
                   color: Color(0xFFE28C7E).withOpacity(0.3),
@@ -629,12 +628,23 @@ class _HomePageState extends State<HomePage> {
                   Text(
                     'Schedule',
                     style: TextStyle(
-                      color: Colors.grey[700],
-                      fontSize: 13,
+                      color: Colors.grey[800],
+                      fontSize: 18,
                     ),
                     textAlign: TextAlign.center,
                   ),
                   Divider(),
+                  Spacer(),
+                  Text(
+                    'Schedule Not Available.',
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                      fontSize: 13,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Spacer(),
+                  SizedBox(height: 20),
                 ],
               ),
             ),

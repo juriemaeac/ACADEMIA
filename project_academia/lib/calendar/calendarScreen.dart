@@ -270,7 +270,7 @@ class _CalendarState extends State<Calendar> {
   // Delete doesnt refresh yet, thats it, then done!
   void _deleteEvent(String s) {
     List<CalendarItem> d = _data.where((element) => element.name == s).toList();
-    if (d.length == 1) {
+    if (d.length >= 1) {
       DB.delete(CalendarItem.table, d[0]);
       _selectedEvents.removeWhere((e) => e == s);
       _fetchEvents();
