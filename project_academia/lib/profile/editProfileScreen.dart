@@ -671,13 +671,8 @@ class _EditProfileState extends State<EditProfile> {
                                                                   '${textNumber}');
                                                               print(
                                                                   '${textBirthdate}');
-                                                              Navigator.push(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                  builder: (_) =>
-                                                                      Profile(),
-                                                                ),
-                                                              );
+                                                              Navigator.pop(
+                                                                  context);
                                                             },
                                                             style:
                                                                 ElevatedButton
