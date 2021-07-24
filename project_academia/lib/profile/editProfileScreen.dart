@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:sample1/Home/HomePage.dart';
 import 'package:sample1/profile/input.dart';
 import 'package:sample1/profile/profileScreen.dart';
 import 'package:sample1/profile/theme.dart';
@@ -672,8 +673,7 @@ class _EditProfileState extends State<EditProfile> {
                                                                   '${textNumber}');
                                                               print(
                                                                   '${textBirthdate}');
-                                                              Navigator.pop(
-                                                                  context);
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
                                                               },
                                                               ); 
                                                             },
