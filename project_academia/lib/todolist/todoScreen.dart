@@ -128,7 +128,6 @@ class _TodoListScreenState extends State<TodoListScreen> {
       //drawer: Navbar(),
       appBar: AppBar(centerTitle: true,
       automaticallyImplyLeading: false,
-        //title: Text('Todo List', style: TextStyle(fontSize: 25),),
         title: Row(
           //mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -147,10 +146,9 @@ class _TodoListScreenState extends State<TodoListScreen> {
                 );
               },
             ),
-            Spacer(),
-            Text('Todo List', style: TextStyle(fontSize: 25),),
-            Spacer(),
-            SizedBox(width: 45,)
+            SizedBox(width: 20,),
+            Text('Todo List'),
+            
           ],
         ),
         elevation: 0,

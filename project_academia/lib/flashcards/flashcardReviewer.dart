@@ -150,25 +150,25 @@ class _FlashcardState extends State<Flashcard> {
                               Spacer(),
                               GestureDetector(
                                 onTap: (){
-                                      return showDialog(
-                                        context: context,
-                                        builder: (ctx) => AlertDialog(
-                                          title: Text("Premium Account Only",textAlign: TextAlign.center,
-                                            style: TextStyle(color: Colors.red[700], fontSize: 18, fontWeight: FontWeight.bold),
+                                  return showDialog(
+                                    context: context,
+                                    builder: (ctx) => AlertDialog(
+                                      title: Text("Premium Account Only",textAlign: TextAlign.center,
+                                        style: TextStyle(color: Colors.red[700], fontSize: 18, fontWeight: FontWeight.bold),
+                                      ),
+                                      content: Text("This feature is available for premium users only, get yours now!"),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text('Okay',style: TextStyle(color: Colors.red[700]),
                                           ),
-                                          content: Text("This feature is available for premium users only, get yours now!"),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: Text('Okay',style: TextStyle(color: Colors.red[700]),
-                                              ),
-                                            ),
-                                          ],
                                         ),
-                                      );
-                                    },
+                                      ],
+                                    ),
+                                  );
+                                },
                                 child: Icon(
                                   Icons.repeat_rounded,
                                   //size: 15,

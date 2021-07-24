@@ -40,8 +40,7 @@ class NoteListState extends State<NoteList> {
             children: <Widget>[
               Spacer(),
               Text(
-                'Notes', style: Theme.of(context).textTheme.headline5,
-                //textAlign: TextAlign.center,
+                'Notes',
               ),
               Spacer(),
               IconButton(

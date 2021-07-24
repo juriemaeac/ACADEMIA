@@ -50,7 +50,7 @@ class ReminderScreenState extends State<ReminderScreen> {
 
   Future _sNotification(DateTime scheduledTime, int id) async {
     var androidDetails = new AndroidNotificationDetails(
-        "1", "Epap", "EpapNotificationChannel",
+        "1", "Academia", "AcademiaNotificationChannel",
         importance: Importance.max);
     var iOSDetails = new IOSNotificationDetails();
     var generalNotificationDetails =
@@ -66,7 +66,7 @@ class ReminderScreenState extends State<ReminderScreen> {
 
     final st = tz.TZDateTime.from(scheduledTime, location);
     fltrNotification.zonedSchedule(
-        counter, "Epap", alarms[id][4], st, generalNotificationDetails,
+        counter, "Academia", alarms[id][4], st, generalNotificationDetails,
         androidAllowWhileIdle: true,
         payload:
             '${alarms[id][4]} at ${alarms[id][1].hourOfPeriod}:${ReminderScreenState().getminute(alarms[id][1])} ${ReminderScreenState().getm(alarms[id][1])}',
@@ -153,7 +153,8 @@ class ReminderScreenState extends State<ReminderScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        title: const Text('Schedule Reminder'), actions: [
+        title: const Text('Schedule Reminder',
+        ), actions: [
         IconButton(
             icon: Icon(Icons.delete),
             color: Color(0xFFE28C7E),

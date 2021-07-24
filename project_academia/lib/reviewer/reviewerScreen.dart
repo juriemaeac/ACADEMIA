@@ -214,6 +214,17 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
         builder: (context, snapshot) {
           if (!snapshot.hasData){
             return Center(child: CircularProgressIndicator(),
+
+            );
+          }
+
+          if (snapshot.data.length == 0){
+            return Container(
+              color: Colors.white,
+              child: Center(
+                  child: Text('Click on the add card to add a flashcard!',
+                      style: Theme.of(context).textTheme.bodyText2),
+                ),
             );
           }
 
@@ -241,13 +252,32 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
                         child: new Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            // IconButton(
-                            //   icon: Icon(Icons.sort_outlined, 
-                            //   size: 30,
-                            //   color: Colors.black,
-                            //   ),
-                            //   onPressed: (){},
-                            // ),
+                            IconButton(
+                              icon: Icon(Icons.sort_outlined, 
+                              size: 30,
+                              color: Colors.black,
+                              ),
+                              onPressed: (){
+                                return showDialog(
+                                  context: context,
+                                  builder: (ctx) => AlertDialog(
+                                    title: Text("Premium Account Only",textAlign: TextAlign.center,
+                                      style: TextStyle(color: Colors.red[700], fontSize: 18, fontWeight: FontWeight.bold),
+                                    ),
+                                    content: Text("This feature is available for premium users only, get yours now!"),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Okay',style: TextStyle(color: Colors.red[700]),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
                             Spacer(),
                             ElevatedButton.icon(
                               icon: Icon(
@@ -273,14 +303,32 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
                               ),
                             ),
                             Spacer(),
-                            // IconButton(
-                            //   icon: Icon(Icons.search, 
-                            //   size: 30,
-                            //   color: Colors.black,
-                            //   ),
-                            //   onPressed: () async {
-                            //   },
-                            // ),
+                            IconButton(
+                              icon: Icon(Icons.search, 
+                              size: 30,
+                              color: Colors.black,
+                              ),
+                              onPressed: () {
+                                return showDialog(
+                                    context: context,
+                                    builder: (ctx) => AlertDialog(
+                                      title: Text("Premium Account Only",textAlign: TextAlign.center,
+                                        style: TextStyle(color: Colors.red[700], fontSize: 18, fontWeight: FontWeight.bold),
+                                      ),
+                                      content: Text("This feature is available for premium users only, get yours now!"),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text('Okay',style: TextStyle(color: Colors.red[700]),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                              },
+                            ),
                           ],
                         ),
                       ),

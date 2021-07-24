@@ -50,7 +50,7 @@ class Policies extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(25.0),
               child: Center(
-                child: Text('Last updated: July __, 2021' + '\n' + '\n' +
+                child: Text('Last updated: July 24, 2021' + '\n' + '\n' +
                   'Please read these Terms and Conditions ("Terms", "Terms and Conditions")' + 
                   ' carefully before using the Academia mobile application operated by Tech Intellect. ' + 
                   'Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. ' + 
