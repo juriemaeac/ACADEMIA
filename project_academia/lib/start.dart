@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -44,7 +46,9 @@ class _StartState extends State<Start> {
   }
   @override 
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new WillPopScope(
+    onWillPop: _onBackPressed,
+    child: new Scaffold(
       //backgroundColor: Color(0xFFEEBAB2), Color(0xFFE7C9A9),
       body: Container(
         decoration: BoxDecoration(
@@ -138,7 +142,32 @@ class _StartState extends State<Start> {
           ],
         ),
         
-      ),
+      ),),
     );
+  }
+  Future<bool> _onBackPressed() {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Confirm'),
+          content: Text('Do you want to exit the App'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop(false); //Will not exit the App
+              },
+            ),
+            FlatButton(
+              child: Text('Yes'),
+              onPressed: () {
+                exit(0);//Will exit the App
+              },
+            )
+          ],
+        );
+      },
+    ) ?? false;
   }
 }

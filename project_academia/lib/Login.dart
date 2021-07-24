@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sample1/SignUp.dart';
@@ -74,7 +76,9 @@ class _LoginState extends State<Login> {
 
   @override 
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new WillPopScope(
+    onWillPop: _onBackPressed,
+    child: new Scaffold(
       backgroundColor: Color(0xFFE7C9A9),
       body: Container(
       decoration: BoxDecoration(
@@ -245,7 +249,32 @@ class _LoginState extends State<Login> {
           )
         ),
       ),
-    ),
+    ),),
     );
+  }
+  Future<bool> _onBackPressed() {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Confirm'),
+          content: Text('Do you want to exit the App'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop(false); //Will not exit the App
+              },
+            ),
+            FlatButton(
+              child: Text('Yes'),
+              onPressed: () {
+                exit(0);//Will exit the App
+              },
+            )
+          ],
+        );
+      },
+    ) ?? false;
   }
 }
