@@ -95,12 +95,13 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(left: 20),
+              padding: EdgeInsets.only(left: 20, top: 20),
               color: Color(0xFFE28C7E),
               alignment: FractionalOffset.center,
               child: new Row(
                 //mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
+                  
                   Text(
                     DateFormat.yMMMMd('en_US').format(DateTime.now()),
                     style: TextStyle(
