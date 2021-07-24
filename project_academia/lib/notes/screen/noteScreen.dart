@@ -38,12 +38,12 @@ class NoteListState extends State<NoteList> {
           title: Row(
             //mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              SizedBox(width: 100),
+              Spacer(),
               Text(
                 'Notes', style: Theme.of(context).textTheme.headline5,
                 //textAlign: TextAlign.center,
               ),
-              SizedBox(width: 60),
+              Spacer(),
               IconButton(
                 icon: Icon(
                   Icons.search,

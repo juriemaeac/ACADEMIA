@@ -162,7 +162,7 @@ class _AddReviewerScreenState extends State<AddReviewerScreen> {
                             widget.reviewer == null ? 'Add' : 'Update', 
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 15,
+                              fontSize: 20,
                             ),
                           ),
                           style: ElevatedButton.styleFrom(

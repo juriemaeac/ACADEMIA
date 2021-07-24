@@ -72,7 +72,7 @@ class Attendance extends StatelessWidget {
                   children: [
                     Center(
                       child: Container(
-                        width: 170,
+                        width: ((MediaQuery.of(context).size.width)/2) - 40,
                         height: 70,
                         decoration: BoxDecoration(
                           color: Color(0xFFE28C7E).withOpacity(0.3),
@@ -96,7 +96,7 @@ class Attendance extends StatelessWidget {
                     ),
                     Center(
                       child: Container(
-                        width: 170,
+                        width: ((MediaQuery.of(context).size.width)/2) - 40,
                         height: 70,
                         decoration: BoxDecoration(
                           color: Color(0xFFE28C7E).withOpacity(0.3),
@@ -136,17 +136,17 @@ class Attendance extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12)),
                 child: SizedBox(
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(20.0),
                       child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Course Code:", style: def),
-                          SizedBox(height: 15.0),
+                          SizedBox(height: 13.0),
                           Text("Course Name:", style: def),
-                          SizedBox(height: 15.0),
+                          SizedBox(height: 13.0),
                           Text("Time", style: def),
-                          SizedBox(height: 15.0),
+                          SizedBox(height: 13.0),
                           Text("Professor:", style: def),
-                          SizedBox(height: 15.0),
+                          SizedBox(height: 13.0),
                           Text("Status:", style: def),
                         ],
                       ),
@@ -207,13 +207,13 @@ class Attendance extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12)),
                 child: SizedBox(
                   child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(20.0),
                       child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Course Name:", style: def),
-                          SizedBox(height: 24.0),
+                          SizedBox(height: 22.0),
                           Text("Time", style: def),
-                          SizedBox(height: 24.0),
+                          SizedBox(height: 22.0),
                           Text("Status:", style: def),
                         ],
                       ),

@@ -241,13 +241,14 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
                         child: new Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            IconButton(
-                              icon: Icon(Icons.sort_outlined, 
-                              size: 30,
-                              color: Colors.black,
-                              ),
-                              onPressed: (){},
-                            ),
+                            // IconButton(
+                            //   icon: Icon(Icons.sort_outlined, 
+                            //   size: 30,
+                            //   color: Colors.black,
+                            //   ),
+                            //   onPressed: (){},
+                            // ),
+                            Spacer(),
                             ElevatedButton.icon(
                               icon: Icon(
                                 Icons.library_books_outlined,
@@ -263,7 +264,7 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
                               ),
                               style: ElevatedButton.styleFrom(
                                   padding: EdgeInsets.symmetric(
-                                      horizontal: 50, vertical: 8),
+                                      horizontal: 40, vertical: 8),
                                   primary: Color(0xFFE28C7E),
                                   onPrimary: Colors.white,
                                   shape: RoundedRectangleBorder(
@@ -271,14 +272,15 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
                                   ),
                               ),
                             ),
-                            IconButton(
-                              icon: Icon(Icons.search, 
-                              size: 30,
-                              color: Colors.black,
-                              ),
-                              onPressed: () async {
-                              },
-                            ),
+                            Spacer(),
+                            // IconButton(
+                            //   icon: Icon(Icons.search, 
+                            //   size: 30,
+                            //   color: Colors.black,
+                            //   ),
+                            //   onPressed: () async {
+                            //   },
+                            // ),
                           ],
                         ),
                       ),

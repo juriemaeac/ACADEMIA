@@ -206,7 +206,8 @@ class _ProfileState extends State<Profile> {
                                                       : '${textLRN}',
                                                   style: TextStyle(
                                                       color: Colors.grey[850],
-                                                      fontSize: 16)),
+                                                      fontSize: 16,),
+                                            ),
                                             ),
                                           ],
                                         ),

@@ -472,11 +472,13 @@ class _EditProfileState extends State<EditProfile> {
         title: Row(
           //mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            SizedBox(width: 80),
+            Spacer(),
             Text(
               'Edit Profile',
               style: TextStyle(color: Colors.white, fontSize: 24),
             ),
+            Spacer(),
+            SizedBox(width: 50)
           ],
         ),
         leading: IconButton(
@@ -617,7 +619,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               padding: EdgeInsets
                                                                   .symmetric(
                                                                       horizontal:
-                                                                          50),
+                                                                          30),
                                                               shape: RoundedRectangleBorder(
                                                                   borderRadius:
                                                                       BorderRadius
@@ -685,7 +687,7 @@ class _EditProfileState extends State<EditProfile> {
                                                               padding: EdgeInsets
                                                                   .symmetric(
                                                                       horizontal:
-                                                                          50),
+                                                                          30),
                                                               elevation: 2,
                                                               shape: RoundedRectangleBorder(
                                                                   borderRadius:
