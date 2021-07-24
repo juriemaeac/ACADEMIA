@@ -449,7 +449,7 @@ class _HomePageState extends State<HomePage> {
                             width: 80.0,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage('icons/schedule.png'),
+                                image: AssetImage('icons/reviewer.png'),
                                 fit: BoxFit.fill,
                               ),
                               shape: BoxShape.rectangle,
@@ -457,7 +457,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           SizedBox(height: 5),
                           Text(
-                            'Schedule',
+                            'Reviewer',
                             style: TextStyle(color: Colors.grey[700]),
                           )
                         ],
@@ -466,7 +466,7 @@ class _HomePageState extends State<HomePage> {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => ReminderScreen(),
+                        builder: (_) => ReviewerScreen(),
                       ),
                     ),
                   ),
@@ -527,7 +527,7 @@ class _HomePageState extends State<HomePage> {
                             width: 80.0,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage('icons/attendance.png'),
+                                image: AssetImage('icons/schedule.png'),
                                 fit: BoxFit.fill,
                               ),
                               shape: BoxShape.rectangle,
@@ -535,7 +535,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           SizedBox(height: 5),
                           Text(
-                            'Attendance',
+                            'Schedule',
                             style: TextStyle(color: Colors.grey[700]),
                           )
                         ],
@@ -544,7 +544,7 @@ class _HomePageState extends State<HomePage> {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => Attendance(),
+                        builder: (_) => ReminderScreen(),
                       ),
                     ),
                   ),
@@ -566,7 +566,7 @@ class _HomePageState extends State<HomePage> {
                             width: 80.0,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage('icons/reviewer.png'),
+                                image: AssetImage('icons/attendance.png'),
                                 fit: BoxFit.fill,
                               ),
                               shape: BoxShape.rectangle,
@@ -574,7 +574,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           SizedBox(height: 5),
                           Text(
-                            'Reviewer',
+                            'Attendance',
                             style: TextStyle(color: Colors.grey[700]),
                           )
                         ],
@@ -583,7 +583,7 @@ class _HomePageState extends State<HomePage> {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => ReviewerScreen(),
+                        builder: (_) => Attendance(),
                       ),
                     ),
                   ),
