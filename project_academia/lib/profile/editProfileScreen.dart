@@ -555,153 +555,160 @@ class _EditProfileState extends State<EditProfile> {
                                                                   0.0)),
                                                   color: Colors.white,
                                                 ),
-                                                child: Column(
-                                                  children: [
-                                                    SizedBox(height: 80),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: <Widget>[
-                                                        Center(
-                                                          child: Text(
-                                                            '${textName}',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: Colors
-                                                                    .black,
-                                                                fontSize: 22),
+                                                child: SingleChildScrollView(
+                                                  child: Column(
+                                                    children: [
+                                                      SizedBox(height: 80),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: <Widget>[
+                                                          Center(
+                                                            child: Text(
+                                                              '${textName}',
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 22),
+                                                            ),
                                                           ),
-                                                        ),
-                                                        SizedBox(height: 10),
-                                                        Center(
-                                                          child: Text(
-                                                            '${user.email}',
-                                                            //textEmail ?? "EMAIL",
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: Colors
-                                                                    .black,
-                                                                fontSize: 16),
+                                                          SizedBox(height: 10),
+                                                          Center(
+                                                            child: Text(
+                                                              '${user.email}',
+                                                              //textEmail ?? "EMAIL",
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 16),
+                                                            ),
                                                           ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(height: 30),
-                                                    _buildUserDescription(),
-                                                    SizedBox(height: 13),
-                                                    _buildUserLRN(),
-                                                    SizedBox(height: 13),
-                                                    _buildUserCourse(),
-                                                    SizedBox(height: 13),
-                                                    _buildUserNumber(),
-                                                    SizedBox(height: 13),
-                                                    _buildUserBirthdate(),
-                                                    SizedBox(height: 30),
-                                                    //_buildButton(),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        SizedBox(width: 10.0),
-                                                        ElevatedButton(
-                                                          style: ElevatedButton
-                                                              .styleFrom(
-                                                            padding: EdgeInsets
-                                                                .symmetric(
-                                                                    horizontal:
-                                                                        50),
-                                                            shape: RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            20)),
-                                                            primary:
-                                                                Colors.white,
+                                                        ],
+                                                      ),
+                                                      SizedBox(height: 30),
+                                                      _buildUserDescription(),
+                                                      SizedBox(height: 13),
+                                                      _buildUserLRN(),
+                                                      SizedBox(height: 13),
+                                                      _buildUserCourse(),
+                                                      SizedBox(height: 13),
+                                                      _buildUserNumber(),
+                                                      SizedBox(height: 13),
+                                                      _buildUserBirthdate(),
+                                                      SizedBox(height: 30),
+                                                      //_buildButton(),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          SizedBox(width: 10.0),
+                                                          ElevatedButton(
+                                                            style:
+                                                                ElevatedButton
+                                                                    .styleFrom(
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          50),
+                                                              shape: RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              20)),
+                                                              primary:
+                                                                  Colors.white,
+                                                            ),
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                              loadData();
+                                                            },
+                                                            child: Text(
+                                                                "CANCEL",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    letterSpacing:
+                                                                        2.2,
+                                                                    color: Colors
+                                                                        .black)),
                                                           ),
-                                                          onPressed: () {
-                                                            Navigator.pop(
-                                                                context);
-                                                            loadData();
-                                                          },
-                                                          child: Text("CANCEL",
+                                                          ElevatedButton(
+                                                            onPressed: () {
+                                                              if (!_formKey
+                                                                  .currentState
+                                                                  .validate()) {
+                                                                return;
+                                                              }
+                                                              _formKey
+                                                                  .currentState
+                                                                  .save();
+                                                              saveData();
+                                                              print(
+                                                                  "Profile Saved");
+                                                              loadData();
+                                                              print(
+                                                                  '${textName}');
+                                                              print(
+                                                                  '${textEmail}');
+                                                              print(
+                                                                  '${textDescription}');
+                                                              print(
+                                                                  '${textLRN}');
+                                                              print(
+                                                                  '${textCourse}');
+                                                              print(
+                                                                  '${textNumber}');
+                                                              print(
+                                                                  '${textBirthdate}');
+                                                              Navigator.push(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                  builder: (_) =>
+                                                                      Profile(),
+                                                                ),
+                                                              );
+                                                            },
+                                                            style:
+                                                                ElevatedButton
+                                                                    .styleFrom(
+                                                              primary: Color(
+                                                                  0xFFFFB8AC),
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          50),
+                                                              elevation: 2,
+                                                              shape: RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              20)),
+                                                            ),
+                                                            child: Text(
+                                                              " SAVE ",
                                                               style: TextStyle(
                                                                   fontSize: 14,
                                                                   letterSpacing:
                                                                       2.2,
                                                                   color: Colors
-                                                                      .black)),
-                                                        ),
-                                                        ElevatedButton(
-                                                          onPressed: () {
-                                                            if (!_formKey
-                                                                .currentState
-                                                                .validate()) {
-                                                              return;
-                                                            }
-                                                            _formKey
-                                                                .currentState
-                                                                .save();
-                                                            saveData();
-                                                            print(
-                                                                "Profile Saved");
-                                                            loadData();
-                                                            print(
-                                                                '${textName}');
-                                                            print(
-                                                                '${textEmail}');
-                                                            print(
-                                                                '${textDescription}');
-                                                            print('${textLRN}');
-                                                            print(
-                                                                '${textCourse}');
-                                                            print(
-                                                                '${textNumber}');
-                                                            print(
-                                                                '${textBirthdate}');
-                                                            Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                builder: (_) =>
-                                                                    Profile(),
-                                                              ),
-                                                            );
-                                                          },
-                                                          style: ElevatedButton
-                                                              .styleFrom(
-                                                            primary: Color(
-                                                                0xFFFFB8AC),
-                                                            padding: EdgeInsets
-                                                                .symmetric(
-                                                                    horizontal:
-                                                                        50),
-                                                            elevation: 2,
-                                                            shape: RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            20)),
+                                                                      .white),
+                                                            ),
                                                           ),
-                                                          child: Text(
-                                                            " SAVE ",
-                                                            style: TextStyle(
-                                                                fontSize: 14,
-                                                                letterSpacing:
-                                                                    2.2,
-                                                                color: Colors
-                                                                    .white),
-                                                          ),
-                                                        ),
-                                                        SizedBox(width: 20.0),
-                                                      ],
-                                                    ),
-                                                    SizedBox(width: 20.0),
-                                                  ],
+                                                          SizedBox(width: 20.0),
+                                                        ],
+                                                      ),
+                                                      SizedBox(width: 20.0),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
