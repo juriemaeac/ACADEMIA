@@ -95,12 +95,13 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(left: 20),
+              padding: EdgeInsets.only(left: 20, top: 20),
               color: Color(0xFFE28C7E),
               alignment: FractionalOffset.center,
               child: new Row(
                 //mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
+                  
                   Text(
                     DateFormat.yMMMMd('en_US').format(DateTime.now()),
                     style: TextStyle(
@@ -129,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.only(
                       left: 20,
                       right: 20,
-                      bottom: 13,
+                      bottom: 0,
                     ),
                     height: (MediaQuery.of(context).size.height) * 0.2 - 27,
                     decoration: BoxDecoration(
@@ -148,12 +149,12 @@ class _HomePageState extends State<HomePage> {
                                 textName == null
                                     ? 'Loading...'
                                     : 'Hi ${textName}!',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline5
-                                    .copyWith(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
+                                //overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
                               ),
                               Spacer(),
                               //Image.asset("assets/images/logo.png")
@@ -243,7 +244,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Center(
                   child: Container(
-                    width: 170,
+                    width: ((MediaQuery.of(context).size.width)/2) - 40,
                     height: 70,
                     decoration: BoxDecoration(
                         color: Color(0xFFE28C7E).withOpacity(0.3),
@@ -276,7 +277,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Center(
                   child: Container(
-                    width: 170,
+                    width: ((MediaQuery.of(context).size.width)/2) - 40,
                     height: 70,
                     decoration: BoxDecoration(
                         color: Color(0xFFE28C7E).withOpacity(0.3),

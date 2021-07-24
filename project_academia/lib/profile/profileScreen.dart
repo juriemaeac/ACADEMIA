@@ -107,14 +107,15 @@ class _ProfileState extends State<Profile> {
                                   Text(
                                     ' Edit',
                                     style: TextStyle(
-                                      fontSize: 20,
-                                      foreground: Paint()
-                                        ..style = PaintingStyle.stroke
-                                        ..strokeWidth = 1.5
-                                        ..color = Colors.black,
+                                    shadows: <Shadow>[
+                                      Shadow(
+                                        offset: Offset(0, 0),
+                                        blurRadius: 5.0,
+                                        color: Colors.black,
+                                      ),
+                                    ],
                                     ),
                                   ),
-                                  // Solid text as fill.
                                   Text(
                                     ' Edit',
                                     style: TextStyle(
@@ -124,31 +125,6 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 ],
                               ),
-                              /*child: Text(
-                                'Edit',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  shadows: [
-                                    // Shadow( // bottomLeft
-                                    //   offset: Offset(-1.5, -1.5),
-                                    //   color: Colors.white
-                                    // ),
-                                    Shadow(
-                                        // bottomRight
-                                        offset: Offset(1.5, -1.5),
-                                        color: Colors.black),
-                                    // Shadow( // topRight
-                                    //   offset: Offset(1.5, 1.5),
-                                    //   color: Colors.white
-                                    // ),
-                                    // Shadow( // topLeft
-                                    //   offset: Offset(-1.5, 1.5),
-                                    //   color: Colors.white
-                                    // ),
-                                  ],
-                                ),
-                              ),*/
                               onTap: () {
                                 Navigator.push(
                                   context,
@@ -230,7 +206,8 @@ class _ProfileState extends State<Profile> {
                                                       : '${textLRN}',
                                                   style: TextStyle(
                                                       color: Colors.grey[850],
-                                                      fontSize: 16)),
+                                                      fontSize: 16,),
+                                            ),
                                             ),
                                           ],
                                         ),

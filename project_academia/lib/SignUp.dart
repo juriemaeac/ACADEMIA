@@ -175,8 +175,10 @@ class _SignUpState extends State<SignUp> {
                       
                   ),
                   SizedBox(height: 20.0),
-                  Text('Note: Name and Email can not be changed after signing up.',
+                  Padding(padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                  child: Text('Note: Name and Email can not be changed after signing up.',
                     style: TextStyle(color: Colors.grey, fontSize: 13),
+                  ),
                   ),
                   SizedBox(height: 40.0),
                   ElevatedButton(
@@ -218,11 +220,15 @@ class _SignUpState extends State<SignUp> {
                 ),
                 SizedBox(height: 10.0),
                 GestureDetector(
-                child: Text('By signing up, You agree to Academia Terms and Conditions.',
-                  style: TextStyle(color: Colors.grey, fontSize: 13),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                      child: Text('By signing up, You agree to Academia Terms and Conditions.',
+                        style: TextStyle(color: Colors.grey, fontSize: 13),
+                      ),
+                    ),
+                  onTap: navigateToPolicies,
                 ),
-                onTap: navigateToPolicies,
-                ),
+                SizedBox(height: 10.0),
                 ],
               ),
             ),

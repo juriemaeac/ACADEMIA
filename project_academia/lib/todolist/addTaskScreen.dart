@@ -240,7 +240,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                             widget.task == null ? 'Add' : 'Update', 
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 25,
+                              fontSize: 20,
                             ),
                           ),
                           style: ElevatedButton.styleFrom(

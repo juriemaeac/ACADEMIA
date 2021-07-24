@@ -77,7 +77,7 @@ class About extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 25.0,right: 25.0, bottom: 25.0),
               child: Center(
-                child: Text('©2021 Tech Intellect. Jurie Castronuevo | Stephen Chua | Kristelle Morales | Lance Parungao.'+ 
+                child: Text('©2021 Tech Intellect. Castronuevo, Jurie | Chua, Stephen | Morales, Kristelle | Parungao, Lance.'+ 
                   ' Computer Engineering Students from Polytechnic University of the Philippines Sta. Mesa, Manila. All rights reserved.',
                   textAlign: TextAlign.justify,
                   style: TextStyle(fontWeight: FontWeight.bold),

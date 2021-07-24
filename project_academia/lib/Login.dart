@@ -95,7 +95,6 @@ class _LoginState extends State<Login> {
             children: <Widget>[
               SizedBox(height: MediaQuery.of(context).size.height - (MediaQuery.of(context).size.height * 5/6)),
               Container(
-                
                 height: 130,
                 child: Image(
                 image: AssetImage("assets/signin1.png"),
@@ -109,7 +108,7 @@ class _LoginState extends State<Login> {
                     child: Column(
                       children: <Widget>[
                         Container(
-                          padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                           child: TextFormField(
                           validator: (input) {
                             if (input.isEmpty) {
@@ -135,7 +134,7 @@ class _LoginState extends State<Login> {
                         ),
                         SizedBox(height: 10.0),
                         Container(
-                          padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                           child: TextFormField(
                             validator: (input) {
                               if (input.length < 6) {
@@ -171,17 +170,17 @@ class _LoginState extends State<Login> {
                         SizedBox(height: 10.0),
                         Row(
                           children: [
-                            SizedBox(width: 250),
-                        
-                        GestureDetector(
-                          child: Text("Forget Password",
-                              style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                color: Colors.grey[700], fontSize: 15)),
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword()));
-                          }
-                        ),
+                            Spacer(),
+                            GestureDetector(
+                              child: Text("Forget Password",
+                                  style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    color: Colors.grey[700], fontSize: 15)),
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword()));
+                              }
+                            ),
+                            SizedBox(width: 20,)
                           ],
                         ),
                         SizedBox(height: 40.0),
@@ -211,6 +210,7 @@ class _LoginState extends State<Login> {
                 
                 SizedBox(height: 20.0),
                 Container(
+                  width: (MediaQuery.of(context).size.width)-20,
                   alignment: FractionalOffset.center,
                   child: new Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -240,6 +240,7 @@ class _LoginState extends State<Login> {
                   'Academia. All Rights Reserved (2021)',
                   style: TextStyle(color: Colors.white, fontSize: 13),
                 ),
+                SizedBox(height: 10.0),
             ],
           )
         ),

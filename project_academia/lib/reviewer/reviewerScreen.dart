@@ -214,6 +214,17 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
         builder: (context, snapshot) {
           if (!snapshot.hasData){
             return Center(child: CircularProgressIndicator(),
+
+            );
+          }
+
+          if (snapshot.data.length == 0){
+            return Container(
+              color: Colors.white,
+              child: Center(
+                  child: Text('Click on the add card to add a flashcard!',
+                      style: Theme.of(context).textTheme.bodyText2),
+                ),
             );
           }
 
@@ -246,8 +257,28 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
                               size: 30,
                               color: Colors.black,
                               ),
-                              onPressed: (){},
+                              onPressed: (){
+                                return showDialog(
+                                  context: context,
+                                  builder: (ctx) => AlertDialog(
+                                    title: Text("Premium Account Only",textAlign: TextAlign.center,
+                                      style: TextStyle(color: Colors.red[700], fontSize: 18, fontWeight: FontWeight.bold),
+                                    ),
+                                    content: Text("This feature is available for premium users only, get yours now!"),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Okay',style: TextStyle(color: Colors.red[700]),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
                             ),
+                            Spacer(),
                             ElevatedButton.icon(
                               icon: Icon(
                                 Icons.library_books_outlined,
@@ -263,7 +294,7 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
                               ),
                               style: ElevatedButton.styleFrom(
                                   padding: EdgeInsets.symmetric(
-                                      horizontal: 50, vertical: 8),
+                                      horizontal: 40, vertical: 8),
                                   primary: Color(0xFFE28C7E),
                                   onPrimary: Colors.white,
                                   shape: RoundedRectangleBorder(
@@ -271,12 +302,31 @@ class _ReviewerScreenState extends State<ReviewerScreen> {
                                   ),
                               ),
                             ),
+                            Spacer(),
                             IconButton(
                               icon: Icon(Icons.search, 
                               size: 30,
                               color: Colors.black,
                               ),
-                              onPressed: () async {
+                              onPressed: () {
+                                return showDialog(
+                                    context: context,
+                                    builder: (ctx) => AlertDialog(
+                                      title: Text("Premium Account Only",textAlign: TextAlign.center,
+                                        style: TextStyle(color: Colors.red[700], fontSize: 18, fontWeight: FontWeight.bold),
+                                      ),
+                                      content: Text("This feature is available for premium users only, get yours now!"),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text('Okay',style: TextStyle(color: Colors.red[700]),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
                               },
                             ),
                           ],
